@@ -22,8 +22,9 @@ public class ServerApp {
             try {
                 // Get port number from args
                 int port = Integer.parseInt(args[0]);
+                log.info("Starting server on port: " + port);
 
-                // Bind service
+                // Start server
                 Server server =
                         ServerBuilder
                                 .forPort(port)
@@ -33,7 +34,7 @@ public class ServerApp {
                 // Start server
                 try {
                     server.start();
-                    log.info("Server started on port " + port);
+                    log.info("Server started");
 
                     // Keep server running until terminated
                     try {
