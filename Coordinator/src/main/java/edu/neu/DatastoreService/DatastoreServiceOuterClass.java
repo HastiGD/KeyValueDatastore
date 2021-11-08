@@ -2642,6 +2642,1207 @@ public final class DatastoreServiceOuterClass {
 
   }
 
+  public interface OperateRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:OperateRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string serverId = 1;</code>
+     * @return The serverId.
+     */
+    java.lang.String getServerId();
+    /**
+     * <code>string serverId = 1;</code>
+     * @return The bytes for serverId.
+     */
+    com.google.protobuf.ByteString
+        getServerIdBytes();
+  }
+  /**
+   * Protobuf type {@code OperateRequest}
+   */
+  public  static final class OperateRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:OperateRequest)
+      OperateRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use OperateRequest.newBuilder() to construct.
+    private OperateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private OperateRequest() {
+      serverId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new OperateRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private OperateRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              serverId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.class, edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.Builder.class);
+    }
+
+    public static final int SERVERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object serverId_;
+    /**
+     * <code>string serverId = 1;</code>
+     * @return The serverId.
+     */
+    public java.lang.String getServerId() {
+      java.lang.Object ref = serverId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        serverId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string serverId = 1;</code>
+     * @return The bytes for serverId.
+     */
+    public com.google.protobuf.ByteString
+        getServerIdBytes() {
+      java.lang.Object ref = serverId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        serverId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getServerIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, serverId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getServerIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, serverId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest)) {
+        return super.equals(obj);
+      }
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest other = (edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest) obj;
+
+      if (!getServerId()
+          .equals(other.getServerId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SERVERID_FIELD_NUMBER;
+      hash = (53 * hash) + getServerId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code OperateRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:OperateRequest)
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.class, edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.Builder.class);
+      }
+
+      // Construct using edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        serverId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest getDefaultInstanceForType() {
+        return edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest build() {
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest buildPartial() {
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest result = new edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest(this);
+        result.serverId_ = serverId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest) {
+          return mergeFrom((edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest other) {
+        if (other == edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.getDefaultInstance()) return this;
+        if (!other.getServerId().isEmpty()) {
+          serverId_ = other.serverId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object serverId_ = "";
+      /**
+       * <code>string serverId = 1;</code>
+       * @return The serverId.
+       */
+      public java.lang.String getServerId() {
+        java.lang.Object ref = serverId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          serverId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string serverId = 1;</code>
+       * @return The bytes for serverId.
+       */
+      public com.google.protobuf.ByteString
+          getServerIdBytes() {
+        java.lang.Object ref = serverId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          serverId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string serverId = 1;</code>
+       * @param value The serverId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setServerId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        serverId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string serverId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearServerId() {
+        
+        serverId_ = getDefaultInstance().getServerId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string serverId = 1;</code>
+       * @param value The bytes for serverId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setServerIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        serverId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:OperateRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:OperateRequest)
+    private static final edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest();
+    }
+
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<OperateRequest>
+        PARSER = new com.google.protobuf.AbstractParser<OperateRequest>() {
+      @java.lang.Override
+      public OperateRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OperateRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<OperateRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<OperateRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface OperateResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:OperateResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bool operate = 1;</code>
+     * @return The operate.
+     */
+    boolean getOperate();
+
+    /**
+     * <code>string serverId = 2;</code>
+     * @return The serverId.
+     */
+    java.lang.String getServerId();
+    /**
+     * <code>string serverId = 2;</code>
+     * @return The bytes for serverId.
+     */
+    com.google.protobuf.ByteString
+        getServerIdBytes();
+  }
+  /**
+   * Protobuf type {@code OperateResponse}
+   */
+  public  static final class OperateResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:OperateResponse)
+      OperateResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use OperateResponse.newBuilder() to construct.
+    private OperateResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private OperateResponse() {
+      serverId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new OperateResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private OperateResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              operate_ = input.readBool();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              serverId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.class, edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.Builder.class);
+    }
+
+    public static final int OPERATE_FIELD_NUMBER = 1;
+    private boolean operate_;
+    /**
+     * <code>bool operate = 1;</code>
+     * @return The operate.
+     */
+    public boolean getOperate() {
+      return operate_;
+    }
+
+    public static final int SERVERID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object serverId_;
+    /**
+     * <code>string serverId = 2;</code>
+     * @return The serverId.
+     */
+    public java.lang.String getServerId() {
+      java.lang.Object ref = serverId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        serverId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string serverId = 2;</code>
+     * @return The bytes for serverId.
+     */
+    public com.google.protobuf.ByteString
+        getServerIdBytes() {
+      java.lang.Object ref = serverId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        serverId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (operate_ != false) {
+        output.writeBool(1, operate_);
+      }
+      if (!getServerIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, serverId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (operate_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, operate_);
+      }
+      if (!getServerIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, serverId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse)) {
+        return super.equals(obj);
+      }
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse other = (edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse) obj;
+
+      if (getOperate()
+          != other.getOperate()) return false;
+      if (!getServerId()
+          .equals(other.getServerId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + OPERATE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getOperate());
+      hash = (37 * hash) + SERVERID_FIELD_NUMBER;
+      hash = (53 * hash) + getServerId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code OperateResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:OperateResponse)
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.class, edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.Builder.class);
+      }
+
+      // Construct using edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        operate_ = false;
+
+        serverId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return edu.neu.DatastoreService.DatastoreServiceOuterClass.internal_static_OperateResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse getDefaultInstanceForType() {
+        return edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse build() {
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse buildPartial() {
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse result = new edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse(this);
+        result.operate_ = operate_;
+        result.serverId_ = serverId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse) {
+          return mergeFrom((edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse other) {
+        if (other == edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.getDefaultInstance()) return this;
+        if (other.getOperate() != false) {
+          setOperate(other.getOperate());
+        }
+        if (!other.getServerId().isEmpty()) {
+          serverId_ = other.serverId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private boolean operate_ ;
+      /**
+       * <code>bool operate = 1;</code>
+       * @return The operate.
+       */
+      public boolean getOperate() {
+        return operate_;
+      }
+      /**
+       * <code>bool operate = 1;</code>
+       * @param value The operate to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOperate(boolean value) {
+        
+        operate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool operate = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOperate() {
+        
+        operate_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object serverId_ = "";
+      /**
+       * <code>string serverId = 2;</code>
+       * @return The serverId.
+       */
+      public java.lang.String getServerId() {
+        java.lang.Object ref = serverId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          serverId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string serverId = 2;</code>
+       * @return The bytes for serverId.
+       */
+      public com.google.protobuf.ByteString
+          getServerIdBytes() {
+        java.lang.Object ref = serverId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          serverId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string serverId = 2;</code>
+       * @param value The serverId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setServerId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        serverId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string serverId = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearServerId() {
+        
+        serverId_ = getDefaultInstance().getServerId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string serverId = 2;</code>
+       * @param value The bytes for serverId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setServerIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        serverId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:OperateResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:OperateResponse)
+    private static final edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse();
+    }
+
+    public static edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<OperateResponse>
+        PARSER = new com.google.protobuf.AbstractParser<OperateResponse>() {
+      @java.lang.Override
+      public OperateResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OperateResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<OperateResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<OperateResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_PutRequest_descriptor;
   private static final 
@@ -2662,6 +3863,16 @@ public final class DatastoreServiceOuterClass {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_APIResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_OperateRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_OperateRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_OperateResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_OperateResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2675,12 +3886,15 @@ public final class DatastoreServiceOuterClass {
       "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"\031\n\nGetRequest" +
       "\022\013\n\003key\030\001 \001(\t\"\034\n\rDeleteRequest\022\013\n\003key\030\001 " +
       "\001(\t\"H\n\013APIResponse\022\r\n\005value\030\001 \001(\t\022\024\n\014res" +
-      "ponseCode\030\002 \001(\005\022\024\n\014responseText\030\003 \001(\t2~\n" +
-      "\020DatastoreService\022 \n\003put\022\013.PutRequest\032\014." +
-      "APIResponse\022 \n\003get\022\013.GetRequest\032\014.APIRes" +
-      "ponse\022&\n\006delete\022\016.DeleteRequest\032\014.APIRes" +
-      "ponseB\032\n\030edu.neu.DatastoreServiceb\006proto" +
-      "3"
+      "ponseCode\030\002 \001(\005\022\024\n\014responseText\030\003 \001(\t\"\"\n" +
+      "\016OperateRequest\022\020\n\010serverId\030\001 \001(\t\"4\n\017Ope" +
+      "rateResponse\022\017\n\007operate\030\001 \001(\010\022\020\n\010serverI" +
+      "d\030\002 \001(\t2\260\001\n\020DatastoreService\022 \n\003put\022\013.Pu" +
+      "tRequest\032\014.APIResponse\022 \n\003get\022\013.GetReque" +
+      "st\032\014.APIResponse\022&\n\006delete\022\016.DeleteReque" +
+      "st\032\014.APIResponse\0220\n\007operate\022\017.OperateReq" +
+      "uest\032\020.OperateResponse(\0010\001B\032\n\030edu.neu.Da" +
+      "tastoreServiceb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2710,6 +3924,18 @@ public final class DatastoreServiceOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_APIResponse_descriptor,
         new java.lang.String[] { "Value", "ResponseCode", "ResponseText", });
+    internal_static_OperateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_OperateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_OperateRequest_descriptor,
+        new java.lang.String[] { "ServerId", });
+    internal_static_OperateResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_OperateResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_OperateResponse_descriptor,
+        new java.lang.String[] { "Operate", "ServerId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

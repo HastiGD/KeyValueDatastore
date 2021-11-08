@@ -1,11 +1,19 @@
 package edu.neu.DatastoreService;
 
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import java.util.logging.Logger;
 
 public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplBase {
-    private Datastore datastore = new Datastore();
-    private Logger log = Logger.getLogger( "SERVER");
+    private static final Logger log = Logger.getLogger( "SERVER");
+
+    private Datastore datastore;
+
+    public DatastoreService(Datastore datastore) {
+        this.datastore = datastore;
+    }
 
     @Override
     public void put(DatastoreServiceOuterClass.PutRequest request, StreamObserver<DatastoreServiceOuterClass.APIResponse> responseObserver) {
@@ -97,5 +105,49 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         // Send response to client
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver<OperateRequest> operate(StreamObserver<OperateResponse> responseObserver) {
+        log.info("DEBUG - IN OPERATE");
+        return new StreamObserver<OperateRequest>() {
+            @Override
+            public void onNext(OperateRequest operateRequest) {
+                // Get requesting servers ID
+                String serverId = operateRequest.getServerId();
+                log.info("Received operate request from " + serverId);
+
+                // Determine if the datastore is operable
+//                boolean operate = isOperable();
+//                if (!operate) {
+//                    responseObserver.onError(
+//                                Status.PERMISSION_DENIED
+//                                    .withDescription("Operation not allowed")
+//                                    .asRuntimeException()
+//                    );
+//                    return;
+//                }
+
+                // Generate response
+                OperateResponse operateResponse = OperateResponse
+                                .newBuilder()
+                                .setOperate(true)
+                                .build();
+
+                // Send response
+                log.info("Sending response " + operateResponse);
+                responseObserver.onNext(operateResponse);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                log.warning(throwable.getMessage());
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
     }
 }
