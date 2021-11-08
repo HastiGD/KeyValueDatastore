@@ -125,10 +125,9 @@ public class DatastoreCoordinator {
                 // Connect to Servers
                 coordinator = new DatastoreCoordinator(hostnames.get(0), Integer.parseInt(ports.get(0)));
 
-                //coordinator.requestPut("Test", "123");
+                coordinator.requestPut("Test", "123");
 
                 // Request operation
-                coordinator.requestOperation();
 
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 log.severe("Bad arguments, system exiting");
