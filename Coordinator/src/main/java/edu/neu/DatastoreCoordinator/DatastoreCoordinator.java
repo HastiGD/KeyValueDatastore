@@ -2,60 +2,48 @@ package edu.neu.DatastoreCoordinator;
 
 import edu.neu.DatastoreService.CoordinatorService;
 import edu.neu.DatastoreService.DatastoreServiceGrpc;
-import edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest;
-import edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse;
+import edu.neu.DatastoreService.DatastoreServiceGrpc.DatastoreServiceBlockingStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class DatastoreCoordinator {
-    private final Logger log = Logger.getLogger( "COORDINATOR");
-    private final int port;
-    public final Server server;
+    private static final Logger log = Logger.getLogger( "COORDINATOR");
+    private static final int port = 9000;
+    public final Server coordinatorServer;
 
-//    private final ManagedChannel serverChannel;
-//    private final String serverHostname;
-//    private final int serverPort;
-//    private final DatastoreServiceGrpc.DatastoreServiceBlockingStub datastoreStub;
+    public DatastoreCoordinator(List<String> serverHostnames, List<Integer> serverPorts) {
+        // Create DatastoreService stubs
+        List<DatastoreServiceBlockingStub> datastoreStubs = IntStream
+                .range(0, serverHostnames.size())
+                .mapToObj((i) -> ManagedChannelBuilder
+                        .forAddress(serverHostnames.get(i), serverPorts.get(i))
+                        .usePlaintext()
+                        .build())
+                .map(DatastoreServiceGrpc::newBlockingStub)
+                .collect(Collectors.toList());
 
-    public DatastoreCoordinator(int port) {
         // Create the service
-        CoordinatorService coordinatorService = new CoordinatorService();
+        CoordinatorService coordinatorService = new CoordinatorService(datastoreStubs);
 
         // Bind the server
-        this.port = port;
-        this.server = ServerBuilder
+        this.coordinatorServer = ServerBuilder
                 .forPort(port)
                 .addService(coordinatorService)
                 .build();
-
-//        // Establish a channel with server
-//        this.serverChannel = ManagedChannelBuilder
-//                .forAddress(serverHostname, serverPort)
-//                .usePlaintext()
-//                .build();
-//        log.info("Established channel with " + serverHostname + " on port " + serverPort);
-//
-//        // Create stubs
-//        this.datastoreStub = DatastoreServiceGrpc
-//                .newBlockingStub(serverChannel)
-//                .withDeadlineAfter(5, TimeUnit.MINUTES);
-
     }
 
     public void start() throws IOException {
-        server.start();
+        coordinatorServer.start();
         log.info("Coordinator started on port " + port);
 
         Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -73,14 +61,14 @@ public class DatastoreCoordinator {
     }
 
     public void stop() throws InterruptedException {
-        if (server != null) {
-            server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
+        if (coordinatorServer != null) {
+            coordinatorServer.shutdown().awaitTermination(30, TimeUnit.SECONDS);
         }
     }
 
     private void blockUntilShutdown() throws InterruptedException {
-        if (server != null) {
-            server.awaitTermination();
+        if (coordinatorServer != null) {
+            coordinatorServer.awaitTermination();
         }
     }
 
@@ -90,65 +78,76 @@ public class DatastoreCoordinator {
                 "%1$tb %1$td, %1$tY %1$tl:%1$tM:%1$tS:%1$tL [%4$-4s]: %5$s %n");
         Logger log = Logger.getLogger( "COORDINATOR");
 
-        try {
-            // Get port from args
-            int port = Integer.parseInt(args[0]);
+        // Create a list to store server hostnames and ports
+        List<String> hostnames;
+        List<Integer> ports;
 
-            // Create the coordinator
-            DatastoreCoordinator coordinator = new DatastoreCoordinator(port);
+        // Get server hostnames and ports from args
+        if (args.length < 2) {
+            log.severe("Missing server hostname or port, system exiting");
+            System.exit(0);
+        } else {
+            List<String> input = Arrays.asList(args);
+            // Get server hostnames
+            hostnames = IntStream
+                    .range(0, input.size())
+                    .filter(n -> n % 2 == 0)
+                    .mapToObj(input::get)
+                    .collect(Collectors.toList());
 
-            // Start the coordinator
+            // Get server ports
+            List<String> inputPorts = IntStream
+                    .range(0, input.size())
+                    .filter(n -> n % 2 != 0)
+                    .mapToObj(input::get)
+                    .collect(Collectors.toList());
+
+            // Convert inputPorts to Integer
             try {
-                coordinator.start();
-                coordinator.blockUntilShutdown();
-            } catch (InterruptedException e) {
-                log.info("Coordinator interrupted, system exiting");
-                System.exit(1);
-            } catch (IOException e) {
-                log.info("Coordinator failed, system exiting");
-                System.exit(1);
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            log.severe("Missing port, system exiting");
-            System.exit(0);
-        } catch (NumberFormatException e) {
-            log.severe("Bad port, system exiting");
-            System.exit(0);
-        }
+                ports = inputPorts
+                        .stream()
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList());
 
-//        Map<String, Integer> servers;
-//        List<String> hostnames;
-//        List<String> ports;
-//        DatastoreCoordinator coordinator;
+                // Create the coordinator
+                DatastoreCoordinator coordinator = new DatastoreCoordinator(hostnames, ports);
+
+                // Start the coordinator
+                try {
+                    coordinator.start();
+                    coordinator.blockUntilShutdown();
+                } catch (InterruptedException | IOException e) {
+                    log.severe("Coordinator failed, system exiting");
+                    log.severe(e.getMessage());
+                    System.exit(1);
+                }
+            } catch (NumberFormatException e) {
+                log.severe("Bad port, system exiting");
+                System.exit(0);
+            }
+        }
+    }
+}
+//            // Read server input from console
+//            DataInputStream inputStream = new DataInputStream(System.in);
+//            log.info(
+//                    "Enter the hostname followed by port for each server" +
+//                    System.getProperty("line.separator") +
+//                    "server1 port1 server2 port2 server3 port3");
 //
-//        // Get Servers from arguments
-//        if (args.length < 2) {
-//            log.severe("Missing arguments, system exiting");
-//            System.exit(0);
-//        } else {
-//            List<String> input = Arrays.asList(args);
+//            String[] input = null;
 //            try {
-//                // Get server hostnames
-//                hostnames = IntStream
-//                        .range(0, input.size())
-//                        .filter(n -> n % 2 == 0)
-//                        .mapToObj(input::get)
-//                        .collect(Collectors.toList());
-//
-//                // Get server ports
-//                ports = IntStream
-//                        .range(0, input.size())
-//                        .filter(n -> n % 2 != 0)
-//                        .mapToObj(input::get)
-//                        .collect(Collectors.toList());
+//                input = inputStream.readLine().split(" ");
+//            } catch (IOException e) {
+//                log.severe("Failed to read input, system exiting");
+//                System.exit(0);
+//            }
+
+
 //
 //                // Store servers
+//        Map<String, Integer> servers;
 //                servers = IntStream
 //                        .range(0, hostnames.size())
 //                        .boxed()
 //                        .collect(Collectors.toMap(i -> hostnames.get(i) + ports.get(i), i -> Integer.parseInt(ports.get(i))));
-
-                // Connect to Servers
-
-    }
-}

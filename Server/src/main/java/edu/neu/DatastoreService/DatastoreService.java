@@ -2,6 +2,13 @@ package edu.neu.DatastoreService;
 
 import io.grpc.stub.StreamObserver;
 import java.util.logging.Logger;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.Request;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse;
+import edu.neu.DatastoreService.CoordinatorServiceOuterClass.OperateResponse;
+import edu.neu.DatastoreService.CoordinatorServiceOuterClass.OperateRequest;
 
 public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplBase {
     private static final Logger log = Logger.getLogger( "SERVER");
@@ -15,7 +22,7 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
     }
 
     @Override
-    public void put(DatastoreServiceOuterClass.PutRequest request, StreamObserver<DatastoreServiceOuterClass.APIResponse> responseObserver) {
+    public void put(PutRequest request, StreamObserver<APIResponse> responseObserver) {
         // Determine the caller and get key and value from request
         String caller = request.getCaller();
         String key = request.getKey();
@@ -26,7 +33,7 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         boolean result = requestOperation("PUT", key, value);
 
         // Generate response
-        DatastoreServiceOuterClass.APIResponse.Builder response = DatastoreServiceOuterClass.APIResponse.newBuilder();
+        APIResponse.Builder response = APIResponse.newBuilder();
         if (result) {
             response.setResponseCode(200).setResponseText("Processing request");
         } else {
@@ -58,7 +65,7 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
     }
 
     @Override
-    public void get(DatastoreServiceOuterClass.GetRequest request, StreamObserver<DatastoreServiceOuterClass.APIResponse> responseObserver) {
+    public void get(GetRequest request, StreamObserver<APIResponse> responseObserver) {
         // Get key from request
         String key = request.getKey();
         log.info(String.format("Request: GET %s", key));
@@ -67,7 +74,7 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         String result = datastore.get(key);
 
         // Generate response
-        DatastoreServiceOuterClass.APIResponse.Builder response = DatastoreServiceOuterClass.APIResponse.newBuilder();
+        APIResponse.Builder response = APIResponse.newBuilder();
 
         if (result.equals("")) {
             // Key was not found
@@ -88,7 +95,7 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
     }
 
     @Override
-    public void delete(DatastoreServiceOuterClass.DeleteRequest request, StreamObserver<DatastoreServiceOuterClass.APIResponse> responseObserver) {
+    public void delete(DeleteRequest request, StreamObserver<APIResponse> responseObserver) {
         // Determine the caller and get key from request
         String caller = request.getCaller();
         String key = request.getKey();
@@ -98,7 +105,7 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         boolean result = requestOperation("DELETE", key, "");
 
         // Generate response
-        DatastoreServiceOuterClass.APIResponse.Builder response = DatastoreServiceOuterClass.APIResponse.newBuilder();
+        APIResponse.Builder response = APIResponse.newBuilder();
         if (result) {
             response.setResponseCode(200).setResponseText("Processing request");
         } else {
@@ -122,9 +129,36 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
 //                    .setValue(result);
 //        }
 
-
-        // Send response to client
         // Send response
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void available(Request request, StreamObserver<APIResponse> responseObserver) {
+        // Get operation, key, and value from request
+        String operation = request.getOperation();
+        String key = request.getKey();
+        String value = request.getValue();
+
+        // See if datastore is available for transaction
+        log.info("Checking datastore availability");
+        boolean available = datastoreAvailable(operation, key, value);
+
+        // Generate response
+        APIResponse.Builder response = APIResponse.newBuilder();
+        if (available) {
+            response
+                    .setResponseCode(200)
+                    .setResponseText("OK");
+        } else {
+            response
+                    .setResponseCode(405)
+                    .setResponseText("Method Not Allowed");
+        }
+
+        // Send response
+        log.info("Sending response to coordinator");
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
@@ -133,8 +167,7 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         log.info("Requesting to operate");
 
         // Send request
-        CoordinatorServiceOuterClass.OperateRequest request =
-                CoordinatorServiceOuterClass.OperateRequest
+        OperateRequest request = OperateRequest
                         .newBuilder()
                         .setOperation(operation)
                         .setKey(key)
@@ -142,14 +175,15 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
                         .build();
 
         // Get response
-        CoordinatorServiceOuterClass.OperateResponse response = coordinatorStub.operate(request);
+        OperateResponse response = coordinatorStub.operate(request);
         int responseCode = response.getResponseCode();
         log.info("Response: " + responseCode + " " + response.getResponseText());
 
-        if (responseCode == 200) {
-            return true;
-        } else {
-            return false;
-        }
+        // Send true if ok to operate otherwise false
+        return responseCode == 200;
+    }
+
+    private boolean datastoreAvailable(String operation, String key, String value) {
+        return true;    // TODO check to see if datastore is available
     }
 }
