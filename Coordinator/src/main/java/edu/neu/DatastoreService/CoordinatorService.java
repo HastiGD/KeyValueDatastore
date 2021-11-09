@@ -19,7 +19,7 @@ public class CoordinatorService  extends CoordinatorServiceGrpc.CoordinatorServi
         log.info("Received request to operate");
 
         // Ask servers if it's possible to operate
-        boolean operate = replicateRequest();
+        boolean operate = datastoreAvailable();
 
         // Generate response
         OperateResponse.Builder response = OperateResponse.newBuilder();
@@ -39,8 +39,9 @@ public class CoordinatorService  extends CoordinatorServiceGrpc.CoordinatorServi
         responseObserver.onCompleted();
     }
 
-    private boolean replicateRequest() {
-        // TODO query all servers, and see if they can replicate
+    private boolean datastoreAvailable() {
+        // TODO query all servers, and see if it's possible to operate on the datastore
+        // call RPC method on DatastoreServiceOuterClass.available(PutRequest/DeleteRequest)
         return true;
     }
 }

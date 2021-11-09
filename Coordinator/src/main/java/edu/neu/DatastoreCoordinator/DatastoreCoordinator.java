@@ -2,8 +2,6 @@ package edu.neu.DatastoreCoordinator;
 
 import edu.neu.DatastoreService.CoordinatorService;
 import edu.neu.DatastoreService.DatastoreServiceGrpc;
-import edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest;
-import edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse;
 import edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest;
 import edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse;
 import io.grpc.ManagedChannel;
