@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "edu.neu.DatastoreService";
+
+service CoordinatorService {
+
+    rpc operate(OperateRequest) returns (OperateResponse);
+
+}
+
+message OperateRequest {
+
+    string operation = 1;
+    string key = 2;
+    string value = 3;
+
+}
+
+message OperateResponse {
+
+    int32 responseCode = 1;
+    string responseText = 2;
+}

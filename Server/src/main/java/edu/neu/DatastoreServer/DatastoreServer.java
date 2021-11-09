@@ -1,24 +1,51 @@
 package edu.neu.DatastoreServer;
 
+import edu.neu.DatastoreService.CoordinatorServiceGrpc;
+import edu.neu.DatastoreService.CoordinatorServiceOuterClass;
 import edu.neu.DatastoreService.Datastore;
 import edu.neu.DatastoreService.DatastoreService;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class DatastoreServer {
     private static final Logger log = Logger.getLogger( "SERVER");
-
     private final int port;
     private final Server server;
+    private final String coordinatorHostname;
+    private final int coordinatorPort;
+    private final ManagedChannel coordinatorChannel;
+    private final CoordinatorServiceGrpc.CoordinatorServiceBlockingStub coordinatorStub;
 
-    public DatastoreServer(int port, Datastore datastore) {
+    public DatastoreServer(int port, Datastore datastore, String coordinatorHostname, int coordinatorPort) {
+        // Establish a channel with the coordinator
+        this.coordinatorHostname = coordinatorHostname;
+        this.coordinatorPort = coordinatorPort;
+        this.coordinatorChannel = ManagedChannelBuilder
+                .forAddress(coordinatorHostname, coordinatorPort)
+                .usePlaintext()
+                .build();
+
+        // Create stubs
+        this.coordinatorStub = CoordinatorServiceGrpc
+                .newBlockingStub(coordinatorChannel)
+                .withDeadlineAfter(5, TimeUnit.MINUTES);
+
+        // Create the service
+        DatastoreService datastoreService = new DatastoreService(datastore, coordinatorStub);
+
+        // Bind the server
         this.port = port;
-        DatastoreService datastoreService = new DatastoreService(datastore);
-        this.server = ServerBuilder.forPort(port).addService(datastoreService).build();
+        this.server = ServerBuilder
+                .forPort(port)
+                .addService(datastoreService)
+                .build();
     }
 
     public void start() throws IOException {
@@ -28,7 +55,7 @@ public class DatastoreServer {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                System.err.println("Shut down gRPC server because JVM shut down");
+                System.err.println("Shut down server because JVM shut down");
                 try {
                     DatastoreServer.this.stop();
                 } catch (InterruptedException e) {
@@ -63,20 +90,37 @@ public class DatastoreServer {
             System.exit(0);
         } else {
             try {
-                // Get port number from args
+                // Get port from args
                 int port = Integer.parseInt(args[0]);
-                Datastore datastore = new Datastore();
-                // Start server
+
+                // Read coordinator info from terminal
+                DataInputStream input = new DataInputStream(System.in);
+                String[] coordinatorInfo = null;
                 try {
-                    DatastoreServer server = new DatastoreServer(port, datastore);
-                    server.start();
-                    server.blockUntilShutdown();
+                    log.info("Enter coordinator hostname seperated by coordinator port");
+                    coordinatorInfo = input.readLine().split(" ");
+                    String coordinatorHostname = coordinatorInfo[0];
+                    int coordinatorPort = Integer.parseInt(coordinatorInfo[1]);
+
+                    // Create datastore
+                    Datastore datastore = new Datastore();
+
+                    // Start server
+                    try {
+                        DatastoreServer server =
+                                new DatastoreServer(port, datastore, coordinatorHostname, coordinatorPort);
+                        server.start();
+                        server.blockUntilShutdown();
+                    } catch (IOException e) {
+                        log.severe("Server failed, system exiting");
+                        System.exit(1);
+                    } catch (InterruptedException e) {
+                        log.severe("Server interrupted, system exiting");
+                        System.exit(1);
+                    }
                 } catch (IOException e) {
-                    log.severe("Server failed, system exiting");
-                    System.exit(1);
-                } catch (InterruptedException e) {
-                    log.severe("Server interrupted, system exiting");
-                    System.exit(1);
+                    log.severe("Failed to read input, system exiting");
+                    System.exit(0);
                 }
             } catch (NumberFormatException e) {
                 log.severe("Bad port number, system exiting");

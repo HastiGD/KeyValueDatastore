@@ -44,7 +44,7 @@ public class ClientApp {
         DatastoreServiceGrpc.DatastoreServiceBlockingStub stub =
                 DatastoreServiceGrpc
                         .newBlockingStub(channel)
-                        .withDeadlineAfter(120, TimeUnit.SECONDS); //TODO why is this not working
+                        .withDeadlineAfter(120, TimeUnit.SECONDS);
 
         // Demonstrate how to operate on Datastore
         String[] keys = {"Good", "Love", "Night", "Friend", "Half-Full", "White"};
@@ -58,6 +58,7 @@ public class ClientApp {
                     DatastoreServiceOuterClass
                             .PutRequest
                             .newBuilder()
+                            .setCaller("CLIENT")
                             .setKey(keys[i])
                             .setValue(values[i])
                             .build();

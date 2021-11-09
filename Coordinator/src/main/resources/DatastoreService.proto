@@ -9,14 +9,13 @@ service DatastoreService {
     rpc get(GetRequest) returns (APIResponse);
 
     rpc delete(DeleteRequest) returns (APIResponse);
-
-    rpc operate(stream OperateRequest) returns (stream OperateResponse);
 }
 
 message PutRequest {
 
     string key = 1;
     string value = 2;
+    string caller = 3;
 }
 
 message GetRequest {
@@ -27,6 +26,7 @@ message GetRequest {
 message DeleteRequest {
 
     string key = 1;
+    string caller = 2;
 }
 
 message APIResponse {
@@ -34,15 +34,4 @@ message APIResponse {
     string value = 1;
     int32 responseCode = 2;
     string responseText = 3;
-}
-
-message OperateRequest {
-
-    string serverId = 1;
-}
-
-message OperateResponse {
-
-    bool operate = 1;
-    string serverId = 2;
 }
