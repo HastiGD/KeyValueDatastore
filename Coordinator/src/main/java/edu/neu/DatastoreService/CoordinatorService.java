@@ -4,6 +4,8 @@ import io.grpc.stub.StreamObserver;
 import edu.neu.DatastoreService.CoordinatorServiceOuterClass.OperateResponse;
 import edu.neu.DatastoreService.CoordinatorServiceOuterClass.OperateRequest;
 import edu.neu.DatastoreService.DatastoreServiceOuterClass.Request;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest;
 import edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse;
 import edu.neu.DatastoreService.DatastoreServiceGrpc.DatastoreServiceBlockingStub;
 
@@ -26,29 +28,38 @@ public class CoordinatorService  extends CoordinatorServiceGrpc.CoordinatorServi
         String key = request.getKey();
         String value = request.getValue();
 
-        log.info("Received request to operate");
+        log.info(String.format("Received OperateRequest from Server: %s %s %s", operation, key, value));
 
         // Ask servers if it's possible to operate
+        log.info("Confirming Datastore availability with all Servers");
         boolean operate = datastoreAvailable(operation, key, value);
 
         // Generate response
-        OperateResponse.Builder response = OperateResponse.newBuilder();
+        OperateResponse.Builder operateResponse = OperateResponse.newBuilder();
         if (operate) {
-            log.info("Permission to operate accepted");
-            response.setResponseCode(200)
+            log.info("OperateRequest confirmed");
+
+            operateResponse.setResponseCode(200)
                     .setResponseText("OK");
         } else {
-            log.info("Permission to operate denied");
-            response.setResponseCode(405)
+            log.info("OperateRequest denied");
+            operateResponse.setResponseCode(405)
                     .setResponseText("Method Not allowed");
         }
 
         // Send response to server
-        log.info("Sending response");
-        responseObserver.onNext(response.build());
+        log.info("Sending APIResponse to Server Response Code: " +
+                operateResponse.getResponseCode() +
+                " Response Message: " +
+                operateResponse.getResponseText());
+
+        responseObserver.onNext(operateResponse.build());
         responseObserver.onCompleted();
 
-        // TODO complete request on all servers
+        // Complete request on all servers if allowed
+        if (operate) {
+            completeRequest(operation, key, value);
+        }
     }
 
     private boolean datastoreAvailable(String operation, String key, String value) {
@@ -57,7 +68,7 @@ public class CoordinatorService  extends CoordinatorServiceGrpc.CoordinatorServi
                 .setOperation(operation)
                 .setKey(key).setValue(value)
                 .build();
-        log.info("Requesting datastore availability on all server");
+        log.info(String.format("Confirming Request with Servers: %s %s %s", operation, key, value));
 
         // Confirm datastore availability of all servers
         for (DatastoreServiceBlockingStub stub : datastoreStubs) {
@@ -69,7 +80,47 @@ public class CoordinatorService  extends CoordinatorServiceGrpc.CoordinatorServi
             }
         }
         // Otherwise return true
-        log.info("All datastores available");
+        log.info("All Datastores available");
         return true;
+    }
+
+    private APIResponse completeRequest(String operation, String key, String value) {
+        // Create request and store all responses
+        List<APIResponse> responses = null;
+        switch (operation) {
+            case "PUT":
+                PutRequest putRequest = PutRequest.newBuilder().setKey(key).setValue(value).build();
+                log.info(String.format("Completing PutRequest on all Servers: %s %s %s", operation, key, value));
+                for (DatastoreServiceBlockingStub stub : datastoreStubs) {
+                    APIResponse response = stub.coordinatorPut(putRequest);
+                    responses.add(response);
+                }
+                break;
+            case "DELETE":
+                DeleteRequest deleteRequest = DeleteRequest.newBuilder().setKey(key).build();
+                log.info(String.format("Completing DeleteRequest on all Servers: %s %s", operation, key));
+                for (DatastoreServiceBlockingStub stub : datastoreStubs) {
+                    APIResponse response = stub.coordinatorDelete(deleteRequest);
+                    responses.add(response);
+                }
+                break;
+            default:
+                break;
+        }
+
+        // Iterate through responses and make sure all servers completed request
+        APIResponse response = null;
+        for (int i = 0; i < responses.size(); i++) {
+            if (i == 0) {
+                response = responses.get(i);
+            } else {
+                if (!responses.get(i).equals(response)) {
+                    // TODO handle case where one server didn't complete request properly
+                    log.info("One server failed to update Datastore");
+                    response = responses.get(i);
+                }
+            }
+        }
+        return response;
     }
 }

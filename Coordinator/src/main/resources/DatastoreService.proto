@@ -6,9 +6,13 @@ service DatastoreService {
 
     rpc put(PutRequest) returns (APIResponse);
 
+    rpc coordinatorPut(PutRequest) returns (APIResponse);
+
     rpc get(GetRequest) returns (APIResponse);
 
     rpc delete(DeleteRequest) returns (APIResponse);
+
+    rpc coordinatorDelete(DeleteRequest) returns (APIResponse);
 
     rpc available(Request) returns (APIResponse);
 }
@@ -24,7 +28,6 @@ message PutRequest {
 
     string key = 1;
     string value = 2;
-    string caller = 3;
 }
 
 message GetRequest {
@@ -35,7 +38,6 @@ message GetRequest {
 message DeleteRequest {
 
     string key = 1;
-    string caller = 2;
 }
 
 message APIResponse {

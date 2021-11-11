@@ -903,18 +903,6 @@ public final class DatastoreServiceOuterClass {
      */
     com.google.protobuf.ByteString
         getValueBytes();
-
-    /**
-     * <code>string caller = 3;</code>
-     * @return The caller.
-     */
-    java.lang.String getCaller();
-    /**
-     * <code>string caller = 3;</code>
-     * @return The bytes for caller.
-     */
-    com.google.protobuf.ByteString
-        getCallerBytes();
   }
   /**
    * Protobuf type {@code PutRequest}
@@ -931,7 +919,6 @@ public final class DatastoreServiceOuterClass {
     private PutRequest() {
       key_ = "";
       value_ = "";
-      caller_ = "";
     }
 
     @java.lang.Override
@@ -974,12 +961,6 @@ public final class DatastoreServiceOuterClass {
               java.lang.String s = input.readStringRequireUtf8();
 
               value_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              caller_ = s;
               break;
             }
             default: {
@@ -1086,42 +1067,6 @@ public final class DatastoreServiceOuterClass {
       }
     }
 
-    public static final int CALLER_FIELD_NUMBER = 3;
-    private volatile java.lang.Object caller_;
-    /**
-     * <code>string caller = 3;</code>
-     * @return The caller.
-     */
-    public java.lang.String getCaller() {
-      java.lang.Object ref = caller_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        caller_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string caller = 3;</code>
-     * @return The bytes for caller.
-     */
-    public com.google.protobuf.ByteString
-        getCallerBytes() {
-      java.lang.Object ref = caller_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        caller_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1142,9 +1087,6 @@ public final class DatastoreServiceOuterClass {
       if (!getValueBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, value_);
       }
-      if (!getCallerBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, caller_);
-      }
       unknownFields.writeTo(output);
     }
 
@@ -1159,9 +1101,6 @@ public final class DatastoreServiceOuterClass {
       }
       if (!getValueBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, value_);
-      }
-      if (!getCallerBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, caller_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1182,8 +1121,6 @@ public final class DatastoreServiceOuterClass {
           .equals(other.getKey())) return false;
       if (!getValue()
           .equals(other.getValue())) return false;
-      if (!getCaller()
-          .equals(other.getCaller())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1199,8 +1136,6 @@ public final class DatastoreServiceOuterClass {
       hash = (53 * hash) + getKey().hashCode();
       hash = (37 * hash) + VALUE_FIELD_NUMBER;
       hash = (53 * hash) + getValue().hashCode();
-      hash = (37 * hash) + CALLER_FIELD_NUMBER;
-      hash = (53 * hash) + getCaller().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1338,8 +1273,6 @@ public final class DatastoreServiceOuterClass {
 
         value_ = "";
 
-        caller_ = "";
-
         return this;
       }
 
@@ -1368,7 +1301,6 @@ public final class DatastoreServiceOuterClass {
         edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest result = new edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest(this);
         result.key_ = key_;
         result.value_ = value_;
-        result.caller_ = caller_;
         onBuilt();
         return result;
       }
@@ -1423,10 +1355,6 @@ public final class DatastoreServiceOuterClass {
         }
         if (!other.getValue().isEmpty()) {
           value_ = other.value_;
-          onChanged();
-        }
-        if (!other.getCaller().isEmpty()) {
-          caller_ = other.caller_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1606,82 +1534,6 @@ public final class DatastoreServiceOuterClass {
   checkByteStringIsUtf8(value);
         
         value_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object caller_ = "";
-      /**
-       * <code>string caller = 3;</code>
-       * @return The caller.
-       */
-      public java.lang.String getCaller() {
-        java.lang.Object ref = caller_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          caller_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string caller = 3;</code>
-       * @return The bytes for caller.
-       */
-      public com.google.protobuf.ByteString
-          getCallerBytes() {
-        java.lang.Object ref = caller_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          caller_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string caller = 3;</code>
-       * @param value The caller to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCaller(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        caller_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string caller = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCaller() {
-        
-        caller_ = getDefaultInstance().getCaller();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string caller = 3;</code>
-       * @param value The bytes for caller to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCallerBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        caller_ = value;
         onChanged();
         return this;
       }
@@ -2319,18 +2171,6 @@ public final class DatastoreServiceOuterClass {
      */
     com.google.protobuf.ByteString
         getKeyBytes();
-
-    /**
-     * <code>string caller = 2;</code>
-     * @return The caller.
-     */
-    java.lang.String getCaller();
-    /**
-     * <code>string caller = 2;</code>
-     * @return The bytes for caller.
-     */
-    com.google.protobuf.ByteString
-        getCallerBytes();
   }
   /**
    * Protobuf type {@code DeleteRequest}
@@ -2346,7 +2186,6 @@ public final class DatastoreServiceOuterClass {
     }
     private DeleteRequest() {
       key_ = "";
-      caller_ = "";
     }
 
     @java.lang.Override
@@ -2383,12 +2222,6 @@ public final class DatastoreServiceOuterClass {
               java.lang.String s = input.readStringRequireUtf8();
 
               key_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              caller_ = s;
               break;
             }
             default: {
@@ -2459,42 +2292,6 @@ public final class DatastoreServiceOuterClass {
       }
     }
 
-    public static final int CALLER_FIELD_NUMBER = 2;
-    private volatile java.lang.Object caller_;
-    /**
-     * <code>string caller = 2;</code>
-     * @return The caller.
-     */
-    public java.lang.String getCaller() {
-      java.lang.Object ref = caller_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        caller_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string caller = 2;</code>
-     * @return The bytes for caller.
-     */
-    public com.google.protobuf.ByteString
-        getCallerBytes() {
-      java.lang.Object ref = caller_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        caller_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2512,9 +2309,6 @@ public final class DatastoreServiceOuterClass {
       if (!getKeyBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
       }
-      if (!getCallerBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, caller_);
-      }
       unknownFields.writeTo(output);
     }
 
@@ -2526,9 +2320,6 @@ public final class DatastoreServiceOuterClass {
       size = 0;
       if (!getKeyBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
-      }
-      if (!getCallerBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, caller_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2547,8 +2338,6 @@ public final class DatastoreServiceOuterClass {
 
       if (!getKey()
           .equals(other.getKey())) return false;
-      if (!getCaller()
-          .equals(other.getCaller())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2562,8 +2351,6 @@ public final class DatastoreServiceOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + KEY_FIELD_NUMBER;
       hash = (53 * hash) + getKey().hashCode();
-      hash = (37 * hash) + CALLER_FIELD_NUMBER;
-      hash = (53 * hash) + getCaller().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2699,8 +2486,6 @@ public final class DatastoreServiceOuterClass {
         super.clear();
         key_ = "";
 
-        caller_ = "";
-
         return this;
       }
 
@@ -2728,7 +2513,6 @@ public final class DatastoreServiceOuterClass {
       public edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest buildPartial() {
         edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest result = new edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest(this);
         result.key_ = key_;
-        result.caller_ = caller_;
         onBuilt();
         return result;
       }
@@ -2779,10 +2563,6 @@ public final class DatastoreServiceOuterClass {
         if (other == edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest.getDefaultInstance()) return this;
         if (!other.getKey().isEmpty()) {
           key_ = other.key_;
-          onChanged();
-        }
-        if (!other.getCaller().isEmpty()) {
-          caller_ = other.caller_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -2886,82 +2666,6 @@ public final class DatastoreServiceOuterClass {
   checkByteStringIsUtf8(value);
         
         key_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object caller_ = "";
-      /**
-       * <code>string caller = 2;</code>
-       * @return The caller.
-       */
-      public java.lang.String getCaller() {
-        java.lang.Object ref = caller_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          caller_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string caller = 2;</code>
-       * @return The bytes for caller.
-       */
-      public com.google.protobuf.ByteString
-          getCallerBytes() {
-        java.lang.Object ref = caller_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          caller_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string caller = 2;</code>
-       * @param value The caller to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCaller(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        caller_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string caller = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCaller() {
-        
-        caller_ = getDefaultInstance().getCaller();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string caller = 2;</code>
-       * @param value The bytes for caller to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCallerBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        caller_ = value;
         onChanged();
         return this;
       }
@@ -3836,17 +3540,18 @@ public final class DatastoreServiceOuterClass {
     java.lang.String[] descriptorData = {
       "\n\026DatastoreService.proto\"8\n\007Request\022\021\n\to" +
       "peration\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030\003 \001" +
-      "(\t\"8\n\nPutRequest\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002" +
-      " \001(\t\022\016\n\006caller\030\003 \001(\t\"\031\n\nGetRequest\022\013\n\003ke" +
-      "y\030\001 \001(\t\",\n\rDeleteRequest\022\013\n\003key\030\001 \001(\t\022\016\n" +
-      "\006caller\030\002 \001(\t\"H\n\013APIResponse\022\r\n\005value\030\001 " +
-      "\001(\t\022\024\n\014responseCode\030\002 \001(\005\022\024\n\014responseTex" +
-      "t\030\003 \001(\t2\243\001\n\020DatastoreService\022 \n\003put\022\013.Pu" +
-      "tRequest\032\014.APIResponse\022 \n\003get\022\013.GetReque" +
-      "st\032\014.APIResponse\022&\n\006delete\022\016.DeleteReque" +
-      "st\032\014.APIResponse\022#\n\tavailable\022\010.Request\032" +
-      "\014.APIResponseB\032\n\030edu.neu.DatastoreServic" +
-      "eb\006proto3"
+      "(\t\"(\n\nPutRequest\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002" +
+      " \001(\t\"\031\n\nGetRequest\022\013\n\003key\030\001 \001(\t\"\034\n\rDelet" +
+      "eRequest\022\013\n\003key\030\001 \001(\t\"H\n\013APIResponse\022\r\n\005" +
+      "value\030\001 \001(\t\022\024\n\014responseCode\030\002 \001(\005\022\024\n\014res" +
+      "ponseText\030\003 \001(\t2\203\002\n\020DatastoreService\022 \n\003" +
+      "put\022\013.PutRequest\032\014.APIResponse\022+\n\016coordi" +
+      "natorPut\022\013.PutRequest\032\014.APIResponse\022 \n\003g" +
+      "et\022\013.GetRequest\032\014.APIResponse\022&\n\006delete\022" +
+      "\016.DeleteRequest\032\014.APIResponse\0221\n\021coordin" +
+      "atorDelete\022\016.DeleteRequest\032\014.APIResponse" +
+      "\022#\n\tavailable\022\010.Request\032\014.APIResponseB\032\n" +
+      "\030edu.neu.DatastoreServiceb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3863,7 +3568,7 @@ public final class DatastoreServiceOuterClass {
     internal_static_PutRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PutRequest_descriptor,
-        new java.lang.String[] { "Key", "Value", "Caller", });
+        new java.lang.String[] { "Key", "Value", });
     internal_static_GetRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_GetRequest_fieldAccessorTable = new
@@ -3875,7 +3580,7 @@ public final class DatastoreServiceOuterClass {
     internal_static_DeleteRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DeleteRequest_descriptor,
-        new java.lang.String[] { "Key", "Caller", });
+        new java.lang.String[] { "Key", });
     internal_static_APIResponse_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_APIResponse_fieldAccessorTable = new

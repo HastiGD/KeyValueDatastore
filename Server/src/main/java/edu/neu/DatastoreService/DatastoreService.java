@@ -23,52 +23,81 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
 
     @Override
     public void put(PutRequest request, StreamObserver<APIResponse> responseObserver) {
-        // Determine the caller and get key and value from request
-        String caller = request.getCaller();
+        // Get key and value from request
         String key = request.getKey();
         String value = request.getValue();
-        log.info(String.format("Request from " + caller + " to: PUT <%s, %s>", key, value));
+        log.info(String.format("Received PutRequest from Client: PUT %s %s", key, value));
 
         // Forward request to Coordinator
+        log.info("Forwarding PutRequest to Coordinator");
         boolean result = requestOperation("PUT", key, value);
 
         // Generate response
         APIResponse.Builder response = APIResponse.newBuilder();
         if (result) {
-            response.setResponseCode(200).setResponseText("Processing request");
+            // Operation was accepted
+            response
+                    .setResponseCode(200)
+                    .setResponseText("OK");
         } else {
-            response.setResponseCode(405).setResponseText("Cannot process request");
+            // Operation was denied
+            response
+                    .setResponseCode(405)
+                    .setResponseText("Method Not Allowed");
         }
 
-//        // Add key and value to datastore
-//        String result = datastore.put(key, value);
-//
-//
-//        if (result.equals("")) {
-//            // Key was added
-//            response
-//                    .setResponseCode(200)
-//                    .setResponseText("OK")
-//                    .setValue("");
-//        } else {
-//            // Key already exists, return value
-//            response
-//                    .setResponseCode(405)
-//                    .setResponseText("Method Not Allowed")
-//                    .setValue(result);
-//        }
+        // Send response to client
+        log.info("Sending APIResponse to Client Response Code: " +
+                response.getResponseCode() +
+                " Response Message: " +
+                response.getResponseText());
 
-        // Send response to coordinator
-        // Send response
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
 
     @Override
+    public void coordinatorPut(PutRequest request, StreamObserver<APIResponse> responseObserver) {
+        // Get key and value from request
+        String key = request.getKey();
+        String value = request.getValue();
+        log.info(String.format("Received PutRequest from Coordinator: PUT %s %s", key, value));
+
+        // Add key and value to datastore
+        String result = datastore.put(key, value);
+
+        // Generate response
+        APIResponse.Builder response = APIResponse.newBuilder();
+        if (result.equals("")) {
+            // Key was added
+            response
+                    .setResponseCode(200)
+                    .setResponseText("OK")
+                    .setValue("");
+        } else {
+            // Key already exists, return value
+            response
+                    .setResponseCode(405)
+                    .setResponseText("Method Not Allowed")
+                    .setValue(result);
+        }
+
+        // Send response to Coordinator
+        log.info("Sending APIResponse to Coordinator Response Code: " +
+                response.getResponseCode() +
+                " Response Message: " +
+                response.getResponseText());
+
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
+    }
+
+
+    @Override
     public void get(GetRequest request, StreamObserver<APIResponse> responseObserver) {
         // Get key from request
         String key = request.getKey();
-        log.info(String.format("Request: GET %s", key));
+        log.info(String.format("Received GetRequest from Client: GET %s", key));
 
         // Get value from datastore
         String result = datastore.get(key);
@@ -89,47 +118,82 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
                     .setResponseText("OK")
                     .setValue(result);
         }
+
         // Send response to client
+        log.info("Sending APIResponse to Client Response Code: " +
+                response.getResponseCode() +
+                " Response Message: " +
+                response.getResponseText());
+
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
 
     @Override
     public void delete(DeleteRequest request, StreamObserver<APIResponse> responseObserver) {
-        // Determine the caller and get key from request
-        String caller = request.getCaller();
+        // Get key from request
         String key = request.getKey();
-        log.info(String.format("Request from " + caller + " to: DELETE %s", key));
+        log.info(String.format("Received DeleteRequest from Client: DELETE %s", key));
 
         // Forward request to Coordinator
+        log.info("Forwarding DeleteRequest to Coordinator");
         boolean result = requestOperation("DELETE", key, "");
 
         // Generate response
         APIResponse.Builder response = APIResponse.newBuilder();
         if (result) {
-            response.setResponseCode(200).setResponseText("Processing request");
+            // Operation was accepted
+            response
+                    .setResponseCode(200)
+                    .setResponseText("OK");
         } else {
-            response.setResponseCode(405).setResponseText("Cannot process request");
+            // Operation cannot be performed at this time
+            response
+                    .setResponseCode(405)
+                    .setResponseText("Method not allowed");
         }
 
-//        // Delete key from datastore
-//        String result = datastore.delete(key);
-//
-//        if (result.equals("")) {
-//            // Key was not found
-//            response
-//                    .setResponseCode(404)
-//                    .setResponseText("Not Found")
-//                    .setValue("");
-//        } else {
-//            // Key was deleted, return value
-//            response
-//                    .setResponseCode(200)
-//                    .setResponseText("OK")
-//                    .setValue(result);
-//        }
+        // Send response to client
+        log.info("Sending APIResponse to Client Response Code: " +
+                response.getResponseCode() +
+                " Response Message: " +
+                response.getResponseText());
 
-        // Send response
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void coordinatorDelete(DeleteRequest request, StreamObserver<APIResponse> responseObserver) {
+        // Get key from request
+        String key = request.getKey();
+        log.info(String.format("Received DeleteRequest from Coordinator: DELETE %s", key));
+
+        // Delete key from datastore
+        String result = datastore.delete(key);
+
+        // Generate response
+        APIResponse.Builder response = APIResponse.newBuilder();
+        if (result.equals("")) {
+            // Key was not found
+            response
+                    .setResponseCode(404)
+                    .setResponseText("Not Found")
+                    .setValue("");
+        } else {
+            // Key was deleted, return value
+            response
+                    .setResponseCode(200)
+                    .setResponseText("OK")
+                    .setValue(result);
+        }
+
+        // Send response to Coordinator
+        log.info("Sending APIResponse to Coordinator Response Code: " +
+                response.getResponseCode() +
+                " Response Message: " +
+                response.getResponseText());
+
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
@@ -140,6 +204,7 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         String operation = request.getOperation();
         String key = request.getKey();
         String value = request.getValue();
+        log.info(String.format("Received Request from Coordinator: %s %s %s", operation, key, value));
 
         // See if datastore is available for transaction
         log.info("Checking datastore availability");
@@ -158,15 +223,18 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         }
 
         // Send response
-        log.info("Sending response to coordinator");
+        log.info("Sending APIResponse to Coordinator Response Code: " +
+                response.getResponseCode() +
+                " Response Message: " +
+                response.getResponseText());
+
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
 
     private boolean requestOperation(String operation, String key, String value) {
-        log.info("Requesting to operate");
-
         // Send request
+        log.info("Sending OperateRequest to Coordinator");
         OperateRequest request = OperateRequest
                         .newBuilder()
                         .setOperation(operation)
@@ -177,7 +245,10 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         // Get response
         OperateResponse response = coordinatorStub.operate(request);
         int responseCode = response.getResponseCode();
-        log.info("Response: " + responseCode + " " + response.getResponseText());
+        log.info("Received OperateResponse from Coordinator Response Code: " +
+                responseCode +
+                " Response Text: " +
+                response.getResponseText());
 
         // Send true if ok to operate otherwise false
         return responseCode == 200;

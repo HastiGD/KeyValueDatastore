@@ -122,7 +122,7 @@ public class ClientApp {
                                 .setValue(request[2])
                                 .build();
                         response = stub.put(putRequest);
-                        log.info("Response: "+Integer.toString(response.getResponseCode())+" "+response.getResponseText()+" "+response.getValue());
+                        log.info("Response: "+Integer.toString(response.getResponseCode())+" "+response.getResponseText());
                         break;
                     case "GET" :    log.info(String.format("Request: GET %s", request[1]));
                         DatastoreServiceOuterClass.GetRequest getRequest = DatastoreServiceOuterClass
@@ -139,7 +139,7 @@ public class ClientApp {
                                 .setKey(request[1])
                                 .build();
                         response = stub.delete(deleteRequest);
-                        log.info("Response: "+Integer.toString(response.getResponseCode())+" "+response.getResponseText()+" "+response.getValue());
+                        log.info("Response: "+Integer.toString(response.getResponseCode())+" "+response.getResponseText());
                         break;
                     case "CLOSE" :  log.info("Closing client");
                         exit = true;

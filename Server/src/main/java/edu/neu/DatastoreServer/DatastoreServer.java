@@ -34,8 +34,7 @@ public class DatastoreServer {
 
         // Create stubs
         this.coordinatorStub = CoordinatorServiceGrpc
-                .newBlockingStub(coordinatorChannel)
-                .withDeadlineAfter(5, TimeUnit.MINUTES);
+                .newBlockingStub(coordinatorChannel);
 
         // Create the service
         DatastoreService datastoreService = new DatastoreService(datastore, coordinatorStub);
@@ -97,10 +96,10 @@ public class DatastoreServer {
                 DataInputStream input = new DataInputStream(System.in);
                 String[] coordinatorInfo = null;
                 try {
-                    log.info("Enter coordinator hostname seperated by coordinator port");
+                    log.info("Enter coordinator hostname");
                     coordinatorInfo = input.readLine().split(" ");
                     String coordinatorHostname = coordinatorInfo[0];
-                    int coordinatorPort = Integer.parseInt(coordinatorInfo[1]);
+                    int coordinatorPort = 9090;
 
                     // Create datastore
                     Datastore datastore = new Datastore();

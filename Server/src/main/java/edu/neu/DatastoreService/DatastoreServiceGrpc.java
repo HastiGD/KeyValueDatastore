@@ -59,6 +59,38 @@ public final class DatastoreServiceGrpc {
      return getPutMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest,
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getCoordinatorPutMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "coordinatorPut",
+      requestType = edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest.class,
+      responseType = edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest,
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getCoordinatorPutMethod() {
+    io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getCoordinatorPutMethod;
+    if ((getCoordinatorPutMethod = DatastoreServiceGrpc.getCoordinatorPutMethod) == null) {
+      synchronized (DatastoreServiceGrpc.class) {
+        if ((getCoordinatorPutMethod = DatastoreServiceGrpc.getCoordinatorPutMethod) == null) {
+          DatastoreServiceGrpc.getCoordinatorPutMethod = getCoordinatorPutMethod = 
+              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "DatastoreService", "coordinatorPut"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new DatastoreServiceMethodDescriptorSupplier("coordinatorPut"))
+                  .build();
+          }
+        }
+     }
+     return getCoordinatorPutMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest,
       edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getGetMethod;
 
@@ -121,6 +153,38 @@ public final class DatastoreServiceGrpc {
         }
      }
      return getDeleteMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest,
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getCoordinatorDeleteMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "coordinatorDelete",
+      requestType = edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest.class,
+      responseType = edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest,
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getCoordinatorDeleteMethod() {
+    io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getCoordinatorDeleteMethod;
+    if ((getCoordinatorDeleteMethod = DatastoreServiceGrpc.getCoordinatorDeleteMethod) == null) {
+      synchronized (DatastoreServiceGrpc.class) {
+        if ((getCoordinatorDeleteMethod = DatastoreServiceGrpc.getCoordinatorDeleteMethod) == null) {
+          DatastoreServiceGrpc.getCoordinatorDeleteMethod = getCoordinatorDeleteMethod = 
+              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "DatastoreService", "coordinatorDelete"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new DatastoreServiceMethodDescriptorSupplier("coordinatorDelete"))
+                  .build();
+          }
+        }
+     }
+     return getCoordinatorDeleteMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.Request,
@@ -191,6 +255,13 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
+    public void coordinatorPut(edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getCoordinatorPutMethod(), responseObserver);
+    }
+
+    /**
+     */
     public void get(edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest request,
         io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetMethod(), responseObserver);
@@ -201,6 +272,13 @@ public final class DatastoreServiceGrpc {
     public void delete(edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request,
         io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getDeleteMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void coordinatorDelete(edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getCoordinatorDeleteMethod(), responseObserver);
     }
 
     /**
@@ -220,6 +298,13 @@ public final class DatastoreServiceGrpc {
                 edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>(
                   this, METHODID_PUT)))
           .addMethod(
+            getCoordinatorPutMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest,
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>(
+                  this, METHODID_COORDINATOR_PUT)))
+          .addMethod(
             getGetMethod(),
             asyncUnaryCall(
               new MethodHandlers<
@@ -233,6 +318,13 @@ public final class DatastoreServiceGrpc {
                 edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest,
                 edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>(
                   this, METHODID_DELETE)))
+          .addMethod(
+            getCoordinatorDeleteMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest,
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>(
+                  this, METHODID_COORDINATOR_DELETE)))
           .addMethod(
             getAvailableMethod(),
             asyncUnaryCall(
@@ -272,6 +364,14 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
+    public void coordinatorPut(edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCoordinatorPutMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void get(edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest request,
         io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
       asyncUnaryCall(
@@ -284,6 +384,14 @@ public final class DatastoreServiceGrpc {
         io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getDeleteMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void coordinatorDelete(edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCoordinatorDeleteMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -322,6 +430,13 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
+    public edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse coordinatorPut(edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getCoordinatorPutMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
     public edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse get(edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest request) {
       return blockingUnaryCall(
           getChannel(), getGetMethod(), getCallOptions(), request);
@@ -332,6 +447,13 @@ public final class DatastoreServiceGrpc {
     public edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse delete(edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request) {
       return blockingUnaryCall(
           getChannel(), getDeleteMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse coordinatorDelete(edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getCoordinatorDeleteMethod(), getCallOptions(), request);
     }
 
     /**
@@ -370,6 +492,14 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> coordinatorPut(
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCoordinatorPutMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> get(
         edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest request) {
       return futureUnaryCall(
@@ -386,6 +516,14 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> coordinatorDelete(
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCoordinatorDeleteMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> available(
         edu.neu.DatastoreService.DatastoreServiceOuterClass.Request request) {
       return futureUnaryCall(
@@ -394,9 +532,11 @@ public final class DatastoreServiceGrpc {
   }
 
   private static final int METHODID_PUT = 0;
-  private static final int METHODID_GET = 1;
-  private static final int METHODID_DELETE = 2;
-  private static final int METHODID_AVAILABLE = 3;
+  private static final int METHODID_COORDINATOR_PUT = 1;
+  private static final int METHODID_GET = 2;
+  private static final int METHODID_DELETE = 3;
+  private static final int METHODID_COORDINATOR_DELETE = 4;
+  private static final int METHODID_AVAILABLE = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -419,12 +559,20 @@ public final class DatastoreServiceGrpc {
           serviceImpl.put((edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest) request,
               (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>) responseObserver);
           break;
+        case METHODID_COORDINATOR_PUT:
+          serviceImpl.coordinatorPut((edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest) request,
+              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>) responseObserver);
+          break;
         case METHODID_GET:
           serviceImpl.get((edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest) request,
               (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>) responseObserver);
           break;
         case METHODID_DELETE:
           serviceImpl.delete((edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest) request,
+              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>) responseObserver);
+          break;
+        case METHODID_COORDINATOR_DELETE:
+          serviceImpl.coordinatorDelete((edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest) request,
               (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>) responseObserver);
           break;
         case METHODID_AVAILABLE:
@@ -493,8 +641,10 @@ public final class DatastoreServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new DatastoreServiceFileDescriptorSupplier())
               .addMethod(getPutMethod())
+              .addMethod(getCoordinatorPutMethod())
               .addMethod(getGetMethod())
               .addMethod(getDeleteMethod())
+              .addMethod(getCoordinatorDeleteMethod())
               .addMethod(getAvailableMethod())
               .build();
         }

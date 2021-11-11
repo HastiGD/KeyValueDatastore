@@ -18,17 +18,21 @@ import java.util.stream.IntStream;
 
 public class DatastoreCoordinator {
     private static final Logger log = Logger.getLogger( "COORDINATOR");
-    private static final int port = 9000;
+    private static final int port = 9090;
     public final Server coordinatorServer;
 
     public DatastoreCoordinator(List<String> serverHostnames, List<Integer> serverPorts) {
         // Create DatastoreService stubs
         List<DatastoreServiceBlockingStub> datastoreStubs = IntStream
                 .range(0, serverHostnames.size())
-                .mapToObj((i) -> ManagedChannelBuilder
-                        .forAddress(serverHostnames.get(i), serverPorts.get(i))
-                        .usePlaintext()
-                        .build())
+                .mapToObj((i) -> {
+                    String hostname = serverHostnames.get(i);
+                    Integer port = serverPorts.get(i);
+                    log.info("Establishing channel with server " + hostname + " on port " + port);
+                    return  ManagedChannelBuilder
+                            .forAddress(hostname, port)
+                            .usePlaintext()
+                            .build();})
                 .map(DatastoreServiceGrpc::newBlockingStub)
                 .collect(Collectors.toList());
 
