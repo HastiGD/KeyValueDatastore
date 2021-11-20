@@ -27,100 +27,36 @@ public final class DatastoreServiceGrpc {
   public static final String SERVICE_NAME = "DatastoreService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest,
-      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getPutMethod;
+  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest,
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> getAvailableMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "put",
-      requestType = edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest.class,
-      responseType = edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "available",
+      requestType = edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.class,
+      responseType = edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest,
-      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getPutMethod() {
-    io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getPutMethod;
-    if ((getPutMethod = DatastoreServiceGrpc.getPutMethod) == null) {
+  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest,
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> getAvailableMethod() {
+    io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> getAvailableMethod;
+    if ((getAvailableMethod = DatastoreServiceGrpc.getAvailableMethod) == null) {
       synchronized (DatastoreServiceGrpc.class) {
-        if ((getPutMethod = DatastoreServiceGrpc.getPutMethod) == null) {
-          DatastoreServiceGrpc.getPutMethod = getPutMethod = 
-              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>newBuilder()
+        if ((getAvailableMethod = DatastoreServiceGrpc.getAvailableMethod) == null) {
+          DatastoreServiceGrpc.getAvailableMethod = getAvailableMethod = 
+              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "DatastoreService", "put"))
+                  "DatastoreService", "available"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest.getDefaultInstance()))
+                  edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new DatastoreServiceMethodDescriptorSupplier("put"))
+                  edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new DatastoreServiceMethodDescriptorSupplier("available"))
                   .build();
           }
         }
      }
-     return getPutMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest,
-      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getGetMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "get",
-      requestType = edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest.class,
-      responseType = edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest,
-      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getGetMethod() {
-    io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getGetMethod;
-    if ((getGetMethod = DatastoreServiceGrpc.getGetMethod) == null) {
-      synchronized (DatastoreServiceGrpc.class) {
-        if ((getGetMethod = DatastoreServiceGrpc.getGetMethod) == null) {
-          DatastoreServiceGrpc.getGetMethod = getGetMethod = 
-              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "DatastoreService", "get"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new DatastoreServiceMethodDescriptorSupplier("get"))
-                  .build();
-          }
-        }
-     }
-     return getGetMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest,
-      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getDeleteMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "delete",
-      requestType = edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest.class,
-      responseType = edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest,
-      edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getDeleteMethod() {
-    io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> getDeleteMethod;
-    if ((getDeleteMethod = DatastoreServiceGrpc.getDeleteMethod) == null) {
-      synchronized (DatastoreServiceGrpc.class) {
-        if ((getDeleteMethod = DatastoreServiceGrpc.getDeleteMethod) == null) {
-          DatastoreServiceGrpc.getDeleteMethod = getDeleteMethod = 
-              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "DatastoreService", "delete"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new DatastoreServiceMethodDescriptorSupplier("delete"))
-                  .build();
-          }
-        }
-     }
-     return getDeleteMethod;
+     return getAvailableMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest,
@@ -130,7 +66,7 @@ public final class DatastoreServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "operate",
       requestType = edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest.class,
       responseType = edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest,
       edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> getOperateMethod() {
     io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> getOperateMethod;
@@ -139,7 +75,7 @@ public final class DatastoreServiceGrpc {
         if ((getOperateMethod = DatastoreServiceGrpc.getOperateMethod) == null) {
           DatastoreServiceGrpc.getOperateMethod = getOperateMethod = 
               io.grpc.MethodDescriptor.<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "DatastoreService", "operate"))
               .setSampledToLocalTracing(true)
@@ -153,6 +89,38 @@ public final class DatastoreServiceGrpc {
         }
      }
      return getOperateMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest,
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse> getUpdateMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "update",
+      requestType = edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest.class,
+      responseType = edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest,
+      edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse> getUpdateMethod() {
+    io.grpc.MethodDescriptor<edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse> getUpdateMethod;
+    if ((getUpdateMethod = DatastoreServiceGrpc.getUpdateMethod) == null) {
+      synchronized (DatastoreServiceGrpc.class) {
+        if ((getUpdateMethod = DatastoreServiceGrpc.getUpdateMethod) == null) {
+          DatastoreServiceGrpc.getUpdateMethod = getUpdateMethod = 
+              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest, edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "DatastoreService", "update"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new DatastoreServiceMethodDescriptorSupplier("update"))
+                  .build();
+          }
+        }
+     }
+     return getUpdateMethod;
   }
 
   /**
@@ -184,62 +152,48 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
-    public void put(edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest request,
-        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getPutMethod(), responseObserver);
-    }
-
-    /**
-     */
-    public void get(edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest request,
-        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetMethod(), responseObserver);
-    }
-
-    /**
-     */
-    public void delete(edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request,
-        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getDeleteMethod(), responseObserver);
-    }
-
-    /**
-     */
-    public io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest> operate(
+    public void available(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest request,
         io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> responseObserver) {
-      return asyncUnimplementedStreamingCall(getOperateMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getAvailableMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void operate(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getOperateMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void update(edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getPutMethod(),
+            getAvailableMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest,
-                edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>(
-                  this, METHODID_PUT)))
-          .addMethod(
-            getGetMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest,
-                edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>(
-                  this, METHODID_GET)))
-          .addMethod(
-            getDeleteMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest,
-                edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>(
-                  this, METHODID_DELETE)))
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest,
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse>(
+                  this, METHODID_AVAILABLE)))
           .addMethod(
             getOperateMethod(),
-            asyncBidiStreamingCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest,
                 edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse>(
                   this, METHODID_OPERATE)))
+          .addMethod(
+            getUpdateMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest,
+                edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse>(
+                  this, METHODID_UPDATE)))
           .build();
     }
   }
@@ -264,34 +218,26 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
-    public void put(edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest request,
-        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getPutMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void get(edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest request,
-        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getGetMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void delete(edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request,
-        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getDeleteMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest> operate(
+    public void available(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest request,
         io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(getOperateMethod(), getCallOptions()), responseObserver);
+      asyncUnaryCall(
+          getChannel().newCall(getAvailableMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void operate(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getOperateMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void update(edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -315,23 +261,23 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
-    public edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse put(edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest request) {
+    public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse available(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest request) {
       return blockingUnaryCall(
-          getChannel(), getPutMethod(), getCallOptions(), request);
+          getChannel(), getAvailableMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse get(edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest request) {
+    public edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse operate(edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest request) {
       return blockingUnaryCall(
-          getChannel(), getGetMethod(), getCallOptions(), request);
+          getChannel(), getOperateMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse delete(edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request) {
+    public edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse update(edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest request) {
       return blockingUnaryCall(
-          getChannel(), getDeleteMethod(), getCallOptions(), request);
+          getChannel(), getUpdateMethod(), getCallOptions(), request);
     }
   }
 
@@ -355,33 +301,32 @@ public final class DatastoreServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> put(
-        edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> available(
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getPutMethod(), getCallOptions()), request);
+          getChannel().newCall(getAvailableMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> get(
-        edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse> operate(
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getGetMethod(), getCallOptions()), request);
+          getChannel().newCall(getOperateMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse> delete(
-        edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse> update(
+        edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getDeleteMethod(), getCallOptions()), request);
+          getChannel().newCall(getUpdateMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_PUT = 0;
-  private static final int METHODID_GET = 1;
-  private static final int METHODID_DELETE = 2;
-  private static final int METHODID_OPERATE = 3;
+  private static final int METHODID_AVAILABLE = 0;
+  private static final int METHODID_OPERATE = 1;
+  private static final int METHODID_UPDATE = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -400,17 +345,17 @@ public final class DatastoreServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_PUT:
-          serviceImpl.put((edu.neu.DatastoreService.DatastoreServiceOuterClass.PutRequest) request,
-              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>) responseObserver);
+        case METHODID_AVAILABLE:
+          serviceImpl.available((edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest) request,
+              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse>) responseObserver);
           break;
-        case METHODID_GET:
-          serviceImpl.get((edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest) request,
-              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>) responseObserver);
+        case METHODID_OPERATE:
+          serviceImpl.operate((edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest) request,
+              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse>) responseObserver);
           break;
-        case METHODID_DELETE:
-          serviceImpl.delete((edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest) request,
-              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse>) responseObserver);
+        case METHODID_UPDATE:
+          serviceImpl.update((edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreRequest) request,
+              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.DatastoreResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -422,9 +367,6 @@ public final class DatastoreServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_OPERATE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.operate(
-              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -476,10 +418,9 @@ public final class DatastoreServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new DatastoreServiceFileDescriptorSupplier())
-              .addMethod(getPutMethod())
-              .addMethod(getGetMethod())
-              .addMethod(getDeleteMethod())
+              .addMethod(getAvailableMethod())
               .addMethod(getOperateMethod())
+              .addMethod(getUpdateMethod())
               .build();
         }
       }

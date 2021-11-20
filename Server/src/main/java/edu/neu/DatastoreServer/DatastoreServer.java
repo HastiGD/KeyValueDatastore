@@ -2,23 +2,40 @@ package edu.neu.DatastoreServer;
 
 import edu.neu.DatastoreService.Datastore;
 import edu.neu.DatastoreService.DatastoreService;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class DatastoreServer {
     private static final Logger log = Logger.getLogger( "SERVER");
-
     private final int port;
     private final Server server;
+    private final String serverId;
 
-    public DatastoreServer(int port, Datastore datastore) {
+    public DatastoreServer(int port, Datastore datastore, String coordinatorHostname, int coordinatorPort) {
         this.port = port;
-        DatastoreService datastoreService = new DatastoreService(datastore);
-        this.server = ServerBuilder.forPort(port).addService(datastoreService).build();
+        this.serverId = "Server" + String.valueOf(port);
+
+        // Establish channel with coordinator
+        ManagedChannel channel = ManagedChannelBuilder
+                .forAddress(coordinatorHostname, coordinatorPort)
+                .usePlaintext()
+                .build();
+
+        // Create DatastoreService
+        DatastoreService datastoreService = new DatastoreService(serverId, datastore, channel);
+
+        // Build gRPC server and bind DatastoreService
+        this.server = ServerBuilder
+                .forPort(port)
+                .addService(datastoreService)
+                .build();
     }
 
     public void start() throws IOException {
@@ -28,7 +45,7 @@ public class DatastoreServer {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                System.err.println("Shut down gRPC server because JVM shut down");
+                System.err.println("Shut down Datastore server because JVM shut down");
                 try {
                     DatastoreServer.this.stop();
                 } catch (InterruptedException e) {
@@ -65,10 +82,17 @@ public class DatastoreServer {
             try {
                 // Get port number from args
                 int port = Integer.parseInt(args[0]);
-                Datastore datastore = new Datastore();
-                // Start server
+
+                // Get coordinator hostname and port
+                Scanner in = new Scanner(System.in);
+                log.info("Enter coordinator hostname and port number: <hostname> <port>");
+                String coordinatorHostname = in.next();
+                int coordinatorPort = in.nextInt();
                 try {
-                    DatastoreServer server = new DatastoreServer(port, datastore);
+                    // Start server
+                    Datastore datastore = new Datastore();
+                    DatastoreServer server =
+                            new DatastoreServer(port, datastore, coordinatorHostname, coordinatorPort);
                     server.start();
                     server.blockUntilShutdown();
                 } catch (IOException e) {

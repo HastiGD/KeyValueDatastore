@@ -4,45 +4,34 @@ option java_package = "edu.neu.DatastoreService";
 
 service DatastoreService {
 
-    rpc put(PutRequest) returns (APIResponse);
+    rpc available(OperateRequest) returns (OperateResponse);
 
-    rpc get(GetRequest) returns (APIResponse);
+    rpc operate(OperateRequest) returns (OperateResponse);
 
-    rpc delete(DeleteRequest) returns (APIResponse);
-
-    rpc operate(stream OperateRequest) returns (stream OperateResponse);
-}
-
-message PutRequest {
-
-    string key = 1;
-    string value = 2;
-}
-
-message GetRequest {
-
-    string key = 1;
-}
-
-message DeleteRequest {
-
-    string key = 1;
-}
-
-message APIResponse {
-
-    string value = 1;
-    int32 responseCode = 2;
-    string responseText = 3;
+    rpc update(DatastoreRequest) returns (DatastoreResponse);
 }
 
 message OperateRequest {
-
-    string serverId = 1;
+    string operation = 1;
+    string key = 2;
+    string value = 3;
+    string callerId = 4;
 }
 
 message OperateResponse {
+    int32 code = 1;
+    string message = 2;
+    string responderId = 3;
+}
 
-    bool operate = 1;
-    string serverId = 2;
+message DatastoreRequest {
+    string operation = 1;
+    string key = 2;
+    string value = 3;
+}
+
+message DatastoreResponse {
+    int32 code = 1;
+    string message = 2;
+    string value = 3;
 }

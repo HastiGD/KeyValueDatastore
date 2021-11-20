@@ -2,6 +2,8 @@ package edu.neu.DatastoreClient;
 
 import edu.neu.DatastoreService.DatastoreServiceGrpc;
 import edu.neu.DatastoreService.DatastoreServiceOuterClass;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateResponse;
+import edu.neu.DatastoreService.DatastoreServiceOuterClass.OperateRequest;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -9,6 +11,7 @@ import io.grpc.StatusRuntimeException;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import java.util.logging.Logger;
@@ -44,106 +47,116 @@ public class ClientApp {
         DatastoreServiceGrpc.DatastoreServiceBlockingStub stub =
                 DatastoreServiceGrpc
                         .newBlockingStub(channel)
-                        .withDeadlineAfter(120, TimeUnit.SECONDS); //TODO why is this not working
+                        .withDeadlineAfter(120, TimeUnit.SECONDS);
 
-        // Demonstrate how to operate on Datastore
-        String[] keys = {"Good", "Love", "Night", "Friend", "Half-Full", "White"};
-        String[] values = {"Bad", "Hate", "Day", "Foe", "Half-Empty", "Black"};
+//        // Demonstrate how to operate on Datastore
+//        String[] keys = {"Good", "Love", "Night", "Friend", "Half-Full", "White"};
+//        String[] values = {"Bad", "Hate", "Day", "Foe", "Half-Empty", "Black"};
+//
+//        log.info("Testing Datastore operations");
+//
+//        for (int i = 0; i < keys.length; i++) {
+//            // Make put Request
+//            DatastoreServiceOuterClass.PutRequest putRequest =
+//                    DatastoreServiceOuterClass
+//                            .PutRequest
+//                            .newBuilder()
+//                            .setKey(keys[i])
+//                            .setValue(values[i])
+//                            .build();
+//            log.info(String.format("Request: PUT <%s, %s>", keys[i], values[i]));
+//
+//            // Read response
+//            DatastoreServiceOuterClass.APIResponse putResponse = stub.put(putRequest);
+//            log.info("Response: "+ Integer.toString(putResponse.getResponseCode())+" "+putResponse.getResponseText()+" "+putResponse.getValue());
+//
+//            // Make get request
+//            DatastoreServiceOuterClass.GetRequest getRequest =
+//                    DatastoreServiceOuterClass
+//                            .GetRequest.newBuilder()
+//                            .setKey(keys[i])
+//                            .build();
+//            log.info(String.format("Request: GET %s", keys[i]));
+//
+//            // Read response
+//            DatastoreServiceOuterClass.APIResponse getResponse = stub.get(getRequest);
+//            log.info("Response: "+Integer.toString(getResponse.getResponseCode())+" "+getResponse.getResponseText()+" "+getResponse.getValue());
+//
+//            // Make delete request
+//            DatastoreServiceOuterClass.DeleteRequest deleteRequest =
+//                    DatastoreServiceOuterClass
+//                            .DeleteRequest
+//                            .newBuilder()
+//                            .setKey(keys[i])
+//                            .build();
+//            log.info(String.format("Request: DELETE %s", keys[i]));
+//
+//            // Read response
+//            DatastoreServiceOuterClass.APIResponse deleteResponse = stub.delete(deleteRequest);
+//            log.info("Response: "+Integer.toString(deleteResponse.getResponseCode())+" "+deleteResponse.getResponseText()+" "+deleteResponse.getValue());
+//        }
+//
+//        log.info("Finished Test");
 
-        log.info("Testing Datastore operations");
 
-        for (int i = 0; i < keys.length; i++) {
-            // Make put Request
-            DatastoreServiceOuterClass.PutRequest putRequest =
-                    DatastoreServiceOuterClass
-                            .PutRequest
-                            .newBuilder()
-                            .setKey(keys[i])
-                            .setValue(values[i])
-                            .build();
-            log.info(String.format("Request: PUT <%s, %s>", keys[i], values[i]));
-
-            // Read response
-            DatastoreServiceOuterClass.APIResponse putResponse = stub.put(putRequest);
-            log.info("Response: "+ Integer.toString(putResponse.getResponseCode())+" "+putResponse.getResponseText()+" "+putResponse.getValue());
-
-            // Make get request
-            DatastoreServiceOuterClass.GetRequest getRequest =
-                    DatastoreServiceOuterClass
-                            .GetRequest.newBuilder()
-                            .setKey(keys[i])
-                            .build();
-            log.info(String.format("Request: GET %s", keys[i]));
-
-            // Read response
-            DatastoreServiceOuterClass.APIResponse getResponse = stub.get(getRequest);
-            log.info("Response: "+Integer.toString(getResponse.getResponseCode())+" "+getResponse.getResponseText()+" "+getResponse.getValue());
-
-            // Make delete request
-            DatastoreServiceOuterClass.DeleteRequest deleteRequest =
-                    DatastoreServiceOuterClass
-                            .DeleteRequest
-                            .newBuilder()
-                            .setKey(keys[i])
-                            .build();
-            log.info(String.format("Request: DELETE %s", keys[i]));
-
-            // Read response
-            DatastoreServiceOuterClass.APIResponse deleteResponse = stub.delete(deleteRequest);
-            log.info("Response: "+Integer.toString(deleteResponse.getResponseCode())+" "+deleteResponse.getResponseText()+" "+deleteResponse.getValue());
-        }
-
-        log.info("Finished Test");
 
         // Read input from terminal
-        DataInputStream input = new DataInputStream(System.in);
 
         log.info("Enter requests separated by space: <OPERATION> <KEY> <VALUE>");
         log.info("Valid operations: PUT, GET, DELETE");
         log.info("Enter CLOSE to exit program");
 
+        DataInputStream in = new DataInputStream(System.in);
+
         // Ask user for requests
-        String[] request = null;
         boolean exit = false;
         while (!exit) {
             log.info("Enter your request: ");
             try {
                 // Parse input, send requests, read response
-                request = input.readLine().split(" ");
-                String operation = request[0].toUpperCase();
-                DatastoreServiceOuterClass.APIResponse response = null;
+                String[] input = in.readLine().split(" ");
+                String operation = input[0].toUpperCase();
+
+                OperateRequest request = null;
+                OperateResponse response = null;
+
                 switch (operation) {
-                    case "PUT" :    log.info(String.format("Request: PUT <%s, %s>", request[1], request[2]));
-                        DatastoreServiceOuterClass.PutRequest putRequest = DatastoreServiceOuterClass
-                                .PutRequest
-                                .newBuilder()
-                                .setKey(request[1])
-                                .setValue(request[2])
+                    case "PUT" :
+                        log.info(String.format("Sending Request to Server: PUT <%s, %s>", input[1], input[2]));
+                        request = OperateRequest.newBuilder()
+                                .setOperation(operation)
+                                .setKey(input[1])
+                                .setValue(input[2])
                                 .build();
-                        response = stub.put(putRequest);
-                        log.info("Response: "+Integer.toString(response.getResponseCode())+" "+response.getResponseText()+" "+response.getValue());
+                        response = stub.operate(request);
+                        log.info("Received Response from Server: " + response);
                         break;
-                    case "GET" :    log.info(String.format("Request: GET %s", request[1]));
-                        DatastoreServiceOuterClass.GetRequest getRequest = DatastoreServiceOuterClass
-                                .GetRequest.newBuilder()
-                                .setKey(request[1])
+                    case "GET" :
+                        log.info(String.format("Sending Request to Server: GET %s", input[1]));
+                        request = OperateRequest.newBuilder()
+                                .setOperation(operation)
+                                .setKey(input[1])
+                                .setValue("")
                                 .build();
-                        response = stub.get(getRequest);
-                        log.info("Response: "+Integer.toString(response.getResponseCode())+" "+response.getResponseText()+" "+response.getValue());
+                        response = stub.operate(request);
+                        log.info("Received Response from Server: " + response);
                         break;
-                    case "DELETE" : log.info(String.format("Request: DELETE %s", request[1]));
-                        DatastoreServiceOuterClass.DeleteRequest deleteRequest = DatastoreServiceOuterClass
-                                .DeleteRequest
-                                .newBuilder()
-                                .setKey(request[1])
+                    case "DELETE" :
+                        log.info(String.format("Sending Request to Server: DELETE %s", input[1]));
+                        request = OperateRequest.newBuilder()
+                                .setOperation(operation)
+                                .setKey(input[1])
+                                .setValue("")
                                 .build();
-                        response = stub.delete(deleteRequest);
-                        log.info("Response: "+Integer.toString(response.getResponseCode())+" "+response.getResponseText()+" "+response.getValue());
+                        response = stub.operate(request);
+                        log.info("Received Response from Server: " + response);
                         break;
-                    case "CLOSE" :  log.info("Closing client");
+                    case "CLOSE" :
+                        log.info("Closing client");
                         exit = true;
                         break;
-                    default :       log.warning("Invalid operation");
+                    default :
+                        log.warning("Invalid operation");
                         break;
                 }
             } catch (IOException e) {
