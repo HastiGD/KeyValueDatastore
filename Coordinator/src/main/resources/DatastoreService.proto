@@ -22,6 +22,7 @@ message OperateResponse {
     int32 code = 1;
     string message = 2;
     string responderId = 3;
+    string value = 4;
 }
 
 message DatastoreRequest {

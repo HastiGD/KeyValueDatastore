@@ -45,8 +45,8 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
         // TODO Get DatastoreResponse from coordinator and forward result to client
 
         // Send response to client
-        DatastoreServiceOuterClass.OperateResponse.Builder response =
-                DatastoreServiceOuterClass.OperateResponse.newBuilder();
+        DatastoreServiceOuterClass.OperateResponse.Builder response = operateResponseStreamObserver.getDatastoreResponse();
+                //DatastoreServiceOuterClass.OperateResponse.newBuilder();
         response
                 .setCode(200)
                 .setMessage("OK");

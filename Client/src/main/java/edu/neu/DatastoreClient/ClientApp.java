@@ -47,7 +47,7 @@ public class ClientApp {
         DatastoreServiceGrpc.DatastoreServiceBlockingStub stub =
                 DatastoreServiceGrpc
                         .newBlockingStub(channel)
-                        .withDeadlineAfter(120, TimeUnit.SECONDS);
+                        .withDeadlineAfter(5, TimeUnit.MINUTES);
 
 //        // Demonstrate how to operate on Datastore
 //        String[] keys = {"Good", "Love", "Night", "Friend", "Half-Full", "White"};

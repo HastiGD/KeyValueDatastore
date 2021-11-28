@@ -1057,6 +1057,18 @@ public final class DatastoreServiceOuterClass {
      */
     com.google.protobuf.ByteString
         getResponderIdBytes();
+
+    /**
+     * <code>string value = 4;</code>
+     * @return The value.
+     */
+    java.lang.String getValue();
+    /**
+     * <code>string value = 4;</code>
+     * @return The bytes for value.
+     */
+    com.google.protobuf.ByteString
+        getValueBytes();
   }
   /**
    * Protobuf type {@code OperateResponse}
@@ -1073,6 +1085,7 @@ public final class DatastoreServiceOuterClass {
     private OperateResponse() {
       message_ = "";
       responderId_ = "";
+      value_ = "";
     }
 
     @java.lang.Override
@@ -1120,6 +1133,12 @@ public final class DatastoreServiceOuterClass {
               java.lang.String s = input.readStringRequireUtf8();
 
               responderId_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              value_ = s;
               break;
             }
             default: {
@@ -1236,6 +1255,42 @@ public final class DatastoreServiceOuterClass {
       }
     }
 
+    public static final int VALUE_FIELD_NUMBER = 4;
+    private volatile java.lang.Object value_;
+    /**
+     * <code>string value = 4;</code>
+     * @return The value.
+     */
+    public java.lang.String getValue() {
+      java.lang.Object ref = value_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        value_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string value = 4;</code>
+     * @return The bytes for value.
+     */
+    public com.google.protobuf.ByteString
+        getValueBytes() {
+      java.lang.Object ref = value_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        value_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1259,6 +1314,9 @@ public final class DatastoreServiceOuterClass {
       if (!getResponderIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, responderId_);
       }
+      if (!getValueBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, value_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1277,6 +1335,9 @@ public final class DatastoreServiceOuterClass {
       }
       if (!getResponderIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, responderId_);
+      }
+      if (!getValueBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, value_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1299,6 +1360,8 @@ public final class DatastoreServiceOuterClass {
           .equals(other.getMessage())) return false;
       if (!getResponderId()
           .equals(other.getResponderId())) return false;
+      if (!getValue()
+          .equals(other.getValue())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1316,6 +1379,8 @@ public final class DatastoreServiceOuterClass {
       hash = (53 * hash) + getMessage().hashCode();
       hash = (37 * hash) + RESPONDERID_FIELD_NUMBER;
       hash = (53 * hash) + getResponderId().hashCode();
+      hash = (37 * hash) + VALUE_FIELD_NUMBER;
+      hash = (53 * hash) + getValue().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1455,6 +1520,8 @@ public final class DatastoreServiceOuterClass {
 
         responderId_ = "";
 
+        value_ = "";
+
         return this;
       }
 
@@ -1484,6 +1551,7 @@ public final class DatastoreServiceOuterClass {
         result.code_ = code_;
         result.message_ = message_;
         result.responderId_ = responderId_;
+        result.value_ = value_;
         onBuilt();
         return result;
       }
@@ -1541,6 +1609,10 @@ public final class DatastoreServiceOuterClass {
         }
         if (!other.getResponderId().isEmpty()) {
           responderId_ = other.responderId_;
+          onChanged();
+        }
+        if (!other.getValue().isEmpty()) {
+          value_ = other.value_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1750,6 +1822,82 @@ public final class DatastoreServiceOuterClass {
   checkByteStringIsUtf8(value);
         
         responderId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object value_ = "";
+      /**
+       * <code>string value = 4;</code>
+       * @return The value.
+       */
+      public java.lang.String getValue() {
+        java.lang.Object ref = value_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          value_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string value = 4;</code>
+       * @return The bytes for value.
+       */
+      public com.google.protobuf.ByteString
+          getValueBytes() {
+        java.lang.Object ref = value_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          value_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string value = 4;</code>
+       * @param value The value to set.
+       * @return This builder for chaining.
+       */
+      public Builder setValue(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        value_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string value = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearValue() {
+        
+        value_ = getDefaultInstance().getValue();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string value = 4;</code>
+       * @param value The bytes for value to set.
+       * @return This builder for chaining.
+       */
+      public Builder setValueBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        value_ = value;
         onChanged();
         return this;
       }
@@ -3481,17 +3629,18 @@ public final class DatastoreServiceOuterClass {
     java.lang.String[] descriptorData = {
       "\n\026DatastoreService.proto\"Q\n\016OperateReque" +
       "st\022\021\n\toperation\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005va" +
-      "lue\030\003 \001(\t\022\020\n\010callerId\030\004 \001(\t\"E\n\017OperateRe" +
+      "lue\030\003 \001(\t\022\020\n\010callerId\030\004 \001(\t\"T\n\017OperateRe" +
       "sponse\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\022\023\n" +
-      "\013responderId\030\003 \001(\t\"A\n\020DatastoreRequest\022\021" +
-      "\n\toperation\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030" +
-      "\003 \001(\t\"A\n\021DatastoreResponse\022\014\n\004code\030\001 \001(\005" +
-      "\022\017\n\007message\030\002 \001(\t\022\r\n\005value\030\003 \001(\t2\241\001\n\020Dat" +
-      "astoreService\022.\n\tavailable\022\017.OperateRequ" +
-      "est\032\020.OperateResponse\022,\n\007operate\022\017.Opera" +
-      "teRequest\032\020.OperateResponse\022/\n\006update\022\021." +
-      "DatastoreRequest\032\022.DatastoreResponseB\032\n\030" +
-      "edu.neu.DatastoreServiceb\006proto3"
+      "\013responderId\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\"A\n\020Dat" +
+      "astoreRequest\022\021\n\toperation\030\001 \001(\t\022\013\n\003key\030" +
+      "\002 \001(\t\022\r\n\005value\030\003 \001(\t\"A\n\021DatastoreRespons" +
+      "e\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\022\r\n\005valu" +
+      "e\030\003 \001(\t2\241\001\n\020DatastoreService\022.\n\tavailabl" +
+      "e\022\017.OperateRequest\032\020.OperateResponse\022,\n\007" +
+      "operate\022\017.OperateRequest\032\020.OperateRespon" +
+      "se\022/\n\006update\022\021.DatastoreRequest\032\022.Datast" +
+      "oreResponseB\032\n\030edu.neu.DatastoreServiceb" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3508,7 +3657,7 @@ public final class DatastoreServiceOuterClass {
     internal_static_OperateResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_OperateResponse_descriptor,
-        new java.lang.String[] { "Code", "Message", "ResponderId", });
+        new java.lang.String[] { "Code", "Message", "ResponderId", "Value", });
     internal_static_DatastoreRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_DatastoreRequest_fieldAccessorTable = new
