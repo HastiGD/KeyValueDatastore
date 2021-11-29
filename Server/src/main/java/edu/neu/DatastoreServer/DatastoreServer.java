@@ -1,12 +1,10 @@
 package edu.neu.DatastoreServer;
 
 import edu.neu.DatastoreService.*;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import edu.neu.DatastoreService.Proposer.Proposer;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;

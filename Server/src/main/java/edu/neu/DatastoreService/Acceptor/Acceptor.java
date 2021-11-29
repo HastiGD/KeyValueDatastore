@@ -1,10 +1,10 @@
-package edu.neu.DatastoreService;
+package edu.neu.DatastoreService.Acceptor;
 
 import io.grpc.stub.StreamObserver;
-import edu.neu.DatastoreService.AcceptorOuterClass.PrepareRequest;
-import edu.neu.DatastoreService.AcceptorOuterClass.PrepareResponse;
-import edu.neu.DatastoreService.AcceptorOuterClass.ProposeRequest;
-import edu.neu.DatastoreService.AcceptorOuterClass.ProposeResponse;
+import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest;
+import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse;
+import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest;
+import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse;
 
 import java.util.logging.Logger;
 

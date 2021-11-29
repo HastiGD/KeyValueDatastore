@@ -1,17 +1,20 @@
-package edu.neu.DatastoreService;
+package edu.neu.DatastoreService.Proposer;
 
+import edu.neu.DatastoreService.Datastore;
 import io.grpc.stub.StreamObserver;
 
-import edu.neu.DatastoreService.ProposerOuterClass.ConsensusResponse;
-import edu.neu.DatastoreService.ProposerOuterClass.ConsensusRequest;
-
+import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse;
+import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest;
+import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest;
+import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest;
 import java.util.logging.Logger;
 
 public class Proposer extends ProposerGrpc.ProposerImplBase {
     private static final Logger log = Logger.getLogger( "PROPOSER");
     private final String NODE_ID;
     private Datastore datastore;
-
+    private StreamObserver<PrepareRequest> prepareRequestStreamObserver;
+    private StreamObserver<ProposeRequest> proposeRequestStreamObserver;
 
     public Proposer(String nodeId, Datastore datastore) {
         this.NODE_ID = nodeId;

@@ -7,8 +7,6 @@ import edu.neu.DatastoreService.DatastoreServiceOuterClass.DeleteRequest;
 import edu.neu.DatastoreService.DatastoreServiceOuterClass.GetRequest;
 import edu.neu.DatastoreService.DatastoreServiceOuterClass.Request;
 import edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse;
-import edu.neu.DatastoreService.CoordinatorServiceOuterClass.OperateResponse;
-import edu.neu.DatastoreService.CoordinatorServiceOuterClass.OperateRequest;
 
 public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplBase {
     private static final Logger log = Logger.getLogger( "SERVER");
