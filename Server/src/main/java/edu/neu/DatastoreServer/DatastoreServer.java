@@ -1,9 +1,6 @@
 package edu.neu.DatastoreServer;
 
-import edu.neu.DatastoreService.CoordinatorServiceGrpc;
-import edu.neu.DatastoreService.CoordinatorServiceOuterClass;
-import edu.neu.DatastoreService.Datastore;
-import edu.neu.DatastoreService.DatastoreService;
+import edu.neu.DatastoreService.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
@@ -18,32 +15,33 @@ public class DatastoreServer {
     private static final Logger log = Logger.getLogger( "SERVER");
     private final int port;
     private final Server server;
-    private final String coordinatorHostname;
-    private final int coordinatorPort;
-    private final ManagedChannel coordinatorChannel;
-    private final CoordinatorServiceGrpc.CoordinatorServiceBlockingStub coordinatorStub;
+//    private final String coordinatorHostname;
+//    private final int coordinatorPort;
+//    private final ManagedChannel coordinatorChannel;
+//    private final CoordinatorServiceGrpc.CoordinatorServiceBlockingStub coordinatorStub;
 
-    public DatastoreServer(int port, Datastore datastore, String coordinatorHostname, int coordinatorPort) {
-        // Establish a channel with the coordinator
-        this.coordinatorHostname = coordinatorHostname;
-        this.coordinatorPort = coordinatorPort;
-        this.coordinatorChannel = ManagedChannelBuilder
-                .forAddress(coordinatorHostname, coordinatorPort)
-                .usePlaintext()
-                .build();
-
-        // Create stubs
-        this.coordinatorStub = CoordinatorServiceGrpc
-                .newBlockingStub(coordinatorChannel);
+    public DatastoreServer(int port, Datastore datastore) {
+//        // Establish a channel with the coordinator
+//        this.coordinatorHostname = coordinatorHostname;
+//        this.coordinatorPort = coordinatorPort;
+//        this.coordinatorChannel = ManagedChannelBuilder
+//                .forAddress(coordinatorHostname, coordinatorPort)
+//                .usePlaintext()
+//                .build();
+//
+//        // Create stubs
+//        this.coordinatorStub = CoordinatorServiceGrpc
+//                .newBlockingStub(coordinatorChannel);
 
         // Create the service
-        DatastoreService datastoreService = new DatastoreService(datastore, coordinatorStub);
+        //DatastoreService datastoreService = new DatastoreService(datastore, coordinatorStub);
+        Proposer proposer = new Proposer(String.valueOf(port), datastore);
 
         // Bind the server
         this.port = port;
         this.server = ServerBuilder
                 .forPort(port)
-                .addService(datastoreService)
+                .addService(proposer)
                 .build();
     }
 
@@ -93,33 +91,29 @@ public class DatastoreServer {
                 int port = Integer.parseInt(args[0]);
 
                 // Read coordinator info from terminal
-                DataInputStream input = new DataInputStream(System.in);
-                String[] coordinatorInfo = null;
-                try {
-                    log.info("Enter coordinator hostname");
-                    coordinatorInfo = input.readLine().split(" ");
-                    String coordinatorHostname = coordinatorInfo[0];
-                    int coordinatorPort = 9090;
+                //DataInputStream input = new DataInputStream(System.in);
+                //String[] coordinatorInfo = null;
+
+                    //log.info("Enter coordinator hostname");
+                    //coordinatorInfo = input.readLine().split(" ");
+                    //String coordinatorHostname = coordinatorInfo[0];
+                    //int coordinatorPort = 9090;
 
                     // Create datastore
-                    Datastore datastore = new Datastore();
+                Datastore datastore = new Datastore();
 
-                    // Start server
-                    try {
-                        DatastoreServer server =
-                                new DatastoreServer(port, datastore, coordinatorHostname, coordinatorPort);
-                        server.start();
-                        server.blockUntilShutdown();
-                    } catch (IOException e) {
-                        log.severe("Server failed, system exiting");
-                        System.exit(1);
-                    } catch (InterruptedException e) {
-                        log.severe("Server interrupted, system exiting");
-                        System.exit(1);
-                    }
+                // Start server
+                try {
+                    DatastoreServer server =
+                            new DatastoreServer(port, datastore);
+                    server.start();
+                    server.blockUntilShutdown();
                 } catch (IOException e) {
-                    log.severe("Failed to read input, system exiting");
-                    System.exit(0);
+                    log.severe("Server failed, system exiting");
+                    System.exit(1);
+                } catch (InterruptedException e) {
+                    log.severe("Server interrupted, system exiting");
+                    System.exit(1);
                 }
             } catch (NumberFormatException e) {
                 log.severe("Bad port number, system exiting");

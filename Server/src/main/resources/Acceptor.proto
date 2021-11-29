@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_package = "edu.neu.DatastoreService";
+
+service Acceptor {
+
+    rpc getPromise(PrepareRequest) returns (PrepareResponse);
+
+    rpc getAccept(ProposeRequest) returns (ProposeResponse);
+}
+
+message PrepareRequest {
+
+    string proposalId = 1;
+    string key = 2;
+    string value = 3;
+}
+
+message PrepareResponse {
+
+    int32 code = 1;
+    string message = 2;
+}
+
+message ProposeRequest {
+
+    string proposalId = 1;
+    string key = 2;
+    string value = 3;
+}
+
+message ProposeResponse {
+
+    int32 code = 1;
+    string message = 2;
+}
