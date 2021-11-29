@@ -4,16 +4,17 @@ option java_package = "edu.neu.DatastoreService";
 
 service Acceptor {
 
-    rpc getPromise(PrepareRequest) returns (PrepareResponse);
+    rpc getPromise(stream PrepareRequest) returns (stream PrepareResponse);
 
-    rpc getAccept(ProposeRequest) returns (ProposeResponse);
+    rpc getAccept(stream ProposeRequest) returns (stream ProposeResponse);
 }
 
 message PrepareRequest {
 
     string proposalId = 1;
-    string key = 2;
-    string value = 3;
+    string operation = 2;
+    string key = 3;
+    string value = 4;
 }
 
 message PrepareResponse {

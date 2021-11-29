@@ -23,8 +23,22 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
     }
 
     private void sendPrepare(String proposalId) {
+        /*
+        TODO send PrepareRequest to all Acceptors and count promises
+        	if number promises > numAcceptors/2
+                tell acceptors to accept proposal
+	        else start another round of paxos
+         */
         log.info("Sent prepare message to Acceptors");
-        // TODO handle promises
+    }
+
+    private void sendPropose(String proposalId) {
+        /*
+        TODO send ProposeRequest to all Acceptors and count accepts
+            	if number accepts > numAcceptors/2
+		        consensus has been reached, update (or read) datastores
+         */
+        log.info("Sent propose message to Acceptors");
     }
 
     @Override

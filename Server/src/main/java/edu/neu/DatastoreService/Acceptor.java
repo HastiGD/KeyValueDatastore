@@ -10,28 +10,14 @@ import java.util.logging.Logger;
 
 public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
     private static final Logger log = Logger.getLogger( "ACCEPTOR");
-    private Proposal maxProposal = new Proposal();
 
     @Override
-    public void getPromise(PrepareRequest request, StreamObserver<PrepareResponse> responseObserver) {
-        // Get proposalId
-        String proposalId = request.getProposalId();
-
-        PrepareResponse.Builder prepareResponseBuilder = PrepareResponse.newBuilder();
-
-        // Compare with current maxProposalId
-        if (maxProposal.updateProposalId(proposalId)) {
-            maxProposal.setProposalId(proposalId);
-            prepareResponseBuilder.setCode(200).setMessage("Promise Granted");
-        } else {
-            prepareResponseBuilder.setCode(405).setMessage("Promise denied");
-        }
-        responseObserver.onNext(prepareResponseBuilder.build());
-        responseObserver.onCompleted();
+    public StreamObserver<PrepareRequest> getPromise(StreamObserver<PrepareResponse> responseObserver) {
+        return new PrepareRequestStreamObserver(responseObserver);
     }
 
     @Override
-    public void getAccept(ProposeRequest request, StreamObserver<ProposeResponse> responseObserver) {
-        super.getAccept(request, responseObserver);
+    public StreamObserver<ProposeRequest> getAccept(StreamObserver<ProposeResponse> responseObserver) {
+        return new ProposeRequestStreamObserver(responseObserver);
     }
 }

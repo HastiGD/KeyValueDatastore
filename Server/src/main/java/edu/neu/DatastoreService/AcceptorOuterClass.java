@@ -3041,10 +3041,11 @@ public final class AcceptorOuterClass {
       "essage\030\002 \001(\t\"@\n\016ProposeRequest\022\022\n\npropos" +
       "alId\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\"0" +
       "\n\017ProposeResponse\022\014\n\004code\030\001 \001(\005\022\017\n\007messa" +
-      "ge\030\002 \001(\t2k\n\010Acceptor\022/\n\ngetPromise\022\017.Pre" +
-      "pareRequest\032\020.PrepareResponse\022.\n\tgetAcce" +
-      "pt\022\017.ProposeRequest\032\020.ProposeResponseB\032\n" +
-      "\030edu.neu.DatastoreServiceb\006proto3"
+      "ge\030\002 \001(\t2s\n\010Acceptor\0223\n\ngetPromise\022\017.Pre" +
+      "pareRequest\032\020.PrepareResponse(\0010\001\0222\n\tget" +
+      "Accept\022\017.ProposeRequest\032\020.ProposeRespons" +
+      "e(\0010\001B\032\n\030edu.neu.DatastoreServiceb\006proto" +
+      "3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
