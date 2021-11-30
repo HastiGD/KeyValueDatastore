@@ -11,12 +11,12 @@ import edu.neu.DatastoreService.DatastoreServiceOuterClass.APIResponse;
 public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplBase {
     private static final Logger log = Logger.getLogger( "SERVER");
 
-    private final CoordinatorServiceGrpc.CoordinatorServiceBlockingStub coordinatorStub;
+    //private final CoordinatorServiceGrpc.CoordinatorServiceBlockingStub coordinatorStub;
     private Datastore datastore;
 
-    public DatastoreService(Datastore datastore, CoordinatorServiceGrpc.CoordinatorServiceBlockingStub coordinatorStub) {
+    public DatastoreService(Datastore datastore){ //, CoordinatorServiceGrpc.CoordinatorServiceBlockingStub coordinatorStub) {
         this.datastore = datastore;
-        this.coordinatorStub = coordinatorStub;
+        //this.coordinatorStub = coordinatorStub;
     }
 
     @Override
@@ -233,23 +233,24 @@ public class DatastoreService extends DatastoreServiceGrpc.DatastoreServiceImplB
     private boolean requestOperation(String operation, String key, String value) {
         // Send request
         log.info("Sending OperateRequest to Coordinator");
-        OperateRequest request = OperateRequest
-                        .newBuilder()
-                        .setOperation(operation)
-                        .setKey(key)
-                        .setValue(value)
-                        .build();
-
-        // Get response
-        OperateResponse response = coordinatorStub.operate(request);
-        int responseCode = response.getResponseCode();
-        log.info("Received OperateResponse from Coordinator Response Code: " +
-                responseCode +
-                " Response Text: " +
-                response.getResponseText());
+//        OperateRequest request = OperateRequest
+//                        .newBuilder()
+//                        .setOperation(operation)
+//                        .setKey(key)
+//                        .setValue(value)
+//                        .build();
+//
+//        // Get response
+//        OperateResponse response = coordinatorStub.operate(request);
+//        int responseCode = response.getResponseCode();
+//        log.info("Received OperateResponse from Coordinator Response Code: " +
+//                responseCode +
+//                " Response Text: " +
+//                response.getResponseText());
 
         // Send true if ok to operate otherwise false
-        return responseCode == 200;
+        //return responseCode == 200;
+        return false;
     }
 
     private boolean datastoreAvailable(String operation, String key, String value) {
