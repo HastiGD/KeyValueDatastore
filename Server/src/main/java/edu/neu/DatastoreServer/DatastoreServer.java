@@ -1,11 +1,18 @@
 package edu.neu.DatastoreServer;
 
 import edu.neu.DatastoreService.*;
+import edu.neu.DatastoreService.Acceptor.Acceptor;
+import edu.neu.DatastoreService.Acceptor.AcceptorGrpc;
+import edu.neu.DatastoreService.Acceptor.AcceptorGrpc.AcceptorStub;
 import edu.neu.DatastoreService.Proposer.Proposer;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -13,34 +20,28 @@ public class DatastoreServer {
     private static final Logger log = Logger.getLogger( "SERVER");
     private final int port;
     private final Server server;
-//    private final String coordinatorHostname;
-//    private final int coordinatorPort;
-//    private final ManagedChannel coordinatorChannel;
-//    private final CoordinatorServiceGrpc.CoordinatorServiceBlockingStub coordinatorStub;
+    private Map<String, Integer> acceptors;
 
     public DatastoreServer(int port, Datastore datastore) {
-//        // Establish a channel with the coordinator
-//        this.coordinatorHostname = coordinatorHostname;
-//        this.coordinatorPort = coordinatorPort;
-//        this.coordinatorChannel = ManagedChannelBuilder
-//                .forAddress(coordinatorHostname, coordinatorPort)
-//                .usePlaintext()
-//                .build();
-//
-//        // Create stubs
-//        this.coordinatorStub = CoordinatorServiceGrpc
-//                .newBlockingStub(coordinatorChannel);
-
-        // Create the service
-        //DatastoreService datastoreService = new DatastoreService(datastore, coordinatorStub);
-        Proposer proposer = new Proposer(String.valueOf(port), datastore);
+        // Create the Proposer and Acceptor services
+        Proposer proposer = new Proposer(String.valueOf(port));
+        Acceptor acceptor = new Acceptor(datastore);
 
         // Bind the server
         this.port = port;
         this.server = ServerBuilder
                 .forPort(port)
                 .addService(proposer)
+                .addService(acceptor)
                 .build();
+    }
+
+    private ManagedChannel buildChannel(String hostname, int port) {
+        return ManagedChannelBuilder.forAddress(hostname, port).usePlaintext().build();
+    }
+
+    private AcceptorStub createAcceptorStub(ManagedChannel acceptorChannel) {
+        return AcceptorGrpc.newStub(acceptorChannel);
     }
 
     public void start() throws IOException {
@@ -85,25 +86,23 @@ public class DatastoreServer {
             System.exit(0);
         } else {
             try {
-                // Get port from args
+                // Get port from args, this Port exposes the proposer
                 int port = Integer.parseInt(args[0]);
 
-                // Read coordinator info from terminal
-                //DataInputStream input = new DataInputStream(System.in);
-                //String[] coordinatorInfo = null;
+                // Get Acceptor info from args
 
-                    //log.info("Enter coordinator hostname");
-                    //coordinatorInfo = input.readLine().split(" ");
-                    //String coordinatorHostname = coordinatorInfo[0];
-                    //int coordinatorPort = 9090;
 
-                    // Create datastore
+                // Create datastore
                 Datastore datastore = new Datastore();
 
-                // Start server
                 try {
+                    // Create server instance
                     DatastoreServer server =
                             new DatastoreServer(port, datastore);
+
+                    // Establish bidirectional streams with Acceptors
+
+                    // Start server
                     server.start();
                     server.blockUntilShutdown();
                 } catch (IOException e) {

@@ -12,38 +12,12 @@ import java.util.logging.Logger;
 public class Proposer extends ProposerGrpc.ProposerImplBase {
     private static final Logger log = Logger.getLogger( "PROPOSER");
     private final String NODE_ID;
-    private Datastore datastore;
+
     private StreamObserver<PrepareRequest> prepareRequestStreamObserver;
     private StreamObserver<ProposeRequest> proposeRequestStreamObserver;
 
-    public Proposer(String nodeId, Datastore datastore) {
+    public Proposer(String nodeId) {
         this.NODE_ID = nodeId;
-        this.datastore = datastore;
-    }
-
-    private String createProposalId() {
-        String proposalId = NODE_ID + "." + System.nanoTime();
-        log.info("Generated proposalId: " + proposalId);
-        return proposalId;
-    }
-
-    private void sendPrepare(String proposalId) {
-        /*
-        TODO send PrepareRequest to all Acceptors and count promises
-        	if number promises > numAcceptors/2
-                tell acceptors to accept proposal
-	        else start another round of paxos
-         */
-        log.info("Sent prepare message to Acceptors");
-    }
-
-    private void sendPropose(String proposalId) {
-        /*
-        TODO send ProposeRequest to all Acceptors and count accepts
-            	if number accepts > numAcceptors/2
-		        consensus has been reached, update (or read) datastores
-         */
-        log.info("Sent propose message to Acceptors");
     }
 
     @Override
@@ -69,5 +43,38 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
         // Send response
         responseObserver.onNext(responseBuilder.build());
         responseObserver.onCompleted();
+    }
+
+    private String createProposalId() {
+        String proposalId = NODE_ID + "." + System.nanoTime();
+        log.info("Generated proposalId: " + proposalId);
+        return proposalId;
+    }
+
+    private void sendPrepare(String proposalId) {
+        /*
+        TODO send PrepareRequest to all Acceptors and count promises
+        	if number promises > numAcceptors/2
+                tell acceptors to accept proposal
+	        else start another round of paxos
+         */
+
+        // Generate PrepareRequest
+        PrepareRequest.Builder prepareRequestBuilder = PrepareRequest
+                .newBuilder()
+                .setProposalId(proposalId);
+
+        // Send PrepareRequest to all Acceptors
+
+        log.info("Sent prepare message to Acceptors");
+    }
+
+    private void sendPropose(String proposalId) {
+        /*
+        TODO send ProposeRequest to all Acceptors and count accepts
+            	if number accepts > numAcceptors/2
+		        consensus has been reached, update (or read) datastores
+         */
+        log.info("Sent propose message to Acceptors");
     }
 }
