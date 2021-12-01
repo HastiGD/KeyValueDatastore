@@ -32,21 +32,20 @@ public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
             // Update maxProposal
             maxProposal.setProposalId(proposalId);
 
-            // Send promise message back to server
+            // Send promise message back to proposer
             prepareResponseBuilder.setCode(200).setMessage("Promise Granted");
             log.info(String.format("Sending promise to Proposer Response Code: %d Response Message: %s",
                     prepareResponseBuilder.getCode(),
                     prepareResponseBuilder.getMessage()));
-            responseObserver.onNext(prepareResponseBuilder.build());
-            responseObserver.onCompleted();
         } else {
-            // TODO determine what happens here
-            log.info("in else statement of getPromise awaiting timeout");
-//            prepareResponseBuilder.setCode(405).setMessage("Promise denied");
-//            log.info(String.format("Sending promise to Proposer Response Code: %d Response Message: %s",
-//                    prepareResponseBuilder.getCode(),
-//                    prepareResponseBuilder.getMessage()));
+            // Send promise failure messaage back to proposer
+            prepareResponseBuilder.setCode(500).setMessage("Promise Denied");
+            log.info(String.format("Sending promise denied to Proposer Response Code: %d Response Message: %s",
+                    prepareResponseBuilder.getCode(),
+                    prepareResponseBuilder.getMessage()));
         }
+        responseObserver.onNext(prepareResponseBuilder.build());
+        responseObserver.onCompleted();
     }
 
     @Override
@@ -64,9 +63,20 @@ public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
             String value = request.getValue();
 
             // TODO complete the PUT, GET, or DELETE request
+
+            // Send accept message back to proposer
+            proposeResponseBuilder.setCode(200).setMessage("Accept Granted");
+            log.info(String.format("Sending accept to Proposer Response Code: %d Response Message: %s",
+                    proposeResponseBuilder.getCode(),
+                    proposeResponseBuilder.getMessage()));
         } else {
-            // TODO determine what happens here
-            log.info("in else statement of getAccept awaiting timeout");
+            // Send accept messae denied back to proposer
+            proposeResponseBuilder.setCode(500).setMessage("Accept Denied");
+            log.info(String.format("Sending accept denied to Proposer Response Code: %d Response Message: %s",
+                    proposeResponseBuilder.getCode(),
+                    proposeResponseBuilder.getMessage()));
         }
+        responseObserver.onNext(proposeResponseBuilder.build());
+        responseObserver.onCompleted();
     }
 }

@@ -35,7 +35,7 @@ public class ClientApp {
         // Get stub from proto file
         stub = ProposerGrpc
                 .newBlockingStub(channel)
-                .withDeadlineAfter(2, TimeUnit.MINUTES);
+                .withDeadlineAfter(5, TimeUnit.MINUTES);
         log.info("Client connecting to " + hostname + " on port " + port);
     }
 
@@ -92,7 +92,7 @@ public class ClientApp {
                     String operation = request[0].toUpperCase();
                     String key = "";
                     String value = "";
-                    //DatastoreServiceOuterClass.APIResponse response = null;
+
                     ProposerOuterClass.ConsensusResponse response = null;
                     switch (operation) {
                         case "PUT" :

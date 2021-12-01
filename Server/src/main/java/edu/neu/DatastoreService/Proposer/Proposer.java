@@ -13,6 +13,7 @@ import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest;
 import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -33,7 +34,8 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
                         .newBlockingStub(ManagedChannelBuilder
                                 .forAddress(acceptorHostnames.get(i), acceptorPorts.get(i))
                                 .usePlaintext()
-                                .build()))
+                                .build())
+                        .withDeadlineAfter(30, TimeUnit.SECONDS))
                 .collect(Collectors.toList());
     }
 
@@ -51,7 +53,7 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
         // Start Paxos phase 1
         int numPromises = 0;
         String proposalId = "";
-        while (numPromises <= acceptorStubs.size()/2) {
+        while (numPromises < acceptorStubs.size()/2) {
             // Generate proposalId
             proposalId = createProposalId();
 
@@ -91,11 +93,9 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
         log.info("Sending prepare message to all Acceptors");
         AtomicInteger promiseCounter = new AtomicInteger();
         acceptorStubs.forEach(stub -> {
-            try {
-                PrepareResponse prepareResponse = stub.getPromise(prepareRequestBuilder.build());
+            PrepareResponse prepareResponse = stub.getPromise(prepareRequestBuilder.build());
+            if (prepareResponse.getCode() == 200) {
                 promiseCounter.getAndIncrement();
-            } catch (Exception e) {
-                log.warning("Exception in sendPrepare: " + e.getMessage());
             }
         });
         return promiseCounter.get();
@@ -114,11 +114,9 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
         log.info("Sending propose message to all Acceptors");
         AtomicInteger acceptCounter = new AtomicInteger();
         acceptorStubs.forEach(stub -> {
-            try {
-                ProposeResponse proposeResponse = stub.getAccept(proposeRequestBuilder.build());
+            ProposeResponse proposeResponse = stub.getAccept(proposeRequestBuilder.build());
+            if (proposeResponse.getCode() == 200) {
                 acceptCounter.getAndIncrement();
-            } catch (Exception e) {
-                log.warning("Exception in sendPropose: " + e.getMessage());
             }
         });
         return acceptCounter.get();
