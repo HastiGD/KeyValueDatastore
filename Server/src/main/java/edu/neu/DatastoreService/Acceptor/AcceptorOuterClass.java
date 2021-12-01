@@ -31,24 +31,36 @@ public final class AcceptorOuterClass {
         getProposalIdBytes();
 
     /**
-     * <code>string key = 2;</code>
+     * <code>string operation = 2;</code>
+     * @return The operation.
+     */
+    java.lang.String getOperation();
+    /**
+     * <code>string operation = 2;</code>
+     * @return The bytes for operation.
+     */
+    com.google.protobuf.ByteString
+        getOperationBytes();
+
+    /**
+     * <code>string key = 3;</code>
      * @return The key.
      */
     java.lang.String getKey();
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 3;</code>
      * @return The bytes for key.
      */
     com.google.protobuf.ByteString
         getKeyBytes();
 
     /**
-     * <code>string value = 3;</code>
+     * <code>string value = 4;</code>
      * @return The value.
      */
     java.lang.String getValue();
     /**
-     * <code>string value = 3;</code>
+     * <code>string value = 4;</code>
      * @return The bytes for value.
      */
     com.google.protobuf.ByteString
@@ -68,6 +80,7 @@ public final class AcceptorOuterClass {
     }
     private PrepareRequest() {
       proposalId_ = "";
+      operation_ = "";
       key_ = "";
       value_ = "";
     }
@@ -111,10 +124,16 @@ public final class AcceptorOuterClass {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              key_ = s;
+              operation_ = s;
               break;
             }
             case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              key_ = s;
+              break;
+            }
+            case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
               value_ = s;
@@ -141,15 +160,15 @@ public final class AcceptorOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return AcceptorOuterClass.internal_static_PrepareRequest_descriptor;
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return AcceptorOuterClass.internal_static_PrepareRequest_fieldAccessorTable
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              AcceptorOuterClass.PrepareRequest.class, AcceptorOuterClass.PrepareRequest.Builder.class);
+              edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.class, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.Builder.class);
     }
 
     public static final int PROPOSALID_FIELD_NUMBER = 1;
@@ -188,10 +207,46 @@ public final class AcceptorOuterClass {
       }
     }
 
-    public static final int KEY_FIELD_NUMBER = 2;
+    public static final int OPERATION_FIELD_NUMBER = 2;
+    private volatile java.lang.Object operation_;
+    /**
+     * <code>string operation = 2;</code>
+     * @return The operation.
+     */
+    public java.lang.String getOperation() {
+      java.lang.Object ref = operation_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        operation_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string operation = 2;</code>
+     * @return The bytes for operation.
+     */
+    public com.google.protobuf.ByteString
+        getOperationBytes() {
+      java.lang.Object ref = operation_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        operation_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int KEY_FIELD_NUMBER = 3;
     private volatile java.lang.Object key_;
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 3;</code>
      * @return The key.
      */
     public java.lang.String getKey() {
@@ -207,7 +262,7 @@ public final class AcceptorOuterClass {
       }
     }
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 3;</code>
      * @return The bytes for key.
      */
     public com.google.protobuf.ByteString
@@ -224,10 +279,10 @@ public final class AcceptorOuterClass {
       }
     }
 
-    public static final int VALUE_FIELD_NUMBER = 3;
+    public static final int VALUE_FIELD_NUMBER = 4;
     private volatile java.lang.Object value_;
     /**
-     * <code>string value = 3;</code>
+     * <code>string value = 4;</code>
      * @return The value.
      */
     public java.lang.String getValue() {
@@ -243,7 +298,7 @@ public final class AcceptorOuterClass {
       }
     }
     /**
-     * <code>string value = 3;</code>
+     * <code>string value = 4;</code>
      * @return The bytes for value.
      */
     public com.google.protobuf.ByteString
@@ -277,11 +332,14 @@ public final class AcceptorOuterClass {
       if (!getProposalIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, proposalId_);
       }
+      if (!getOperationBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, operation_);
+      }
       if (!getKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, key_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, key_);
       }
       if (!getValueBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, value_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, value_);
       }
       unknownFields.writeTo(output);
     }
@@ -295,11 +353,14 @@ public final class AcceptorOuterClass {
       if (!getProposalIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, proposalId_);
       }
+      if (!getOperationBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, operation_);
+      }
       if (!getKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, key_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, key_);
       }
       if (!getValueBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, value_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, value_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -311,13 +372,15 @@ public final class AcceptorOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof AcceptorOuterClass.PrepareRequest)) {
+      if (!(obj instanceof edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest)) {
         return super.equals(obj);
       }
-      AcceptorOuterClass.PrepareRequest other = (AcceptorOuterClass.PrepareRequest) obj;
+      edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest other = (edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest) obj;
 
       if (!getProposalId()
           .equals(other.getProposalId())) return false;
+      if (!getOperation()
+          .equals(other.getOperation())) return false;
       if (!getKey()
           .equals(other.getKey())) return false;
       if (!getValue()
@@ -335,6 +398,8 @@ public final class AcceptorOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + PROPOSALID_FIELD_NUMBER;
       hash = (53 * hash) + getProposalId().hashCode();
+      hash = (37 * hash) + OPERATION_FIELD_NUMBER;
+      hash = (53 * hash) + getOperation().hashCode();
       hash = (37 * hash) + KEY_FIELD_NUMBER;
       hash = (53 * hash) + getKey().hashCode();
       hash = (37 * hash) + VALUE_FIELD_NUMBER;
@@ -344,69 +409,69 @@ public final class AcceptorOuterClass {
       return hash;
     }
 
-    public static AcceptorOuterClass.PrepareRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(byte[] data)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareRequest parseDelimitedFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.PrepareRequest parseDelimitedFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.PrepareRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -419,7 +484,7 @@ public final class AcceptorOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(AcceptorOuterClass.PrepareRequest prototype) {
+    public static Builder newBuilder(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -440,21 +505,21 @@ public final class AcceptorOuterClass {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:PrepareRequest)
-        AcceptorOuterClass.PrepareRequestOrBuilder {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return AcceptorOuterClass.internal_static_PrepareRequest_descriptor;
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return AcceptorOuterClass.internal_static_PrepareRequest_fieldAccessorTable
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                AcceptorOuterClass.PrepareRequest.class, AcceptorOuterClass.PrepareRequest.Builder.class);
+                edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.class, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.Builder.class);
       }
 
-      // Construct using edu.neu.DatastoreService.AcceptorOuterClass.PrepareRequest.newBuilder()
+      // Construct using edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -474,6 +539,8 @@ public final class AcceptorOuterClass {
         super.clear();
         proposalId_ = "";
 
+        operation_ = "";
+
         key_ = "";
 
         value_ = "";
@@ -484,17 +551,17 @@ public final class AcceptorOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return AcceptorOuterClass.internal_static_PrepareRequest_descriptor;
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareRequest_descriptor;
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.PrepareRequest getDefaultInstanceForType() {
-        return AcceptorOuterClass.PrepareRequest.getDefaultInstance();
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest getDefaultInstanceForType() {
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.PrepareRequest build() {
-        AcceptorOuterClass.PrepareRequest result = buildPartial();
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest build() {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -502,9 +569,10 @@ public final class AcceptorOuterClass {
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.PrepareRequest buildPartial() {
-        AcceptorOuterClass.PrepareRequest result = new AcceptorOuterClass.PrepareRequest(this);
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest buildPartial() {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest result = new edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest(this);
         result.proposalId_ = proposalId_;
+        result.operation_ = operation_;
         result.key_ = key_;
         result.value_ = value_;
         onBuilt();
@@ -545,18 +613,22 @@ public final class AcceptorOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof AcceptorOuterClass.PrepareRequest) {
-          return mergeFrom((AcceptorOuterClass.PrepareRequest)other);
+        if (other instanceof edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest) {
+          return mergeFrom((edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(AcceptorOuterClass.PrepareRequest other) {
-        if (other == AcceptorOuterClass.PrepareRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest other) {
+        if (other == edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.getDefaultInstance()) return this;
         if (!other.getProposalId().isEmpty()) {
           proposalId_ = other.proposalId_;
+          onChanged();
+        }
+        if (!other.getOperation().isEmpty()) {
+          operation_ = other.operation_;
           onChanged();
         }
         if (!other.getKey().isEmpty()) {
@@ -582,11 +654,11 @@ public final class AcceptorOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        AcceptorOuterClass.PrepareRequest parsedMessage = null;
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (AcceptorOuterClass.PrepareRequest) e.getUnfinishedMessage();
+          parsedMessage = (edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -672,9 +744,85 @@ public final class AcceptorOuterClass {
         return this;
       }
 
+      private java.lang.Object operation_ = "";
+      /**
+       * <code>string operation = 2;</code>
+       * @return The operation.
+       */
+      public java.lang.String getOperation() {
+        java.lang.Object ref = operation_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          operation_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string operation = 2;</code>
+       * @return The bytes for operation.
+       */
+      public com.google.protobuf.ByteString
+          getOperationBytes() {
+        java.lang.Object ref = operation_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          operation_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string operation = 2;</code>
+       * @param value The operation to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOperation(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        operation_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string operation = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOperation() {
+        
+        operation_ = getDefaultInstance().getOperation();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string operation = 2;</code>
+       * @param value The bytes for operation to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOperationBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        operation_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object key_ = "";
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @return The key.
        */
       public java.lang.String getKey() {
@@ -690,7 +838,7 @@ public final class AcceptorOuterClass {
         }
       }
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @return The bytes for key.
        */
       public com.google.protobuf.ByteString
@@ -707,7 +855,7 @@ public final class AcceptorOuterClass {
         }
       }
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @param value The key to set.
        * @return This builder for chaining.
        */
@@ -722,7 +870,7 @@ public final class AcceptorOuterClass {
         return this;
       }
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearKey() {
@@ -732,7 +880,7 @@ public final class AcceptorOuterClass {
         return this;
       }
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @param value The bytes for key to set.
        * @return This builder for chaining.
        */
@@ -750,7 +898,7 @@ public final class AcceptorOuterClass {
 
       private java.lang.Object value_ = "";
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @return The value.
        */
       public java.lang.String getValue() {
@@ -766,7 +914,7 @@ public final class AcceptorOuterClass {
         }
       }
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @return The bytes for value.
        */
       public com.google.protobuf.ByteString
@@ -783,7 +931,7 @@ public final class AcceptorOuterClass {
         }
       }
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @param value The value to set.
        * @return This builder for chaining.
        */
@@ -798,7 +946,7 @@ public final class AcceptorOuterClass {
         return this;
       }
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearValue() {
@@ -808,7 +956,7 @@ public final class AcceptorOuterClass {
         return this;
       }
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @param value The bytes for value to set.
        * @return This builder for chaining.
        */
@@ -840,12 +988,12 @@ public final class AcceptorOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:PrepareRequest)
-    private static final AcceptorOuterClass.PrepareRequest DEFAULT_INSTANCE;
+    private static final edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new AcceptorOuterClass.PrepareRequest();
+      DEFAULT_INSTANCE = new edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest();
     }
 
-    public static AcceptorOuterClass.PrepareRequest getDefaultInstance() {
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -870,7 +1018,7 @@ public final class AcceptorOuterClass {
     }
 
     @java.lang.Override
-    public AcceptorOuterClass.PrepareRequest getDefaultInstanceForType() {
+    public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -976,15 +1124,15 @@ public final class AcceptorOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return AcceptorOuterClass.internal_static_PrepareResponse_descriptor;
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return AcceptorOuterClass.internal_static_PrepareResponse_fieldAccessorTable
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              AcceptorOuterClass.PrepareResponse.class, AcceptorOuterClass.PrepareResponse.Builder.class);
+              edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.class, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.Builder.class);
     }
 
     public static final int CODE_FIELD_NUMBER = 1;
@@ -1079,10 +1227,10 @@ public final class AcceptorOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof AcceptorOuterClass.PrepareResponse)) {
+      if (!(obj instanceof edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse)) {
         return super.equals(obj);
       }
-      AcceptorOuterClass.PrepareResponse other = (AcceptorOuterClass.PrepareResponse) obj;
+      edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse other = (edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse) obj;
 
       if (getCode()
           != other.getCode()) return false;
@@ -1108,69 +1256,69 @@ public final class AcceptorOuterClass {
       return hash;
     }
 
-    public static AcceptorOuterClass.PrepareResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(byte[] data)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareResponse parseDelimitedFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.PrepareResponse parseDelimitedFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.PrepareResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1183,7 +1331,7 @@ public final class AcceptorOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(AcceptorOuterClass.PrepareResponse prototype) {
+    public static Builder newBuilder(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1204,21 +1352,21 @@ public final class AcceptorOuterClass {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:PrepareResponse)
-        AcceptorOuterClass.PrepareResponseOrBuilder {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return AcceptorOuterClass.internal_static_PrepareResponse_descriptor;
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return AcceptorOuterClass.internal_static_PrepareResponse_fieldAccessorTable
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                AcceptorOuterClass.PrepareResponse.class, AcceptorOuterClass.PrepareResponse.Builder.class);
+                edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.class, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.Builder.class);
       }
 
-      // Construct using edu.neu.DatastoreService.AcceptorOuterClass.PrepareResponse.newBuilder()
+      // Construct using edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1246,17 +1394,17 @@ public final class AcceptorOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return AcceptorOuterClass.internal_static_PrepareResponse_descriptor;
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_PrepareResponse_descriptor;
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.PrepareResponse getDefaultInstanceForType() {
-        return AcceptorOuterClass.PrepareResponse.getDefaultInstance();
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse getDefaultInstanceForType() {
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.getDefaultInstance();
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.PrepareResponse build() {
-        AcceptorOuterClass.PrepareResponse result = buildPartial();
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse build() {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1264,8 +1412,8 @@ public final class AcceptorOuterClass {
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.PrepareResponse buildPartial() {
-        AcceptorOuterClass.PrepareResponse result = new AcceptorOuterClass.PrepareResponse(this);
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse buildPartial() {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse result = new edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse(this);
         result.code_ = code_;
         result.message_ = message_;
         onBuilt();
@@ -1306,16 +1454,16 @@ public final class AcceptorOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof AcceptorOuterClass.PrepareResponse) {
-          return mergeFrom((AcceptorOuterClass.PrepareResponse)other);
+        if (other instanceof edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse) {
+          return mergeFrom((edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(AcceptorOuterClass.PrepareResponse other) {
-        if (other == AcceptorOuterClass.PrepareResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse other) {
+        if (other == edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.getDefaultInstance()) return this;
         if (other.getCode() != 0) {
           setCode(other.getCode());
         }
@@ -1338,11 +1486,11 @@ public final class AcceptorOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        AcceptorOuterClass.PrepareResponse parsedMessage = null;
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (AcceptorOuterClass.PrepareResponse) e.getUnfinishedMessage();
+          parsedMessage = (edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1474,12 +1622,12 @@ public final class AcceptorOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:PrepareResponse)
-    private static final AcceptorOuterClass.PrepareResponse DEFAULT_INSTANCE;
+    private static final edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new AcceptorOuterClass.PrepareResponse();
+      DEFAULT_INSTANCE = new edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse();
     }
 
-    public static AcceptorOuterClass.PrepareResponse getDefaultInstance() {
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1504,7 +1652,7 @@ public final class AcceptorOuterClass {
     }
 
     @java.lang.Override
-    public AcceptorOuterClass.PrepareResponse getDefaultInstanceForType() {
+    public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1527,24 +1675,36 @@ public final class AcceptorOuterClass {
         getProposalIdBytes();
 
     /**
-     * <code>string key = 2;</code>
+     * <code>string operation = 2;</code>
+     * @return The operation.
+     */
+    java.lang.String getOperation();
+    /**
+     * <code>string operation = 2;</code>
+     * @return The bytes for operation.
+     */
+    com.google.protobuf.ByteString
+        getOperationBytes();
+
+    /**
+     * <code>string key = 3;</code>
      * @return The key.
      */
     java.lang.String getKey();
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 3;</code>
      * @return The bytes for key.
      */
     com.google.protobuf.ByteString
         getKeyBytes();
 
     /**
-     * <code>string value = 3;</code>
+     * <code>string value = 4;</code>
      * @return The value.
      */
     java.lang.String getValue();
     /**
-     * <code>string value = 3;</code>
+     * <code>string value = 4;</code>
      * @return The bytes for value.
      */
     com.google.protobuf.ByteString
@@ -1564,6 +1724,7 @@ public final class AcceptorOuterClass {
     }
     private ProposeRequest() {
       proposalId_ = "";
+      operation_ = "";
       key_ = "";
       value_ = "";
     }
@@ -1607,10 +1768,16 @@ public final class AcceptorOuterClass {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              key_ = s;
+              operation_ = s;
               break;
             }
             case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              key_ = s;
+              break;
+            }
+            case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
               value_ = s;
@@ -1637,15 +1804,15 @@ public final class AcceptorOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return AcceptorOuterClass.internal_static_ProposeRequest_descriptor;
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return AcceptorOuterClass.internal_static_ProposeRequest_fieldAccessorTable
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              AcceptorOuterClass.ProposeRequest.class, AcceptorOuterClass.ProposeRequest.Builder.class);
+              edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.class, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.Builder.class);
     }
 
     public static final int PROPOSALID_FIELD_NUMBER = 1;
@@ -1684,10 +1851,46 @@ public final class AcceptorOuterClass {
       }
     }
 
-    public static final int KEY_FIELD_NUMBER = 2;
+    public static final int OPERATION_FIELD_NUMBER = 2;
+    private volatile java.lang.Object operation_;
+    /**
+     * <code>string operation = 2;</code>
+     * @return The operation.
+     */
+    public java.lang.String getOperation() {
+      java.lang.Object ref = operation_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        operation_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string operation = 2;</code>
+     * @return The bytes for operation.
+     */
+    public com.google.protobuf.ByteString
+        getOperationBytes() {
+      java.lang.Object ref = operation_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        operation_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int KEY_FIELD_NUMBER = 3;
     private volatile java.lang.Object key_;
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 3;</code>
      * @return The key.
      */
     public java.lang.String getKey() {
@@ -1703,7 +1906,7 @@ public final class AcceptorOuterClass {
       }
     }
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 3;</code>
      * @return The bytes for key.
      */
     public com.google.protobuf.ByteString
@@ -1720,10 +1923,10 @@ public final class AcceptorOuterClass {
       }
     }
 
-    public static final int VALUE_FIELD_NUMBER = 3;
+    public static final int VALUE_FIELD_NUMBER = 4;
     private volatile java.lang.Object value_;
     /**
-     * <code>string value = 3;</code>
+     * <code>string value = 4;</code>
      * @return The value.
      */
     public java.lang.String getValue() {
@@ -1739,7 +1942,7 @@ public final class AcceptorOuterClass {
       }
     }
     /**
-     * <code>string value = 3;</code>
+     * <code>string value = 4;</code>
      * @return The bytes for value.
      */
     public com.google.protobuf.ByteString
@@ -1773,11 +1976,14 @@ public final class AcceptorOuterClass {
       if (!getProposalIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, proposalId_);
       }
+      if (!getOperationBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, operation_);
+      }
       if (!getKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, key_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, key_);
       }
       if (!getValueBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, value_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, value_);
       }
       unknownFields.writeTo(output);
     }
@@ -1791,11 +1997,14 @@ public final class AcceptorOuterClass {
       if (!getProposalIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, proposalId_);
       }
+      if (!getOperationBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, operation_);
+      }
       if (!getKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, key_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, key_);
       }
       if (!getValueBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, value_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, value_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1807,13 +2016,15 @@ public final class AcceptorOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof AcceptorOuterClass.ProposeRequest)) {
+      if (!(obj instanceof edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest)) {
         return super.equals(obj);
       }
-      AcceptorOuterClass.ProposeRequest other = (AcceptorOuterClass.ProposeRequest) obj;
+      edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest other = (edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest) obj;
 
       if (!getProposalId()
           .equals(other.getProposalId())) return false;
+      if (!getOperation()
+          .equals(other.getOperation())) return false;
       if (!getKey()
           .equals(other.getKey())) return false;
       if (!getValue()
@@ -1831,6 +2042,8 @@ public final class AcceptorOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + PROPOSALID_FIELD_NUMBER;
       hash = (53 * hash) + getProposalId().hashCode();
+      hash = (37 * hash) + OPERATION_FIELD_NUMBER;
+      hash = (53 * hash) + getOperation().hashCode();
       hash = (37 * hash) + KEY_FIELD_NUMBER;
       hash = (53 * hash) + getKey().hashCode();
       hash = (37 * hash) + VALUE_FIELD_NUMBER;
@@ -1840,69 +2053,69 @@ public final class AcceptorOuterClass {
       return hash;
     }
 
-    public static AcceptorOuterClass.ProposeRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(byte[] data)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeRequest parseDelimitedFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.ProposeRequest parseDelimitedFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.ProposeRequest parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1915,7 +2128,7 @@ public final class AcceptorOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(AcceptorOuterClass.ProposeRequest prototype) {
+    public static Builder newBuilder(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1936,21 +2149,21 @@ public final class AcceptorOuterClass {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:ProposeRequest)
-        AcceptorOuterClass.ProposeRequestOrBuilder {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return AcceptorOuterClass.internal_static_ProposeRequest_descriptor;
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return AcceptorOuterClass.internal_static_ProposeRequest_fieldAccessorTable
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                AcceptorOuterClass.ProposeRequest.class, AcceptorOuterClass.ProposeRequest.Builder.class);
+                edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.class, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.Builder.class);
       }
 
-      // Construct using edu.neu.DatastoreService.AcceptorOuterClass.ProposeRequest.newBuilder()
+      // Construct using edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1970,6 +2183,8 @@ public final class AcceptorOuterClass {
         super.clear();
         proposalId_ = "";
 
+        operation_ = "";
+
         key_ = "";
 
         value_ = "";
@@ -1980,17 +2195,17 @@ public final class AcceptorOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return AcceptorOuterClass.internal_static_ProposeRequest_descriptor;
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeRequest_descriptor;
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.ProposeRequest getDefaultInstanceForType() {
-        return AcceptorOuterClass.ProposeRequest.getDefaultInstance();
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest getDefaultInstanceForType() {
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.ProposeRequest build() {
-        AcceptorOuterClass.ProposeRequest result = buildPartial();
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest build() {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1998,9 +2213,10 @@ public final class AcceptorOuterClass {
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.ProposeRequest buildPartial() {
-        AcceptorOuterClass.ProposeRequest result = new AcceptorOuterClass.ProposeRequest(this);
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest buildPartial() {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest result = new edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest(this);
         result.proposalId_ = proposalId_;
+        result.operation_ = operation_;
         result.key_ = key_;
         result.value_ = value_;
         onBuilt();
@@ -2041,18 +2257,22 @@ public final class AcceptorOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof AcceptorOuterClass.ProposeRequest) {
-          return mergeFrom((AcceptorOuterClass.ProposeRequest)other);
+        if (other instanceof edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest) {
+          return mergeFrom((edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(AcceptorOuterClass.ProposeRequest other) {
-        if (other == AcceptorOuterClass.ProposeRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest other) {
+        if (other == edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.getDefaultInstance()) return this;
         if (!other.getProposalId().isEmpty()) {
           proposalId_ = other.proposalId_;
+          onChanged();
+        }
+        if (!other.getOperation().isEmpty()) {
+          operation_ = other.operation_;
           onChanged();
         }
         if (!other.getKey().isEmpty()) {
@@ -2078,11 +2298,11 @@ public final class AcceptorOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        AcceptorOuterClass.ProposeRequest parsedMessage = null;
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (AcceptorOuterClass.ProposeRequest) e.getUnfinishedMessage();
+          parsedMessage = (edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -2168,9 +2388,85 @@ public final class AcceptorOuterClass {
         return this;
       }
 
+      private java.lang.Object operation_ = "";
+      /**
+       * <code>string operation = 2;</code>
+       * @return The operation.
+       */
+      public java.lang.String getOperation() {
+        java.lang.Object ref = operation_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          operation_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string operation = 2;</code>
+       * @return The bytes for operation.
+       */
+      public com.google.protobuf.ByteString
+          getOperationBytes() {
+        java.lang.Object ref = operation_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          operation_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string operation = 2;</code>
+       * @param value The operation to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOperation(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        operation_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string operation = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOperation() {
+        
+        operation_ = getDefaultInstance().getOperation();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string operation = 2;</code>
+       * @param value The bytes for operation to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOperationBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        operation_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object key_ = "";
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @return The key.
        */
       public java.lang.String getKey() {
@@ -2186,7 +2482,7 @@ public final class AcceptorOuterClass {
         }
       }
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @return The bytes for key.
        */
       public com.google.protobuf.ByteString
@@ -2203,7 +2499,7 @@ public final class AcceptorOuterClass {
         }
       }
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @param value The key to set.
        * @return This builder for chaining.
        */
@@ -2218,7 +2514,7 @@ public final class AcceptorOuterClass {
         return this;
       }
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearKey() {
@@ -2228,7 +2524,7 @@ public final class AcceptorOuterClass {
         return this;
       }
       /**
-       * <code>string key = 2;</code>
+       * <code>string key = 3;</code>
        * @param value The bytes for key to set.
        * @return This builder for chaining.
        */
@@ -2246,7 +2542,7 @@ public final class AcceptorOuterClass {
 
       private java.lang.Object value_ = "";
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @return The value.
        */
       public java.lang.String getValue() {
@@ -2262,7 +2558,7 @@ public final class AcceptorOuterClass {
         }
       }
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @return The bytes for value.
        */
       public com.google.protobuf.ByteString
@@ -2279,7 +2575,7 @@ public final class AcceptorOuterClass {
         }
       }
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @param value The value to set.
        * @return This builder for chaining.
        */
@@ -2294,7 +2590,7 @@ public final class AcceptorOuterClass {
         return this;
       }
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearValue() {
@@ -2304,7 +2600,7 @@ public final class AcceptorOuterClass {
         return this;
       }
       /**
-       * <code>string value = 3;</code>
+       * <code>string value = 4;</code>
        * @param value The bytes for value to set.
        * @return This builder for chaining.
        */
@@ -2336,12 +2632,12 @@ public final class AcceptorOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:ProposeRequest)
-    private static final AcceptorOuterClass.ProposeRequest DEFAULT_INSTANCE;
+    private static final edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new AcceptorOuterClass.ProposeRequest();
+      DEFAULT_INSTANCE = new edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest();
     }
 
-    public static AcceptorOuterClass.ProposeRequest getDefaultInstance() {
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2366,7 +2662,7 @@ public final class AcceptorOuterClass {
     }
 
     @java.lang.Override
-    public AcceptorOuterClass.ProposeRequest getDefaultInstanceForType() {
+    public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2472,15 +2768,15 @@ public final class AcceptorOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return AcceptorOuterClass.internal_static_ProposeResponse_descriptor;
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return AcceptorOuterClass.internal_static_ProposeResponse_fieldAccessorTable
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              AcceptorOuterClass.ProposeResponse.class, AcceptorOuterClass.ProposeResponse.Builder.class);
+              edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.class, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.Builder.class);
     }
 
     public static final int CODE_FIELD_NUMBER = 1;
@@ -2575,10 +2871,10 @@ public final class AcceptorOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof AcceptorOuterClass.ProposeResponse)) {
+      if (!(obj instanceof edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse)) {
         return super.equals(obj);
       }
-      AcceptorOuterClass.ProposeResponse other = (AcceptorOuterClass.ProposeResponse) obj;
+      edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse other = (edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse) obj;
 
       if (getCode()
           != other.getCode()) return false;
@@ -2604,69 +2900,69 @@ public final class AcceptorOuterClass {
       return hash;
     }
 
-    public static AcceptorOuterClass.ProposeResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(byte[] data)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeResponse parseDelimitedFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.ProposeResponse parseDelimitedFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static AcceptorOuterClass.ProposeResponse parseFrom(
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2679,7 +2975,7 @@ public final class AcceptorOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(AcceptorOuterClass.ProposeResponse prototype) {
+    public static Builder newBuilder(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -2700,21 +2996,21 @@ public final class AcceptorOuterClass {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:ProposeResponse)
-        AcceptorOuterClass.ProposeResponseOrBuilder {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return AcceptorOuterClass.internal_static_ProposeResponse_descriptor;
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return AcceptorOuterClass.internal_static_ProposeResponse_fieldAccessorTable
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                AcceptorOuterClass.ProposeResponse.class, AcceptorOuterClass.ProposeResponse.Builder.class);
+                edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.class, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.Builder.class);
       }
 
-      // Construct using edu.neu.DatastoreService.AcceptorOuterClass.ProposeResponse.newBuilder()
+      // Construct using edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2742,17 +3038,17 @@ public final class AcceptorOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return AcceptorOuterClass.internal_static_ProposeResponse_descriptor;
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.internal_static_ProposeResponse_descriptor;
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.ProposeResponse getDefaultInstanceForType() {
-        return AcceptorOuterClass.ProposeResponse.getDefaultInstance();
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse getDefaultInstanceForType() {
+        return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.getDefaultInstance();
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.ProposeResponse build() {
-        AcceptorOuterClass.ProposeResponse result = buildPartial();
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse build() {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2760,8 +3056,8 @@ public final class AcceptorOuterClass {
       }
 
       @java.lang.Override
-      public AcceptorOuterClass.ProposeResponse buildPartial() {
-        AcceptorOuterClass.ProposeResponse result = new AcceptorOuterClass.ProposeResponse(this);
+      public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse buildPartial() {
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse result = new edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse(this);
         result.code_ = code_;
         result.message_ = message_;
         onBuilt();
@@ -2802,16 +3098,16 @@ public final class AcceptorOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof AcceptorOuterClass.ProposeResponse) {
-          return mergeFrom((AcceptorOuterClass.ProposeResponse)other);
+        if (other instanceof edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse) {
+          return mergeFrom((edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(AcceptorOuterClass.ProposeResponse other) {
-        if (other == AcceptorOuterClass.ProposeResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse other) {
+        if (other == edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.getDefaultInstance()) return this;
         if (other.getCode() != 0) {
           setCode(other.getCode());
         }
@@ -2834,11 +3130,11 @@ public final class AcceptorOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        AcceptorOuterClass.ProposeResponse parsedMessage = null;
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (AcceptorOuterClass.ProposeResponse) e.getUnfinishedMessage();
+          parsedMessage = (edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -2970,12 +3266,12 @@ public final class AcceptorOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:ProposeResponse)
-    private static final AcceptorOuterClass.ProposeResponse DEFAULT_INSTANCE;
+    private static final edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new AcceptorOuterClass.ProposeResponse();
+      DEFAULT_INSTANCE = new edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse();
     }
 
-    public static AcceptorOuterClass.ProposeResponse getDefaultInstance() {
+    public static edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3000,7 +3296,7 @@ public final class AcceptorOuterClass {
     }
 
     @java.lang.Override
-    public AcceptorOuterClass.ProposeResponse getDefaultInstanceForType() {
+    public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3035,17 +3331,17 @@ public final class AcceptorOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016Acceptor.proto\"@\n\016PrepareRequest\022\022\n\npr" +
-      "oposalId\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030\003 \001" +
-      "(\t\"0\n\017PrepareResponse\022\014\n\004code\030\001 \001(\005\022\017\n\007m" +
-      "essage\030\002 \001(\t\"@\n\016ProposeRequest\022\022\n\npropos" +
-      "alId\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\"0" +
-      "\n\017ProposeResponse\022\014\n\004code\030\001 \001(\005\022\017\n\007messa" +
-      "ge\030\002 \001(\t2s\n\010Acceptor\0223\n\ngetPromise\022\017.Pre" +
-      "pareRequest\032\020.PrepareResponse(\0010\001\0222\n\tget" +
-      "Accept\022\017.ProposeRequest\032\020.ProposeRespons" +
-      "e(\0010\001B\032\n\030edu.neu.DatastoreServiceb\006proto" +
-      "3"
+      "\n\016Acceptor.proto\"S\n\016PrepareRequest\022\022\n\npr" +
+      "oposalId\030\001 \001(\t\022\021\n\toperation\030\002 \001(\t\022\013\n\003key" +
+      "\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\"0\n\017PrepareResponse" +
+      "\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\"S\n\016Propo" +
+      "seRequest\022\022\n\nproposalId\030\001 \001(\t\022\021\n\toperati" +
+      "on\030\002 \001(\t\022\013\n\003key\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\"0\n\017" +
+      "ProposeResponse\022\014\n\004code\030\001 \001(\005\022\017\n\007message" +
+      "\030\002 \001(\t2k\n\010Acceptor\022/\n\ngetPromise\022\017.Prepa" +
+      "reRequest\032\020.PrepareResponse\022.\n\tgetAccept" +
+      "\022\017.ProposeRequest\032\020.ProposeResponseB#\n!e" +
+      "du.neu.DatastoreService.Acceptorb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3056,7 +3352,7 @@ public final class AcceptorOuterClass {
     internal_static_PrepareRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PrepareRequest_descriptor,
-        new java.lang.String[] { "ProposalId", "Key", "Value", });
+        new java.lang.String[] { "ProposalId", "Operation", "Key", "Value", });
     internal_static_PrepareResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_PrepareResponse_fieldAccessorTable = new
@@ -3068,7 +3364,7 @@ public final class AcceptorOuterClass {
     internal_static_ProposeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ProposeRequest_descriptor,
-        new java.lang.String[] { "ProposalId", "Key", "Value", });
+        new java.lang.String[] { "ProposalId", "Operation", "Key", "Value", });
     internal_static_ProposeResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_ProposeResponse_fieldAccessorTable = new

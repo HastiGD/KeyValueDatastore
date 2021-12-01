@@ -1,11 +1,18 @@
 package edu.neu.DatastoreService.Proposer;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
 import static io.grpc.stub.ClientCalls.asyncUnaryCall;
 import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
 import static io.grpc.stub.ClientCalls.blockingUnaryCall;
 import static io.grpc.stub.ClientCalls.futureUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
@@ -20,30 +27,30 @@ public final class ProposerGrpc {
   public static final String SERVICE_NAME = "Proposer";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<ProposerOuterClass.ConsensusRequest,
-      ProposerOuterClass.ConsensusResponse> getGetConsensusMethod;
+  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest,
+      edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse> getGetConsensusMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getConsensus",
-      requestType = ProposerOuterClass.ConsensusRequest.class,
-      responseType = ProposerOuterClass.ConsensusResponse.class,
+      requestType = edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.class,
+      responseType = edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<ProposerOuterClass.ConsensusRequest,
-      ProposerOuterClass.ConsensusResponse> getGetConsensusMethod() {
-    io.grpc.MethodDescriptor<ProposerOuterClass.ConsensusRequest, ProposerOuterClass.ConsensusResponse> getGetConsensusMethod;
+  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest,
+      edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse> getGetConsensusMethod() {
+    io.grpc.MethodDescriptor<edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest, edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse> getGetConsensusMethod;
     if ((getGetConsensusMethod = ProposerGrpc.getGetConsensusMethod) == null) {
       synchronized (ProposerGrpc.class) {
         if ((getGetConsensusMethod = ProposerGrpc.getGetConsensusMethod) == null) {
           ProposerGrpc.getGetConsensusMethod = getGetConsensusMethod = 
-              io.grpc.MethodDescriptor.<ProposerOuterClass.ConsensusRequest, ProposerOuterClass.ConsensusResponse>newBuilder()
+              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest, edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "Proposer", "getConsensus"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ProposerOuterClass.ConsensusRequest.getDefaultInstance()))
+                  edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ProposerOuterClass.ConsensusResponse.getDefaultInstance()))
+                  edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new ProposerMethodDescriptorSupplier("getConsensus"))
                   .build();
           }
@@ -81,8 +88,8 @@ public final class ProposerGrpc {
 
     /**
      */
-    public void getConsensus(ProposerOuterClass.ConsensusRequest request,
-                             io.grpc.stub.StreamObserver<ProposerOuterClass.ConsensusResponse> responseObserver) {
+    public void getConsensus(edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetConsensusMethod(), responseObserver);
     }
 
@@ -92,8 +99,8 @@ public final class ProposerGrpc {
             getGetConsensusMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                ProposerOuterClass.ConsensusRequest,
-                ProposerOuterClass.ConsensusResponse>(
+                edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest,
+                edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse>(
                   this, METHODID_GET_CONSENSUS)))
           .build();
     }
@@ -119,8 +126,8 @@ public final class ProposerGrpc {
 
     /**
      */
-    public void getConsensus(ProposerOuterClass.ConsensusRequest request,
-                             io.grpc.stub.StreamObserver<ProposerOuterClass.ConsensusResponse> responseObserver) {
+    public void getConsensus(edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getGetConsensusMethod(), getCallOptions()), request, responseObserver);
     }
@@ -146,7 +153,7 @@ public final class ProposerGrpc {
 
     /**
      */
-    public ProposerOuterClass.ConsensusResponse getConsensus(ProposerOuterClass.ConsensusRequest request) {
+    public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse getConsensus(edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest request) {
       return blockingUnaryCall(
           getChannel(), getGetConsensusMethod(), getCallOptions(), request);
     }
@@ -172,8 +179,8 @@ public final class ProposerGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<ProposerOuterClass.ConsensusResponse> getConsensus(
-        ProposerOuterClass.ConsensusRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse> getConsensus(
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getGetConsensusMethod(), getCallOptions()), request);
     }
@@ -199,8 +206,8 @@ public final class ProposerGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_CONSENSUS:
-          serviceImpl.getConsensus((ProposerOuterClass.ConsensusRequest) request,
-              (io.grpc.stub.StreamObserver<ProposerOuterClass.ConsensusResponse>) responseObserver);
+          serviceImpl.getConsensus((edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest) request,
+              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -224,7 +231,7 @@ public final class ProposerGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return ProposerOuterClass.getDescriptor();
+      return edu.neu.DatastoreService.Proposer.ProposerOuterClass.getDescriptor();
     }
 
     @java.lang.Override

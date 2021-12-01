@@ -2,10 +2,18 @@ package edu.neu.DatastoreService.Acceptor;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
 import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
 import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  */
@@ -19,30 +27,30 @@ public final class AcceptorGrpc {
   public static final String SERVICE_NAME = "Acceptor";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<AcceptorOuterClass.PrepareRequest,
-      AcceptorOuterClass.PrepareResponse> getGetPromiseMethod;
+  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest,
+      edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse> getGetPromiseMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getPromise",
-      requestType = AcceptorOuterClass.PrepareRequest.class,
-      responseType = AcceptorOuterClass.PrepareResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-  public static io.grpc.MethodDescriptor<AcceptorOuterClass.PrepareRequest,
-      AcceptorOuterClass.PrepareResponse> getGetPromiseMethod() {
-    io.grpc.MethodDescriptor<AcceptorOuterClass.PrepareRequest, AcceptorOuterClass.PrepareResponse> getGetPromiseMethod;
+      requestType = edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.class,
+      responseType = edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest,
+      edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse> getGetPromiseMethod() {
+    io.grpc.MethodDescriptor<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse> getGetPromiseMethod;
     if ((getGetPromiseMethod = AcceptorGrpc.getGetPromiseMethod) == null) {
       synchronized (AcceptorGrpc.class) {
         if ((getGetPromiseMethod = AcceptorGrpc.getGetPromiseMethod) == null) {
           AcceptorGrpc.getGetPromiseMethod = getGetPromiseMethod = 
-              io.grpc.MethodDescriptor.<AcceptorOuterClass.PrepareRequest, AcceptorOuterClass.PrepareResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "Acceptor", "getPromise"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  AcceptorOuterClass.PrepareRequest.getDefaultInstance()))
+                  edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  AcceptorOuterClass.PrepareResponse.getDefaultInstance()))
+                  edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new AcceptorMethodDescriptorSupplier("getPromise"))
                   .build();
           }
@@ -51,30 +59,30 @@ public final class AcceptorGrpc {
      return getGetPromiseMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<AcceptorOuterClass.ProposeRequest,
-      AcceptorOuterClass.ProposeResponse> getGetAcceptMethod;
+  private static volatile io.grpc.MethodDescriptor<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest,
+      edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse> getGetAcceptMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getAccept",
-      requestType = AcceptorOuterClass.ProposeRequest.class,
-      responseType = AcceptorOuterClass.ProposeResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-  public static io.grpc.MethodDescriptor<AcceptorOuterClass.ProposeRequest,
-      AcceptorOuterClass.ProposeResponse> getGetAcceptMethod() {
-    io.grpc.MethodDescriptor<AcceptorOuterClass.ProposeRequest, AcceptorOuterClass.ProposeResponse> getGetAcceptMethod;
+      requestType = edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.class,
+      responseType = edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest,
+      edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse> getGetAcceptMethod() {
+    io.grpc.MethodDescriptor<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse> getGetAcceptMethod;
     if ((getGetAcceptMethod = AcceptorGrpc.getGetAcceptMethod) == null) {
       synchronized (AcceptorGrpc.class) {
         if ((getGetAcceptMethod = AcceptorGrpc.getGetAcceptMethod) == null) {
           AcceptorGrpc.getGetAcceptMethod = getGetAcceptMethod = 
-              io.grpc.MethodDescriptor.<AcceptorOuterClass.ProposeRequest, AcceptorOuterClass.ProposeResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              io.grpc.MethodDescriptor.<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest, edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "Acceptor", "getAccept"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  AcceptorOuterClass.ProposeRequest.getDefaultInstance()))
+                  edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  AcceptorOuterClass.ProposeResponse.getDefaultInstance()))
+                  edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new AcceptorMethodDescriptorSupplier("getAccept"))
                   .build();
           }
@@ -112,33 +120,33 @@ public final class AcceptorGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<AcceptorOuterClass.PrepareRequest> getPromise(
-        io.grpc.stub.StreamObserver<AcceptorOuterClass.PrepareResponse> responseObserver) {
-      return asyncUnimplementedStreamingCall(getGetPromiseMethod(), responseObserver);
+    public void getPromise(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetPromiseMethod(), responseObserver);
     }
 
     /**
      */
-    public io.grpc.stub.StreamObserver<AcceptorOuterClass.ProposeRequest> getAccept(
-        io.grpc.stub.StreamObserver<AcceptorOuterClass.ProposeResponse> responseObserver) {
-      return asyncUnimplementedStreamingCall(getGetAcceptMethod(), responseObserver);
+    public void getAccept(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetAcceptMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getGetPromiseMethod(),
-            asyncBidiStreamingCall(
+            asyncUnaryCall(
               new MethodHandlers<
-                AcceptorOuterClass.PrepareRequest,
-                AcceptorOuterClass.PrepareResponse>(
+                edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest,
+                edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse>(
                   this, METHODID_GET_PROMISE)))
           .addMethod(
             getGetAcceptMethod(),
-            asyncBidiStreamingCall(
+            asyncUnaryCall(
               new MethodHandlers<
-                AcceptorOuterClass.ProposeRequest,
-                AcceptorOuterClass.ProposeResponse>(
+                edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest,
+                edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse>(
                   this, METHODID_GET_ACCEPT)))
           .build();
     }
@@ -164,18 +172,18 @@ public final class AcceptorGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<AcceptorOuterClass.PrepareRequest> getPromise(
-        io.grpc.stub.StreamObserver<AcceptorOuterClass.PrepareResponse> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(getGetPromiseMethod(), getCallOptions()), responseObserver);
+    public void getPromise(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetPromiseMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public io.grpc.stub.StreamObserver<AcceptorOuterClass.ProposeRequest> getAccept(
-        io.grpc.stub.StreamObserver<AcceptorOuterClass.ProposeResponse> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(getGetAcceptMethod(), getCallOptions()), responseObserver);
+    public void getAccept(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest request,
+        io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetAcceptMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -196,6 +204,20 @@ public final class AcceptorGrpc {
         io.grpc.CallOptions callOptions) {
       return new AcceptorBlockingStub(channel, callOptions);
     }
+
+    /**
+     */
+    public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse getPromise(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getGetPromiseMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse getAccept(edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getGetAcceptMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -214,6 +236,22 @@ public final class AcceptorGrpc {
     protected AcceptorFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new AcceptorFutureStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse> getPromise(
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetPromiseMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse> getAccept(
+        edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetAcceptMethod(), getCallOptions()), request);
     }
   }
 
@@ -237,6 +275,14 @@ public final class AcceptorGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_GET_PROMISE:
+          serviceImpl.getPromise((edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest) request,
+              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse>) responseObserver);
+          break;
+        case METHODID_GET_ACCEPT:
+          serviceImpl.getAccept((edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest) request,
+              (io.grpc.stub.StreamObserver<edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -247,12 +293,6 @@ public final class AcceptorGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_PROMISE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getPromise(
-              (io.grpc.stub.StreamObserver<AcceptorOuterClass.PrepareResponse>) responseObserver);
-        case METHODID_GET_ACCEPT:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getAccept(
-              (io.grpc.stub.StreamObserver<AcceptorOuterClass.ProposeResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -265,7 +305,7 @@ public final class AcceptorGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return AcceptorOuterClass.getDescriptor();
+      return edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.getDescriptor();
     }
 
     @java.lang.Override

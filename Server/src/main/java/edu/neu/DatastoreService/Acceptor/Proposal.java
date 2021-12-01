@@ -1,4 +1,4 @@
-package edu.neu.DatastoreService;
+package edu.neu.DatastoreService.Acceptor;
 
 public class Proposal {
     private String proposalId;
@@ -24,6 +24,10 @@ public class Proposal {
         String[] parts = proposalId.split("\\.");
         this.nodeId = Integer.parseInt(parts[0]);
         this.timestamp = Long.parseLong(parts[1]);
+    }
+
+    public String getProposalId() {
+        return this.proposalId;
     }
 
     public boolean updateProposalId(String newProposalId) throws NumberFormatException {

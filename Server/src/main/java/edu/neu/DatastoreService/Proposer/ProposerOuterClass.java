@@ -141,15 +141,15 @@ public final class ProposerOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return ProposerOuterClass.internal_static_ConsensusRequest_descriptor;
+      return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return ProposerOuterClass.internal_static_ConsensusRequest_fieldAccessorTable
+      return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ProposerOuterClass.ConsensusRequest.class, ProposerOuterClass.ConsensusRequest.Builder.class);
+              edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.class, edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.Builder.class);
     }
 
     public static final int OPERATION_FIELD_NUMBER = 1;
@@ -311,10 +311,10 @@ public final class ProposerOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof ProposerOuterClass.ConsensusRequest)) {
+      if (!(obj instanceof edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest)) {
         return super.equals(obj);
       }
-      ProposerOuterClass.ConsensusRequest other = (ProposerOuterClass.ConsensusRequest) obj;
+      edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest other = (edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest) obj;
 
       if (!getOperation()
           .equals(other.getOperation())) return false;
@@ -344,69 +344,69 @@ public final class ProposerOuterClass {
       return hash;
     }
 
-    public static ProposerOuterClass.ConsensusRequest parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(byte[] data)
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusRequest parseDelimitedFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static ProposerOuterClass.ConsensusRequest parseDelimitedFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static ProposerOuterClass.ConsensusRequest parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -419,7 +419,7 @@ public final class ProposerOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(ProposerOuterClass.ConsensusRequest prototype) {
+    public static Builder newBuilder(edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -440,21 +440,21 @@ public final class ProposerOuterClass {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:ConsensusRequest)
-        ProposerOuterClass.ConsensusRequestOrBuilder {
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return ProposerOuterClass.internal_static_ConsensusRequest_descriptor;
+        return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return ProposerOuterClass.internal_static_ConsensusRequest_fieldAccessorTable
+        return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                ProposerOuterClass.ConsensusRequest.class, ProposerOuterClass.ConsensusRequest.Builder.class);
+                edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.class, edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.Builder.class);
       }
 
-      // Construct using edu.neu.DatastoreService.ProposerOuterClass.ConsensusRequest.newBuilder()
+      // Construct using edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -484,17 +484,17 @@ public final class ProposerOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return ProposerOuterClass.internal_static_ConsensusRequest_descriptor;
+        return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusRequest_descriptor;
       }
 
       @java.lang.Override
-      public ProposerOuterClass.ConsensusRequest getDefaultInstanceForType() {
-        return ProposerOuterClass.ConsensusRequest.getDefaultInstance();
+      public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest getDefaultInstanceForType() {
+        return edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public ProposerOuterClass.ConsensusRequest build() {
-        ProposerOuterClass.ConsensusRequest result = buildPartial();
+      public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest build() {
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -502,8 +502,8 @@ public final class ProposerOuterClass {
       }
 
       @java.lang.Override
-      public ProposerOuterClass.ConsensusRequest buildPartial() {
-        ProposerOuterClass.ConsensusRequest result = new ProposerOuterClass.ConsensusRequest(this);
+      public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest buildPartial() {
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest result = new edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest(this);
         result.operation_ = operation_;
         result.key_ = key_;
         result.value_ = value_;
@@ -545,16 +545,16 @@ public final class ProposerOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof ProposerOuterClass.ConsensusRequest) {
-          return mergeFrom((ProposerOuterClass.ConsensusRequest)other);
+        if (other instanceof edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest) {
+          return mergeFrom((edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(ProposerOuterClass.ConsensusRequest other) {
-        if (other == ProposerOuterClass.ConsensusRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest other) {
+        if (other == edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest.getDefaultInstance()) return this;
         if (!other.getOperation().isEmpty()) {
           operation_ = other.operation_;
           onChanged();
@@ -582,11 +582,11 @@ public final class ProposerOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        ProposerOuterClass.ConsensusRequest parsedMessage = null;
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (ProposerOuterClass.ConsensusRequest) e.getUnfinishedMessage();
+          parsedMessage = (edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -840,12 +840,12 @@ public final class ProposerOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:ConsensusRequest)
-    private static final ProposerOuterClass.ConsensusRequest DEFAULT_INSTANCE;
+    private static final edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new ProposerOuterClass.ConsensusRequest();
+      DEFAULT_INSTANCE = new edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest();
     }
 
-    public static ProposerOuterClass.ConsensusRequest getDefaultInstance() {
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -870,7 +870,7 @@ public final class ProposerOuterClass {
     }
 
     @java.lang.Override
-    public ProposerOuterClass.ConsensusRequest getDefaultInstanceForType() {
+    public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -976,15 +976,15 @@ public final class ProposerOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return ProposerOuterClass.internal_static_ConsensusResponse_descriptor;
+      return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return ProposerOuterClass.internal_static_ConsensusResponse_fieldAccessorTable
+      return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ProposerOuterClass.ConsensusResponse.class, ProposerOuterClass.ConsensusResponse.Builder.class);
+              edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.class, edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.Builder.class);
     }
 
     public static final int CODE_FIELD_NUMBER = 1;
@@ -1079,10 +1079,10 @@ public final class ProposerOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof ProposerOuterClass.ConsensusResponse)) {
+      if (!(obj instanceof edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse)) {
         return super.equals(obj);
       }
-      ProposerOuterClass.ConsensusResponse other = (ProposerOuterClass.ConsensusResponse) obj;
+      edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse other = (edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse) obj;
 
       if (getCode()
           != other.getCode()) return false;
@@ -1108,69 +1108,69 @@ public final class ProposerOuterClass {
       return hash;
     }
 
-    public static ProposerOuterClass.ConsensusResponse parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(byte[] data)
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusResponse parseDelimitedFrom(java.io.InputStream input)
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static ProposerOuterClass.ConsensusResponse parseDelimitedFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static ProposerOuterClass.ConsensusResponse parseFrom(
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1183,7 +1183,7 @@ public final class ProposerOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(ProposerOuterClass.ConsensusResponse prototype) {
+    public static Builder newBuilder(edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1204,21 +1204,21 @@ public final class ProposerOuterClass {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:ConsensusResponse)
-        ProposerOuterClass.ConsensusResponseOrBuilder {
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return ProposerOuterClass.internal_static_ConsensusResponse_descriptor;
+        return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return ProposerOuterClass.internal_static_ConsensusResponse_fieldAccessorTable
+        return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                ProposerOuterClass.ConsensusResponse.class, ProposerOuterClass.ConsensusResponse.Builder.class);
+                edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.class, edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.Builder.class);
       }
 
-      // Construct using edu.neu.DatastoreService.ProposerOuterClass.ConsensusResponse.newBuilder()
+      // Construct using edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1246,17 +1246,17 @@ public final class ProposerOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return ProposerOuterClass.internal_static_ConsensusResponse_descriptor;
+        return edu.neu.DatastoreService.Proposer.ProposerOuterClass.internal_static_ConsensusResponse_descriptor;
       }
 
       @java.lang.Override
-      public ProposerOuterClass.ConsensusResponse getDefaultInstanceForType() {
-        return ProposerOuterClass.ConsensusResponse.getDefaultInstance();
+      public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse getDefaultInstanceForType() {
+        return edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.getDefaultInstance();
       }
 
       @java.lang.Override
-      public ProposerOuterClass.ConsensusResponse build() {
-        ProposerOuterClass.ConsensusResponse result = buildPartial();
+      public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse build() {
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1264,8 +1264,8 @@ public final class ProposerOuterClass {
       }
 
       @java.lang.Override
-      public ProposerOuterClass.ConsensusResponse buildPartial() {
-        ProposerOuterClass.ConsensusResponse result = new ProposerOuterClass.ConsensusResponse(this);
+      public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse buildPartial() {
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse result = new edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse(this);
         result.code_ = code_;
         result.message_ = message_;
         onBuilt();
@@ -1306,16 +1306,16 @@ public final class ProposerOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof ProposerOuterClass.ConsensusResponse) {
-          return mergeFrom((ProposerOuterClass.ConsensusResponse)other);
+        if (other instanceof edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse) {
+          return mergeFrom((edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(ProposerOuterClass.ConsensusResponse other) {
-        if (other == ProposerOuterClass.ConsensusResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse other) {
+        if (other == edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse.getDefaultInstance()) return this;
         if (other.getCode() != 0) {
           setCode(other.getCode());
         }
@@ -1338,11 +1338,11 @@ public final class ProposerOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        ProposerOuterClass.ConsensusResponse parsedMessage = null;
+        edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (ProposerOuterClass.ConsensusResponse) e.getUnfinishedMessage();
+          parsedMessage = (edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1474,12 +1474,12 @@ public final class ProposerOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:ConsensusResponse)
-    private static final ProposerOuterClass.ConsensusResponse DEFAULT_INSTANCE;
+    private static final edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new ProposerOuterClass.ConsensusResponse();
+      DEFAULT_INSTANCE = new edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse();
     }
 
-    public static ProposerOuterClass.ConsensusResponse getDefaultInstance() {
+    public static edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1504,7 +1504,7 @@ public final class ProposerOuterClass {
     }
 
     @java.lang.Override
-    public ProposerOuterClass.ConsensusResponse getDefaultInstanceForType() {
+    public edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1534,7 +1534,8 @@ public final class ProposerOuterClass {
       "\001(\t\"2\n\021ConsensusResponse\022\014\n\004code\030\001 \001(\005\022\017" +
       "\n\007message\030\002 \001(\t2A\n\010Proposer\0225\n\014getConsen" +
       "sus\022\021.ConsensusRequest\032\022.ConsensusRespon" +
-      "seB\032\n\030edu.neu.DatastoreServiceb\006proto3"
+      "seB#\n!edu.neu.DatastoreService.Proposerb" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
