@@ -1,19 +1,15 @@
 package edu.neu.DatastoreServer;
 
-import edu.neu.DatastoreService.*;
 import edu.neu.DatastoreService.Acceptor.Acceptor;
-import edu.neu.DatastoreService.Acceptor.AcceptorGrpc;
-import edu.neu.DatastoreService.Acceptor.AcceptorGrpc.AcceptorStub;
+import edu.neu.DatastoreService.Learner.Datastore;
+import edu.neu.DatastoreService.Learner.Learner;
 import edu.neu.DatastoreService.Proposer.Proposer;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -30,9 +26,10 @@ public class DatastoreServer {
         this.acceptoHostnames = acceptorHostnames;
         this.acceptorPorts = acceptorPorts;
 
-        // Create the Proposer and Acceptor services
+        // Create the Proposer, Acceptor, and Learner services
         Proposer proposer = new Proposer(String.valueOf(port), acceptorHostnames, acceptorPorts);
-        Acceptor acceptor = new Acceptor(datastore);
+        Acceptor acceptor = new Acceptor();
+        Learner learner = new Learner(datastore);
 
         // Bind the server
         this.port = port;
@@ -40,6 +37,7 @@ public class DatastoreServer {
                 .forPort(port)
                 .addService(proposer)
                 .addService(acceptor)
+                .addService(learner)
                 .build();
     }
 

@@ -71,7 +71,7 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
             if (numAccepts > acceptorStubs.size()/2) {
                 log.info(String.format("Received %d accepts, notifying learners", numPromises));
 
-                // TODO complete the PUT, GET, or DELETE request
+                // TODO call Learners to complete the PUT, GET, or DELETE request
 
                 // Generate response
                 responseBuilder

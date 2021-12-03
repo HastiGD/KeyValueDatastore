@@ -1,4 +1,4 @@
-package edu.neu.DatastoreService;
+package edu.neu.DatastoreService.Learner;
 
 import java.util.HashMap;
 import java.util.Map;

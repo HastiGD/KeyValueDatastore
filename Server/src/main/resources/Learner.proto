@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_package = "edu.neu.DatastoreService.Learner";
+
+service Learner {
+
+    rpc updateDatastore(UpdateRequest) returns (UpdateResponse);
+}
+
+message UpdateRequest {
+
+    string operation = 1;
+    string key = 2;
+    string value = 3;
+}
+
+message UpdateResponse {
+
+    int32 code = 1;
+    string message = 2;
+    string value = 3;
+}

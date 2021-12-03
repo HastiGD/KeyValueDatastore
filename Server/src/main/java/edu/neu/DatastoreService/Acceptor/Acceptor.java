@@ -1,22 +1,19 @@
 package edu.neu.DatastoreService.Acceptor;
 
-import edu.neu.DatastoreService.Datastore;
+import edu.neu.DatastoreService.Learner.Datastore;
 import io.grpc.stub.StreamObserver;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse;
 
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
 public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
     private static final Logger log = Logger.getLogger( "ACCEPTOR");
-    private Datastore datastore;
     private Proposal maxProposal;
 
-    public Acceptor(Datastore datastore) {
-        this.datastore = datastore;
+    public Acceptor() {
         this.maxProposal = new Proposal();
     }
 
