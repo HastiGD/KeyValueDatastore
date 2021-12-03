@@ -7,6 +7,7 @@ import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
 public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
@@ -44,6 +45,11 @@ public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
                     prepareResponseBuilder.getCode(),
                     prepareResponseBuilder.getMessage()));
         }
+//        try {
+//            Thread.sleep(ThreadLocalRandom.current().nextLong(1000));
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         responseObserver.onNext(prepareResponseBuilder.build());
         responseObserver.onCompleted();
     }
@@ -76,6 +82,11 @@ public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
                     proposeResponseBuilder.getCode(),
                     proposeResponseBuilder.getMessage()));
         }
+//        try {
+//            Thread.sleep(ThreadLocalRandom.current().nextLong(1000));
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         responseObserver.onNext(proposeResponseBuilder.build());
         responseObserver.onCompleted();
     }

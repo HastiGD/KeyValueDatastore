@@ -1,5 +1,6 @@
 package edu.neu.DatastoreService.Proposer;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import edu.neu.DatastoreService.Acceptor.AcceptorGrpc;
 import edu.neu.DatastoreService.Acceptor.AcceptorGrpc.AcceptorBlockingStub;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest;
@@ -13,6 +14,7 @@ import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest;
 import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
@@ -41,40 +43,51 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
 
     @Override
     public void getConsensus(ConsensusRequest request, StreamObserver<ConsensusResponse> responseObserver) {
-        // Get value from Client request
-        String operation = request.getOperation();
-        String key = request.getKey();
-        String value = request.getValue();
-        log.info(String.format("Received request from Client: %s %s %s, initiating Paxos phase 1",
-                operation,
-                key,
-                value));
+        try {
+            // Get value from Client request
+            String operation = request.getOperation();
+            String key = request.getKey();
+            String value = request.getValue();
+            log.info(String.format("Received request from Client: %s %s %s, initiating Paxos phase 1",
+                    operation,
+                    key,
+                    value));
 
-        // Start Paxos phase 1
-        int numPromises = 0;
-        String proposalId = "";
-        while (numPromises < acceptorStubs.size()/2) {
-            // Generate proposalId
-            proposalId = createProposalId();
+            // Start Paxos phase 1
+            int numPromises = 0;
+            String proposalId = "";
+            while (numPromises < acceptorStubs.size()/2) {
+                // Generate proposalId
+                proposalId = createProposalId();
 
-            // Send prepare message to acceptors
-            numPromises = sendPrepare(proposalId);
+                // Send prepare message to acceptors
+                numPromises = sendPrepare(proposalId);
+            }
+            log.info(String.format("Received %d promises, initiating Paxos phase 2", numPromises));
+
+            ConsensusResponse.Builder responseBuilder = ConsensusResponse.newBuilder();
+
+            // Start Paxos phase 2
+            int numAccepts = sendPropose(proposalId, operation, key, value);
+            if (numAccepts > acceptorStubs.size()/2) {
+                log.info(String.format("Received %d accepts, informing Learners", numPromises));
+
+                // Generate response
+                responseBuilder
+                        .setCode(200)
+                        .setMessage("OK");
+            } else {
+                // Generate response
+                responseBuilder
+                        .setCode(405)
+                        .setMessage("Request cannot be completed at this time");
+            }
+            // Send response to Client
+            responseObserver.onNext(responseBuilder.build());
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        log.info(String.format("Received %d promises, initiating Paxos phase 2", numPromises));
-
-        // Start Paxos phase 2
-        int numAccepts = sendPropose(proposalId, operation, key, value);
-        log.info(String.format("Received %d promises, initiating Paxos phase 2", numPromises));
-
-        // Generate response
-        ConsensusResponse.Builder responseBuilder = ConsensusResponse.newBuilder();
-        responseBuilder
-                .setCode(200)
-                .setMessage("Test working");
-
-        // Send response
-        responseObserver.onNext(responseBuilder.build());
-        responseObserver.onCompleted();
     }
 
     private String createProposalId() {
@@ -91,14 +104,16 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
 
         // Send PrepareRequest to all Acceptors
         log.info("Sending prepare message to all Acceptors");
-        AtomicInteger promiseCounter = new AtomicInteger();
-        acceptorStubs.forEach(stub -> {
+        int promiseCounter = 0;
+        for (AcceptorBlockingStub stub : acceptorStubs) {
+//            long sleep = ThreadLocalRandom.current().nextLong(3000);
+//            Uninterruptibles.sleepUninterruptibly(sleep, TimeUnit.MILLISECONDS);
             PrepareResponse prepareResponse = stub.getPromise(prepareRequestBuilder.build());
             if (prepareResponse.getCode() == 200) {
-                promiseCounter.getAndIncrement();
+                promiseCounter++;
             }
-        });
-        return promiseCounter.get();
+        }
+        return promiseCounter;
     }
 
     private int sendPropose(String proposalId, String operation, String key, String value) {
@@ -112,13 +127,15 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
 
         // Send ProposeRequest to all Acceptors
         log.info("Sending propose message to all Acceptors");
-        AtomicInteger acceptCounter = new AtomicInteger();
-        acceptorStubs.forEach(stub -> {
+        int acceptCounter = 0;
+        for (AcceptorBlockingStub stub : acceptorStubs) {
+//            long sleep = ThreadLocalRandom.current().nextLong(3000);
+//            Uninterruptibles.sleepUninterruptibly(sleep, TimeUnit.MILLISECONDS);
             ProposeResponse proposeResponse = stub.getAccept(proposeRequestBuilder.build());
             if (proposeResponse.getCode() == 200) {
-                acceptCounter.getAndIncrement();
+                acceptCounter++;
             }
-        });
-        return acceptCounter.get();
+        }
+        return acceptCounter;
     }
 }

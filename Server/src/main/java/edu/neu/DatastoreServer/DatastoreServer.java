@@ -63,7 +63,7 @@ public class DatastoreServer {
 
     public void stop() throws InterruptedException {
         if (server != null) {
-            server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
+            server.shutdown().awaitTermination(1, TimeUnit.MINUTES);
         }
     }
 
@@ -81,16 +81,16 @@ public class DatastoreServer {
         Logger log = Logger.getLogger( "SERVER");
 
         // Check for correct number of args
-        if (args.length < 1) {
-            log.severe("Missing port number, system exiting");
+        if (args.length < 2) {
+            log.severe("Missing server hostname or port number, system exiting");
             System.exit(0);
         } else {
             try {
                 // Get port from args
-                int port = Integer.parseInt(args[0]);
+                int port = Integer.parseInt(args[1]);
 
                 // Get Acceptors from args
-                List<String> input = Arrays.asList(Arrays.copyOfRange(args, 1, args.length));
+                List<String> input = Arrays.asList(Arrays.copyOfRange(args, 2, args.length));
                 List<String> acceptorHostnames = IntStream
                         .range(0, input.size())
                         .filter(n -> n % 2 == 0)
@@ -102,6 +102,9 @@ public class DatastoreServer {
                         .mapToObj(input::get)
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
+
+                acceptorHostnames.add(args[0]);
+                acceptorPorts.add(Integer.parseInt(args[1]));
 
                 // Create datastore
                 Datastore datastore = new Datastore();
