@@ -36,8 +36,7 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
                         .newBlockingStub(ManagedChannelBuilder
                                 .forAddress(acceptorHostnames.get(i), acceptorPorts.get(i))
                                 .usePlaintext()
-                                .build())
-                        .withDeadlineAfter(30, TimeUnit.SECONDS))
+                                .build()))
                 .collect(Collectors.toList());
     }
 
@@ -70,7 +69,9 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
             // Start Paxos phase 2
             int numAccepts = sendPropose(proposalId, operation, key, value);
             if (numAccepts > acceptorStubs.size()/2) {
-                log.info(String.format("Received %d accepts, informing Learners", numPromises));
+                log.info(String.format("Received %d accepts, notifying learners", numPromises));
+
+                // TODO complete the PUT, GET, or DELETE request
 
                 // Generate response
                 responseBuilder
@@ -106,9 +107,9 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
         log.info("Sending prepare message to all Acceptors");
         int promiseCounter = 0;
         for (AcceptorBlockingStub stub : acceptorStubs) {
-//            long sleep = ThreadLocalRandom.current().nextLong(3000);
-//            Uninterruptibles.sleepUninterruptibly(sleep, TimeUnit.MILLISECONDS);
-            PrepareResponse prepareResponse = stub.getPromise(prepareRequestBuilder.build());
+            PrepareResponse prepareResponse = stub
+                    .withDeadlineAfter(2, TimeUnit.MINUTES)
+                    .getPromise(prepareRequestBuilder.build());
             if (prepareResponse.getCode() == 200) {
                 promiseCounter++;
             }
@@ -129,9 +130,9 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
         log.info("Sending propose message to all Acceptors");
         int acceptCounter = 0;
         for (AcceptorBlockingStub stub : acceptorStubs) {
-//            long sleep = ThreadLocalRandom.current().nextLong(3000);
-//            Uninterruptibles.sleepUninterruptibly(sleep, TimeUnit.MILLISECONDS);
-            ProposeResponse proposeResponse = stub.getAccept(proposeRequestBuilder.build());
+            ProposeResponse proposeResponse = stub
+                    .withDeadlineAfter(2, TimeUnit.MINUTES)
+                    .getAccept(proposeRequestBuilder.build());
             if (proposeResponse.getCode() == 200) {
                 acceptCounter++;
             }

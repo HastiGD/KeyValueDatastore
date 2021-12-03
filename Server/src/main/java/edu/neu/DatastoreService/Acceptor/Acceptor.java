@@ -45,11 +45,6 @@ public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
                     prepareResponseBuilder.getCode(),
                     prepareResponseBuilder.getMessage()));
         }
-//        try {
-//            Thread.sleep(ThreadLocalRandom.current().nextLong(1000));
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         responseObserver.onNext(prepareResponseBuilder.build());
         responseObserver.onCompleted();
     }
@@ -68,8 +63,6 @@ public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
             String key = request.getKey();
             String value = request.getValue();
 
-            // TODO complete the PUT, GET, or DELETE request
-
             // Send accept message back to proposer
             proposeResponseBuilder.setCode(200).setMessage("Accept Granted");
             log.info(String.format("Sending accept to Proposer Response Code: %d Response Message: %s",
@@ -82,11 +75,6 @@ public class Acceptor extends AcceptorGrpc.AcceptorImplBase {
                     proposeResponseBuilder.getCode(),
                     proposeResponseBuilder.getMessage()));
         }
-//        try {
-//            Thread.sleep(ThreadLocalRandom.current().nextLong(1000));
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         responseObserver.onNext(proposeResponseBuilder.build());
         responseObserver.onCompleted();
     }
