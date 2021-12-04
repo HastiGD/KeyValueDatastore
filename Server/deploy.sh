@@ -30,3 +30,7 @@ docker run -it -d -p 9091:9091 --name $SERVER_CONTAINER --network $PROJECT_NETWO
 
 echo "----------watching logs from server----------"
 docker logs $SERVER_CONTAINER -f
+# java -jar target/DatastoreServer.jar localhost 11000 localhost 11001 localhost 11002 localhost 11003
+# java -jar target/DatastoreServer.jar localhost 11001 localhost 11000 localhost 11002 localhost 11003
+# java -jar target/DatastoreServer.jar localhost 11002 localhost 11001 localhost 11000 localhost 11003
+# java -jar target/DatastoreServer.jar localhost 11003 localhost 11001 localhost 11002 localhost 11000

@@ -897,6 +897,18 @@ public final class ProposerOuterClass {
      */
     com.google.protobuf.ByteString
         getMessageBytes();
+
+    /**
+     * <code>string value = 3;</code>
+     * @return The value.
+     */
+    java.lang.String getValue();
+    /**
+     * <code>string value = 3;</code>
+     * @return The bytes for value.
+     */
+    com.google.protobuf.ByteString
+        getValueBytes();
   }
   /**
    * Protobuf type {@code ConsensusResponse}
@@ -912,6 +924,7 @@ public final class ProposerOuterClass {
     }
     private ConsensusResponse() {
       message_ = "";
+      value_ = "";
     }
 
     @java.lang.Override
@@ -953,6 +966,12 @@ public final class ProposerOuterClass {
               java.lang.String s = input.readStringRequireUtf8();
 
               message_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              value_ = s;
               break;
             }
             default: {
@@ -1033,6 +1052,42 @@ public final class ProposerOuterClass {
       }
     }
 
+    public static final int VALUE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object value_;
+    /**
+     * <code>string value = 3;</code>
+     * @return The value.
+     */
+    public java.lang.String getValue() {
+      java.lang.Object ref = value_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        value_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string value = 3;</code>
+     * @return The bytes for value.
+     */
+    public com.google.protobuf.ByteString
+        getValueBytes() {
+      java.lang.Object ref = value_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        value_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1053,6 +1108,9 @@ public final class ProposerOuterClass {
       if (!getMessageBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
       }
+      if (!getValueBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, value_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1068,6 +1126,9 @@ public final class ProposerOuterClass {
       }
       if (!getMessageBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
+      }
+      if (!getValueBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, value_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1088,6 +1149,8 @@ public final class ProposerOuterClass {
           != other.getCode()) return false;
       if (!getMessage()
           .equals(other.getMessage())) return false;
+      if (!getValue()
+          .equals(other.getValue())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1103,6 +1166,8 @@ public final class ProposerOuterClass {
       hash = (53 * hash) + getCode();
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + VALUE_FIELD_NUMBER;
+      hash = (53 * hash) + getValue().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1240,6 +1305,8 @@ public final class ProposerOuterClass {
 
         message_ = "";
 
+        value_ = "";
+
         return this;
       }
 
@@ -1268,6 +1335,7 @@ public final class ProposerOuterClass {
         edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse result = new edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse(this);
         result.code_ = code_;
         result.message_ = message_;
+        result.value_ = value_;
         onBuilt();
         return result;
       }
@@ -1321,6 +1389,10 @@ public final class ProposerOuterClass {
         }
         if (!other.getMessage().isEmpty()) {
           message_ = other.message_;
+          onChanged();
+        }
+        if (!other.getValue().isEmpty()) {
+          value_ = other.value_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1457,6 +1529,82 @@ public final class ProposerOuterClass {
         onChanged();
         return this;
       }
+
+      private java.lang.Object value_ = "";
+      /**
+       * <code>string value = 3;</code>
+       * @return The value.
+       */
+      public java.lang.String getValue() {
+        java.lang.Object ref = value_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          value_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string value = 3;</code>
+       * @return The bytes for value.
+       */
+      public com.google.protobuf.ByteString
+          getValueBytes() {
+        java.lang.Object ref = value_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          value_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string value = 3;</code>
+       * @param value The value to set.
+       * @return This builder for chaining.
+       */
+      public Builder setValue(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        value_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string value = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearValue() {
+        
+        value_ = getDefaultInstance().getValue();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string value = 3;</code>
+       * @param value The bytes for value to set.
+       * @return This builder for chaining.
+       */
+      public Builder setValueBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        value_ = value;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1531,11 +1679,11 @@ public final class ProposerOuterClass {
     java.lang.String[] descriptorData = {
       "\n\016Proposer.proto\"A\n\020ConsensusRequest\022\021\n\t" +
       "operation\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030\003 " +
-      "\001(\t\"2\n\021ConsensusResponse\022\014\n\004code\030\001 \001(\005\022\017" +
-      "\n\007message\030\002 \001(\t2A\n\010Proposer\0225\n\014getConsen" +
-      "sus\022\021.ConsensusRequest\032\022.ConsensusRespon" +
-      "seB#\n!edu.neu.DatastoreService.Proposerb" +
-      "\006proto3"
+      "\001(\t\"A\n\021ConsensusResponse\022\014\n\004code\030\001 \001(\005\022\017" +
+      "\n\007message\030\002 \001(\t\022\r\n\005value\030\003 \001(\t2A\n\010Propos" +
+      "er\0225\n\014getConsensus\022\021.ConsensusRequest\032\022." +
+      "ConsensusResponseB#\n!edu.neu.DatastoreSe" +
+      "rvice.Proposerb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1552,7 +1700,7 @@ public final class ProposerOuterClass {
     internal_static_ConsensusResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ConsensusResponse_descriptor,
-        new java.lang.String[] { "Code", "Message", });
+        new java.lang.String[] { "Code", "Message", "Value", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

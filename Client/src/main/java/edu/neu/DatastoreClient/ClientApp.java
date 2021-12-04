@@ -35,7 +35,7 @@ public class ClientApp {
         // Get stub from proto file
         stub = ProposerGrpc
                 .newBlockingStub(channel)
-                .withDeadlineAfter(5, TimeUnit.MINUTES);
+                .withDeadlineAfter(10, TimeUnit.MINUTES);
         log.info("Client connecting to " + hostname + " on port " + port);
     }
 
@@ -92,7 +92,7 @@ public class ClientApp {
                     String operation = request[0].toUpperCase();
                     String key = "";
                     String value = "";
-
+                    String displayValue = "";
                     ProposerOuterClass.ConsensusResponse response = null;
                     switch (operation) {
                         case "PUT" :
@@ -100,19 +100,31 @@ public class ClientApp {
                             value = request[2];
                             log.info(String.format("Request: PUT <%s, %s>", key, value));
                             response = client.sendConsensusRequest(operation, key, value);
-                            log.info(String.format("Response Code: %d Response Message: %s", response.getCode(), response.getMessage()));
+                            displayValue = response.getValue().equals("") ? "" :  " Response Value: " + response.getValue();
+                            log.info(String.format("Response Code: %d Response Message: %s",
+                                    response.getCode(),
+                                    response.getMessage())
+                                    + displayValue);
                             break;
                         case "GET" :
                             key = request[1];
                             log.info(String.format("Request: GET %s", key));
                             response = client.sendConsensusRequest(operation, key, value);
-                            log.info(String.format("Response Code: %d Response Message: %s", response.getCode(), response.getMessage()));
+                            displayValue = response.getValue().equals("") ? "" :  " Response Value: " + response.getValue();
+                            log.info(String.format("Response Code: %d Response Message: %s",
+                                    response.getCode(),
+                                    response.getMessage())
+                                    + displayValue);
                             break;
                         case "DELETE" :
                             key = request[1];
                             log.info(String.format("Request: DELETE %s", key));
                             response = client.sendConsensusRequest(operation, key, value);
-                            log.info(String.format("Response Code: %d Response Message: %s", response.getCode(), response.getMessage()));
+                            displayValue = response.getValue().equals("") ? "" :  " Response Value: " + response.getValue();
+                            log.info(String.format("Response Code: %d Response Message: %s",
+                                    response.getCode(),
+                                    response.getMessage())
+                                    + displayValue);
                             break;
                         case "CLOSE" :
                             log.info("Closing client");

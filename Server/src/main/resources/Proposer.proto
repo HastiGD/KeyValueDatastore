@@ -18,4 +18,5 @@ message ConsensusResponse {
 
     int32 code = 1;
     string message = 2;
+    string value = 3;
 }

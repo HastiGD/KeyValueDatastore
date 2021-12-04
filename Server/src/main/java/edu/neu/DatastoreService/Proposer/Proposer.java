@@ -1,22 +1,27 @@
 package edu.neu.DatastoreService.Proposer;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import edu.neu.DatastoreService.Acceptor.AcceptorGrpc;
 import edu.neu.DatastoreService.Acceptor.AcceptorGrpc.AcceptorBlockingStub;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeRequest;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.ProposeResponse;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse;
+import edu.neu.DatastoreService.Learner.LearnerGrpc;
+import edu.neu.DatastoreService.Learner.LearnerGrpc.LearnerBlockingStub;
+import edu.neu.DatastoreService.Learner.LearnerOuterClass;
+import edu.neu.DatastoreService.Learner.LearnerOuterClass.UpdateRequest;
+import edu.neu.DatastoreService.Learner.LearnerOuterClass.UpdateResponse;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest;
 import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusResponse;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,6 +30,7 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
     private static final Logger log = Logger.getLogger( "PROPOSER");
     private final String NODE_ID;
     private List<AcceptorBlockingStub> acceptorStubs;
+    private List<LearnerGrpc.LearnerBlockingStub> learnerStubs;
 
     public Proposer(String nodeId, List<String> acceptorHostnames, List<Integer> acceptorPorts) {
         this.NODE_ID = nodeId;
@@ -32,7 +38,17 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
         // Create acceptor stubs
         this.acceptorStubs = IntStream
                 .range(0, acceptorHostnames.size())
-                .mapToObj((i) -> AcceptorGrpc
+                .mapToObj(i -> AcceptorGrpc
+                        .newBlockingStub(ManagedChannelBuilder
+                                .forAddress(acceptorHostnames.get(i), acceptorPorts.get(i))
+                                .usePlaintext()
+                                .build()))
+                .collect(Collectors.toList());
+
+        // Create learner stubs
+        this.learnerStubs = IntStream
+                .range(0, acceptorHostnames.size())
+                .mapToObj(i -> LearnerGrpc
                         .newBlockingStub(ManagedChannelBuilder
                                 .forAddress(acceptorHostnames.get(i), acceptorPorts.get(i))
                                 .usePlaintext()
@@ -47,7 +63,7 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
             String operation = request.getOperation();
             String key = request.getKey();
             String value = request.getValue();
-            log.info(String.format("Received request from Client: %s %s %s, initiating Paxos phase 1",
+            log.info(String.format("Received Client request: %s %s %s, initiating Paxos phase 1",
                     operation,
                     key,
                     value));
@@ -69,14 +85,24 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
             // Start Paxos phase 2
             int numAccepts = sendPropose(proposalId, operation, key, value);
             if (numAccepts > acceptorStubs.size()/2) {
-                log.info(String.format("Received %d accepts, notifying learners", numPromises));
+                log.info(String.format("Received %d accepts, completing Client request", numPromises));
 
-                // TODO call Learners to complete the PUT, GET, or DELETE request
+                // Summarise learner responses
+                List<UpdateResponse> updateResults = notifyLearners(operation, key, value);
+                UpdateResponse majorityResult = compareUpdateResults(updateResults);
 
-                // Generate response
-                responseBuilder
-                        .setCode(200)
-                        .setMessage("OK");
+                // Generate Client response
+                if (majorityResult == null) {
+                    responseBuilder
+                            .setCode(500)
+                            .setMessage("Internal Server error");
+
+                } else {
+                    responseBuilder
+                            .setCode(majorityResult.getCode())
+                            .setMessage(majorityResult.getMessage())
+                            .setValue(majorityResult.getValue());
+                }
             } else {
                 // Generate response
                 responseBuilder
@@ -88,6 +114,30 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
             responseObserver.onCompleted();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private UpdateResponse compareUpdateResults(List<UpdateResponse> updateResults) {
+        // Create a list of distinct responses
+        List<UpdateResponse> distinctResponses = updateResults
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        if (distinctResponses.size() == 1) {
+            // Datastores are all exact replicas
+            return distinctResponses.get(0);
+        } else if (1 < distinctResponses.size() && distinctResponses.size() < updateResults.size()) {
+            // Get majority response
+            Map<UpdateResponse, Long> responseCounts =
+                    updateResults
+                            .stream()
+                            .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+            return Collections
+                    .max(responseCounts.entrySet(), Map.Entry.comparingByValue())
+                    .getKey();
+        } else {
+            return null;
         }
     }
 
@@ -138,5 +188,24 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
             }
         }
         return acceptCounter;
+    }
+
+    private List<UpdateResponse> notifyLearners(String operation, String key, String value) {
+        // Generate UpdateRequest
+        UpdateRequest.Builder updateRequestBuilder = UpdateRequest
+                .newBuilder()
+                .setOperation(operation)
+                .setKey(key)
+                .setValue(value);
+
+        // Send UpdateRequest to all Learners
+        List <UpdateResponse> updateResponses = new ArrayList<>();
+        for (LearnerBlockingStub stub : learnerStubs) {
+            UpdateResponse updateResponse = stub
+                    .withDeadlineAfter(2, TimeUnit.MINUTES)
+                    .updateDatastore(updateRequestBuilder.build());
+            updateResponses.add(updateResponse);
+        }
+        return updateResponses;
     }
 }

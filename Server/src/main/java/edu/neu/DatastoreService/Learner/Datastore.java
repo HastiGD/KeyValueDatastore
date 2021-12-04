@@ -47,13 +47,4 @@ public class Datastore {
         }
         return result;
     }
-
-    /**
-     * Searches datastore for a key
-     * @param key to lookup
-     * @return true if found, false if not found
-     */
-    public boolean contains(String key) {
-        return datastore.containsKey(key);
-    }
 }
