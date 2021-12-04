@@ -4,7 +4,6 @@ import edu.neu.DatastoreService.Acceptor.Acceptor;
 import edu.neu.DatastoreService.Learner.Datastore;
 import edu.neu.DatastoreService.Learner.Learner;
 import edu.neu.DatastoreService.Proposer.Proposer;
-import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
@@ -15,19 +14,19 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class DatastoreServer {
-    private static final Logger log = Logger.getLogger( "SERVER");
+public class Server {
+    private static final Logger log = Logger.getLogger("SERVER");
     private final int port;
-    private final Server server;
-    private List<String> acceptoHostnames;
-    private List<Integer> acceptorPorts;
+    private final io.grpc.Server server;
+    private List<String> serverHostnames;
+    private List<Integer> serverPorts;
 
-    public DatastoreServer(int port, Datastore datastore, List<String> acceptorHostnames, List<Integer> acceptorPorts) {
-        this.acceptoHostnames = acceptorHostnames;
-        this.acceptorPorts = acceptorPorts;
+    public Server(int port, Datastore datastore, List<String> serverHostnames, List<Integer> serverPorts) {
+        this.serverHostnames = serverHostnames;
+        this.serverPorts = serverPorts;
 
         // Create the Proposer, Acceptor, and Learner services
-        Proposer proposer = new Proposer(String.valueOf(port), acceptorHostnames, acceptorPorts);
+        Proposer proposer = new Proposer(String.valueOf(port), serverHostnames, serverPorts);
         Acceptor acceptor = new Acceptor();
         Learner learner = new Learner(datastore);
 
@@ -50,7 +49,7 @@ public class DatastoreServer {
             public void run() {
                 System.err.println("Shut down server because JVM shut down");
                 try {
-                    DatastoreServer.this.stop();
+                    Server.this.stop();
                 } catch (InterruptedException e) {
                     e.printStackTrace(System.err);
                 }
@@ -72,11 +71,10 @@ public class DatastoreServer {
     }
 
     public static void main(String[] args) {
-        // Create logger
+        // Configure logger
         System.setProperty(
                 "java.util.logging.SimpleFormatter.format",
-                "%1$tb %1$td, %1$tY %1$tl:%1$tM:%1$tS:%1$tL [%4$-4s]: %5$s %n");
-        Logger log = Logger.getLogger( "SERVER");
+                "%1$tb %1$td, %1$tY %1$tl:%1$tM:%1$tS:%1$tL [%4$-4s]: %2$s - %5$s %n");
 
         // Check for correct number of args
         if (args.length < 2) {
@@ -89,38 +87,43 @@ public class DatastoreServer {
 
                 // Get Acceptors from args
                 List<String> input = Arrays.asList(Arrays.copyOfRange(args, 2, args.length));
-                List<String> acceptorHostnames = IntStream
+                List<String> serverHostnames = IntStream
                         .range(0, input.size())
                         .filter(n -> n % 2 == 0)
                         .mapToObj(input::get)
                         .collect(Collectors.toList());
-                List<Integer> acceptorPorts = IntStream
+                List<Integer> serverPorts = IntStream
                         .range(0, input.size())
                         .filter(n -> n % 2 != 0)
                         .mapToObj(input::get)
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
 
-                acceptorHostnames.add(args[0]);
-                acceptorPorts.add(Integer.parseInt(args[1]));
+                serverHostnames.add(args[0]);
+                serverPorts.add(Integer.parseInt(args[1]));
 
-                // Create datastore
-                Datastore datastore = new Datastore();
+                if (serverHostnames.size() == serverPorts.size() && serverHostnames.size() > 2) {
+                    // Create datastore
+                    Datastore datastore = new Datastore();
 
-                try {
-                    // Create server instance
-                    DatastoreServer server =
-                            new DatastoreServer(port, datastore, acceptorHostnames, acceptorPorts);
+                    try {
+                        // Create server instance
+                        Server server =
+                                new Server(port, datastore, serverHostnames, serverPorts);
 
-                    // Start server
-                    server.start();
-                    server.blockUntilShutdown();
-                } catch (IOException e) {
-                    log.severe("Server failed, system exiting");
-                    System.exit(1);
-                } catch (InterruptedException e) {
-                    log.severe("Server interrupted, system exiting");
-                    System.exit(1);
+                        // Start server
+                        server.start();
+                        server.blockUntilShutdown();
+                    } catch (IOException e) {
+                        log.severe("Server failed, system exiting");
+                        System.exit(1);
+                    } catch (InterruptedException e) {
+                        log.severe("Server interrupted, system exiting");
+                        System.exit(1);
+                    }
+                } else {
+                    log.severe("Not enough Servers, system exiting");
+                    System.exit(0);
                 }
             } catch (NumberFormatException e) {
                 log.severe("Bad port number, system exiting");

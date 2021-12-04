@@ -6,7 +6,7 @@ import edu.neu.DatastoreService.Learner.LearnerOuterClass.UpdateRequest;
 import java.util.logging.Logger;
 
 public class Learner extends LearnerGrpc.LearnerImplBase {
-    private static final Logger log = Logger.getLogger( "LEARNER");
+    private static final Logger log = Logger.getLogger("LEARNER");
     private Datastore datastore;
 
     public Learner(Datastore datastore) {

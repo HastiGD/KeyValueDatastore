@@ -8,7 +8,6 @@ import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareRequest;
 import edu.neu.DatastoreService.Acceptor.AcceptorOuterClass.PrepareResponse;
 import edu.neu.DatastoreService.Learner.LearnerGrpc;
 import edu.neu.DatastoreService.Learner.LearnerGrpc.LearnerBlockingStub;
-import edu.neu.DatastoreService.Learner.LearnerOuterClass;
 import edu.neu.DatastoreService.Learner.LearnerOuterClass.UpdateRequest;
 import edu.neu.DatastoreService.Learner.LearnerOuterClass.UpdateResponse;
 import io.grpc.ManagedChannelBuilder;
@@ -28,30 +27,30 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Proposer extends ProposerGrpc.ProposerImplBase {
-    private static final Logger log = Logger.getLogger( "PROPOSER");
+    private static final Logger log = Logger.getLogger("PROPOSER");
     private final String NODE_ID;
     private List<AcceptorBlockingStub> acceptorStubs;
-    private List<LearnerGrpc.LearnerBlockingStub> learnerStubs;
+    private List<LearnerBlockingStub> learnerStubs;
 
-    public Proposer(String nodeId, List<String> acceptorHostnames, List<Integer> acceptorPorts) {
+    public Proposer(String nodeId, List<String> serverHostnames, List<Integer> serverPorts) {
         this.NODE_ID = nodeId;
 
         // Create acceptor stubs
         this.acceptorStubs = IntStream
-                .range(0, acceptorHostnames.size())
+                .range(0, serverHostnames.size())
                 .mapToObj(i -> AcceptorGrpc
                         .newBlockingStub(ManagedChannelBuilder
-                                .forAddress(acceptorHostnames.get(i), acceptorPorts.get(i))
+                                .forAddress(serverHostnames.get(i), serverPorts.get(i))
                                 .usePlaintext()
                                 .build()))
                 .collect(Collectors.toList());
 
         // Create learner stubs
         this.learnerStubs = IntStream
-                .range(0, acceptorHostnames.size())
+                .range(0, serverHostnames.size())
                 .mapToObj(i -> LearnerGrpc
                         .newBlockingStub(ManagedChannelBuilder
-                                .forAddress(acceptorHostnames.get(i), acceptorPorts.get(i))
+                                .forAddress(serverHostnames.get(i), serverPorts.get(i))
                                 .usePlaintext()
                                 .build()))
                 .collect(Collectors.toList());

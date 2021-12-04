@@ -1,9 +1,7 @@
 package edu.neu.DatastoreClient;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import edu.neu.DatastoreService.ProposerGrpc;
 import edu.neu.DatastoreService.ProposerGrpc.ProposerBlockingStub;
-import edu.neu.DatastoreService.ProposerOuterClass;
 import edu.neu.DatastoreService.ProposerOuterClass.ConsensusRequest;
 import edu.neu.DatastoreService.ProposerOuterClass.ConsensusResponse;
 import io.grpc.ManagedChannel;
@@ -21,14 +19,14 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ClientApp {
-    private static final Logger log = Logger.getLogger( "CLIENT");
+public class Client {
+    private static final Logger log = Logger.getLogger("CLIENT");
     private final int port;
     private final String hostname;
     private final ManagedChannel channel;
     private final ProposerBlockingStub stub;
 
-    public ClientApp(int port, String hostname) {
+    public Client(int port, String hostname) {
         this.port = port;
         this.hostname = hostname;
 
@@ -43,7 +41,7 @@ public class ClientApp {
         stub = ProposerGrpc
                 .newBlockingStub(channel)
                 .withDeadlineAfter(10, TimeUnit.MINUTES);
-        log.info("Client connecting to " + hostname + " on port " + port);
+        log.info(String.format("Connecting to %s on port %d", hostname, port));
     }
 
     public ConsensusResponse sendConsensusRequest(String operation, String key, String value) {
@@ -53,7 +51,6 @@ public class ClientApp {
                 .setKey(key)
                 .setValue(value)
                 .build();
-
         return stub.getConsensus(request);
     }
 
@@ -105,11 +102,10 @@ public class ClientApp {
     }
 
     public static void main(String[] args) {
-        // Create logger
+        // Configure logger
         System.setProperty(
                 "java.util.logging.SimpleFormatter.format",
                 "%1$tb %1$td, %1$tY %1$tl:%1$tM:%1$tS:%1$tL [%4$-4s]: %5$s %n");
-        Logger log = Logger.getLogger( "CLIENT");
 
         // Get hostname and port number from args
         String host = "";
@@ -122,7 +118,7 @@ public class ClientApp {
             port = Integer.parseInt(args[1]);
 
             // Create Client
-            ClientApp client = new ClientApp(port, host);
+            Client client = new Client(port, host);
 
             // Demonstrate use of service
             client.testClient();
