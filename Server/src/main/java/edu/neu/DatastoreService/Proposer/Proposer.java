@@ -12,6 +12,7 @@ import edu.neu.DatastoreService.Learner.LearnerOuterClass;
 import edu.neu.DatastoreService.Learner.LearnerOuterClass.UpdateRequest;
 import edu.neu.DatastoreService.Learner.LearnerOuterClass.UpdateResponse;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
 import edu.neu.DatastoreService.Proposer.ProposerOuterClass.ConsensusRequest;
@@ -112,8 +113,13 @@ public class Proposer extends ProposerGrpc.ProposerImplBase {
             // Send response to Client
             responseObserver.onNext(responseBuilder.build());
             responseObserver.onCompleted();
+        } catch (io.grpc.StatusRuntimeException e) {
+            if (e.getStatus().getCode() == Status.Code.CANCELLED) {
+                log.warning("Context cancelled due to Client error");
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            //log.warning(e.getMessage());
         }
     }
 

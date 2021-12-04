@@ -1,18 +1,25 @@
 package edu.neu.DatastoreClient;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import edu.neu.DatastoreService.ProposerGrpc;
 import edu.neu.DatastoreService.ProposerGrpc.ProposerBlockingStub;
 import edu.neu.DatastoreService.ProposerOuterClass;
 import edu.neu.DatastoreService.ProposerOuterClass.ConsensusRequest;
+import edu.neu.DatastoreService.ProposerOuterClass.ConsensusResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ClientApp {
     private static final Logger log = Logger.getLogger( "CLIENT");
@@ -39,8 +46,8 @@ public class ClientApp {
         log.info("Client connecting to " + hostname + " on port " + port);
     }
 
-    public ProposerOuterClass.ConsensusResponse sendConsensusRequest(String operation, String key, String value) {
-        ConsensusRequest request = ProposerOuterClass.ConsensusRequest
+    public ConsensusResponse sendConsensusRequest(String operation, String key, String value) {
+        ConsensusRequest request = ConsensusRequest
                 .newBuilder()
                 .setOperation(operation)
                 .setKey(key)
@@ -48,6 +55,49 @@ public class ClientApp {
                 .build();
 
         return stub.getConsensus(request);
+    }
+
+    public void testClient() {
+        log.info("================================================");
+        log.info("-----------------Testing Client-----------------");
+        log.info("================================================");
+        List<String> keys = Arrays.asList("Good", "Love", "Day", "Friend", "White", "Happy");
+        List<String> values = Arrays.asList("Bad", "Hate", "Night", "Foe", "Black", "Sad");
+
+        Map<String, String> keyMap = IntStream
+                .range(0, keys.size())
+                .boxed()
+                .collect(Collectors.toMap(keys::get, values::get));
+
+        // Make a PUT Request to server
+        keyMap.forEach((key, value) -> {
+            log.info(String.format("Request: PUT <%s, %s>", key, value));
+            ConsensusResponse response = sendConsensusRequest("PUT", key, value);
+            log.info(String.format("Response Code: %d Response Message: %s",
+                    response.getCode(),
+                    response.getMessage()));
+        });
+        // Make a GET Request to server
+        keyMap.forEach((key, value) -> {
+            log.info(String.format("Request: GET %s", key));
+            ConsensusResponse response = sendConsensusRequest("GET", key, "");
+            log.info(String.format("Response Code: %d Response Message: %s Response Value: %s",
+                    response.getCode(),
+                    response.getMessage(),
+                    response.getValue()));
+        });
+        // Make a DELETE Request to server
+        keyMap.forEach((key, value) -> {
+            log.info(String.format("Request: DELETE %s", key));
+            ConsensusResponse response = sendConsensusRequest("DELETE", key, "");
+            log.info(String.format("Response Code: %d Response Message: %s Response Value: %s",
+                    response.getCode(),
+                    response.getMessage(),
+                    response.getValue()));
+        });
+        log.info("================================================");
+        log.info("----------------Testing Complete----------------");
+        log.info("================================================");
     }
 
     public void shutdownChannel() {
@@ -74,7 +124,15 @@ public class ClientApp {
             // Create Client
             ClientApp client = new ClientApp(port, host);
 
-            // Read input
+            // Demonstrate use of service
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            client.testClient();
+
+            // Read input from terminal
             DataInputStream input = new DataInputStream(System.in);
 
             log.info("Enter requests separated by space: <OPERATION> <KEY> <VALUE>");
@@ -93,7 +151,7 @@ public class ClientApp {
                     String key = "";
                     String value = "";
                     String displayValue = "";
-                    ProposerOuterClass.ConsensusResponse response = null;
+                    ConsensusResponse response = null;
                     switch (operation) {
                         case "PUT" :
                             key = request[1];
@@ -146,62 +204,5 @@ public class ClientApp {
             }
             client.shutdownChannel();
         }
-//        // Demonstrate how to operate on Datastore
-//        String[] keys = {"Good", "Love", "Night", "Friend", "Half-Full", "White"};
-//        String[] values = {"Bad", "Hate", "Day", "Foe", "Half-Empty", "Black"};
-//
-//        log.info("Testing Datastore operations");
-//
-//        for (int i = 0; i < keys.length; i++) {
-//            // Make put Request
-//            DatastoreServiceOuterClass.PutRequest putRequest =
-//                    DatastoreServiceOuterClass
-//                            .PutRequest
-//                            .newBuilder()
-//                            .setCaller("CLIENT")
-//                            .setKey(keys[i])
-//                            .setValue(values[i])
-//                            .build();
-//            log.info(String.format("Request: PUT <%s, %s>", keys[i], values[i]));
-//
-//            // Read response
-//            DatastoreServiceOuterClass.APIResponse putResponse = stub.put(putRequest);
-//            log.info("Response: "+ Integer.toString(putResponse.getResponseCode())+" "+putResponse.getResponseText()+" "+putResponse.getValue());
-//
-//            // Make get request
-//            DatastoreServiceOuterClass.GetRequest getRequest =
-//                    DatastoreServiceOuterClass
-//                            .GetRequest.newBuilder()
-//                            .setKey(keys[i])
-//                            .build();
-//            log.info(String.format("Request: GET %s", keys[i]));
-//
-//            // Read response
-//            DatastoreServiceOuterClass.APIResponse getResponse = stub.get(getRequest);
-//            log.info("Response: "+Integer.toString(getResponse.getResponseCode())+" "+getResponse.getResponseText()+" "+getResponse.getValue());
-//
-//            // Make delete request
-//            DatastoreServiceOuterClass.DeleteRequest deleteRequest =
-//                    DatastoreServiceOuterClass
-//                            .DeleteRequest
-//                            .newBuilder()
-//                            .setKey(keys[i])
-//                            .build();
-//            log.info(String.format("Request: DELETE %s", keys[i]));
-//
-//            // Read response
-//            DatastoreServiceOuterClass.APIResponse deleteResponse = stub.delete(deleteRequest);
-//            log.info("Response: "+Integer.toString(deleteResponse.getResponseCode())+" "+deleteResponse.getResponseText()+" "+deleteResponse.getValue());
-//        }
-//
-//        log.info("Finished Test");
-
-        // Read input from terminal
-
-
-
-
-
-        // Close client
     }
 }
