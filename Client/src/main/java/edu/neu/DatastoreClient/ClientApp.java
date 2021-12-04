@@ -125,11 +125,6 @@ public class ClientApp {
             ClientApp client = new ClientApp(port, host);
 
             // Demonstrate use of service
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             client.testClient();
 
             // Read input from terminal
