@@ -1,6 +1,6 @@
 # DatastoreClient
 ## Client side code for the DatastoreService
-This package contains the source code, deployment script, and Dockerfile for clients of this app, please complete the instructions at the top-level README, and the DatastoreServer README, and the DatastoreCoordinator README before proceeding to this step.
+This package contains the source code, deployment script, and Dockerfile for clients of this app, please complete the instructions at the top-level README, and the DatastoreServer README before proceeding to this step.
 
 ### Project Structure
 ```bash
@@ -13,15 +13,39 @@ DatastoreClient
 ├── src/main
 │   ├── java/neu/edu
 │   │   ├── DatastoreClient
+│   │   │   └── Client
 │   │   └── DatastoreService
 │   └── resources
-│       └── DatastoreService.proto  
+│       └── Proposer.proto  
 │
 └── target
     └── DatastoreClient.jar
 ```
 
-If you have completed the installation step correctly in the top-level README, you should now see a file called DatastoreClient.jar in the target/ subdirectory, please confirm this file was generated as it is needed to run the client.
+### Running the Client locally from the Terminal
+Open up a new Terminal session and cd into the DatastoreClient directory. Then run the following command:
+
+`java -jar target/DatastoreClient.jar localhost 11000`
+
+You may connect to either of the Server instances, doesn't have to be the one on port 11000 specifically.
+
+You should see the following output to Terminal:
+
+`Dec 04, 2021 3:43:30:984 [INFO]: Connecting to localhost on port 11000`
+
+The Client will immediately begin to run a test to demonstrate the API. You are now ready to begin making requests to the Server.
+
+Enter requests as an operation followed by key and, if necessary, a value all separated by spaces. For example Enter:
+
+`put white black`
+
+Produces the following response:
+
+`Dec 04, 2021 3:43:31:018 [INFO]: Request: PUT <White, Black>`
+
+`Dec 04, 2021 3:43:32:001 [INFO]: Response Code: 200 Response Message: OK`
+
+When you are finished you may enter 'close' to exit the Client.
 
 ### Running the Client in Docker (NOT WORKING)
 Once you have installed Docker launch the server by running the deploy.sh script in the **Server** Terminal session.
@@ -31,14 +55,3 @@ Then launch the coordinator by running the run_coordinator.sh script in the **Co
 Finally, run the run_client.sh script in the **Client** Terminal session:
 
 `Client % ./run_client.sh`
-
-### Running the Client locally from the Terminal
-In the **Client** Terminals run the following command:
-
-`java -jar target/DatastoreClient.jar <server_hostname> <server_port> <server2_hostname>`
-
-You should see the following output to Terminal:
-
-`Nov 10, 2021 5:26:43:271 [INFO]: Client connected to localhost on port <port>`
-
-You are now ready to begin making requests to the Server.

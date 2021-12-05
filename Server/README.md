@@ -13,16 +13,53 @@ DatastoreServer
 ├── src/main
 │   ├── java/neu/edu
 │   │   ├── DatastoreServer
+│   │   │   └── Server
 │   │   └── DatastoreService
+│   │       ├── Acceptor
+│   │       ├── Learner
+│   │       └── Proposer
 │   └── resources
-│       ├── CoordinatorService.proto
-│       └── DatastoreService.proto  
+│       ├── Acceptor.proto
+│       ├── Learner.proto
+│       └── Proposer.proto  
 │
 └── target
     └── DatastoreServer.jar
 ```
 
-If you have completed the installation step correctly in the top-level README, you should now see a file called DatastoreServer.jar in the target/ subdirectory, please confirm this file was generated as it is needed to run the server.
+### Running the Server locally from the Terminal
+**IMPORTANT** - In order to use the DatastoreService you need to run (at least) three separate Server instances. Before starting the Servers you need to know:
+
+- The hostname of each Server
+- The port each Server will use to expose its service
+
+For example, if you wish to have three Server instances running on your local computer, you would have the following mapping:
+
+SERVER 1 : localhost 11000
+
+SERVER 2 : localhost 11001
+
+SERVER 3 : localhost 11002
+
+Open up three new Terminal sessions and cd into the DatastoreServer directory. Then in each Terminal run one of the following command:
+
+Terminal 1
+
+`java -jar target/DatastoreServer.jar localhost 11000 localhost 11001 localhost 11002`
+
+Terminal 2
+
+`java -jar target/DatastoreServer.jar localhost 11001 localhost 11002 localhost 11000`
+
+Terminal 3
+
+`java -jar target/DatastoreServer.jar localhost 11002 localhost 11000 localhost 11001`
+
+You should see the following output to each Terminal:
+
+`Dec 04, 2021 3:00:05:922 [INFO]: edu.neu.DatastoreServer.Server start - Server started on port 1100X`
+
+You are now ready to launch the Client. Skip ahead to the README in the DatastoreClient subdirectory and follow the instructions under the **Running the Client locally from the Terminal** heading.
 
 ### Running the Server in Docker (NOT WORKING)
 Once you have installed Docker launch the server by running the deploy.sh script in the **Server** Terminal session:
@@ -30,18 +67,3 @@ Once you have installed Docker launch the server by running the deploy.sh script
 `Server % ./deploy.sh`
 
 The deploy.sh script has created a network and a Docker image for the server. Next it runs the server in a container. 
-
-### Running the Server locally from the Terminal
-In the **Server** Terminal run the following command:
-
-`java -jar target/DatastoreServer.jar <port>`
-
-You should see the following output to Terminal:
-
-`Nov 10, 2021 5:24:30:788 [INFO]: Enter coordinator hostname`
-
-Here you should enter the hostname of the computer that will be running the Coordinator app. You will see the following printed to Terminal
-
-`Nov 10, 2021 5:24:34:363 [INFO]: Server started on port <port>`
-
-You are now ready to launch the Coordinator. Skip ahead to the README in the DatastoreCoordinator subdirectory and follow the instructions under the **Running the Coordinator locally from the Terminal** heading.
