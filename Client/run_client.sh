@@ -1,5 +1,5 @@
 PROJECT_NETWORK='datastore-network'
-SERVER_CONTAINER='server0-container'
+SERVER0_CONTAINER='server0-container'
 CLIENT_IMAGE='datastore-client-image'
 CLIENT_CONTAINER='client-container'
 

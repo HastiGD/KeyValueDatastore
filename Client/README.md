@@ -47,11 +47,7 @@ Produces the following response:
 
 When you are finished you may enter 'close' to exit the Client.
 
-### Running the Client in Docker (NOT WORKING)
-Once you have installed Docker launch the server by running the deploy.sh script in the **Server** Terminal session.
+### Running the Client in Docker
+Launch the client by running the run_client.sh script in a new Terminal session:
 
-Then launch the coordinator by running the run_coordinator.sh script in the **Coordinator** Terminal session.
-
-Finally, run the run_client.sh script in the **Client** Terminal session:
-
-`Client % ./run_client.sh`
+`./run_client.sh`

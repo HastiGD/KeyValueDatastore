@@ -61,9 +61,21 @@ You should see the following output to each Terminal:
 
 You are now ready to launch the Client. Skip ahead to the README in the DatastoreClient subdirectory and follow the instructions under the **Running the Client locally from the Terminal** heading.
 
-### Running the Server in Docker (NOT WORKING)
-Once you have installed Docker launch the server by running the deploy.sh script in the **Server** Terminal session:
+### Running the Server in Docker
+Once you have installed Docker launch the server:
+ 1. Open three seperate Terminals
+ 2. Run each of the three deployment shell scripts consecutively, one per Terminal in the following order:
+ 
+Terminal 1
 
-`Server % ./deploy.sh`
+`./deploy0.sh`
 
-The deploy.sh script has created a network and a Docker image for the server. Next it runs the server in a container. 
+Terminal 2
+
+`./deploy1.sh`
+
+Terminal 3
+
+`./deploy2.sh`
+
+The deploy0.sh script has created a network and a Docker image for the server. Next it runs the server in a container. You may now move on to running the Client in Docker.
